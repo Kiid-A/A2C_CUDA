@@ -1,1 +1,0 @@
--isystem /usr/include/python3.10 -isystem "/usr/local/cuda-12.8/targets/x86_64-linux/include"

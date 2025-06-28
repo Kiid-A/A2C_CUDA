@@ -3,11 +3,11 @@ project(MLP_AC_PYBIND LANGUAGES CXX CUDA)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CUDAToolkit_ROOT "/usr/local/cuda-12.8")
-set(CMAKE_CUDA_COMPILER "/usr/local/cuda-12.8/bin/nvcc")
-set(Python3_EXECUTABLE /usr/bin/python3.10)
+set(CUDAToolkit_ROOT "/opt/cuda")
+set(CMAKE_CUDA_COMPILER "/opt/cuda/bin/nvcc")
+set(Python3_EXECUTABLE /usr/bin/python3.13)
 
-set(CMAKE_CUDA_ARCHITECTURES 86)
+set(CMAKE_CUDA_ARCHITECTURES 75)
 
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 find_package(pybind11 REQUIRED)

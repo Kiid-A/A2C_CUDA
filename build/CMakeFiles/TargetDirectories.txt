@@ -1,4 +1,0 @@
-/home/kid-a/homeworks/gpu_cuda/final/build/CMakeFiles/mlp_ac_cuda_obj.dir
-/home/kid-a/homeworks/gpu_cuda/final/build/CMakeFiles/mlp_ac_cuda.dir
-/home/kid-a/homeworks/gpu_cuda/final/build/CMakeFiles/edit_cache.dir
-/home/kid-a/homeworks/gpu_cuda/final/build/CMakeFiles/rebuild_cache.dir
