@@ -13,19 +13,17 @@ def simple_game():
 
     print("Simple game starting...")
     N_parallel = 1
-    N_episode = 10000
+    N_episode = 2000
     episode_steps = 20
     obs_dim = 2
     n_actions = 2
     hidden_dim = 128
-    trainer_args = dict(value_loss_coef=0.5, actor_loss_coef=1., entropy_coef=1e-3, learning_rate=2e-5)
-    ac = MlpACManual(obs_dim, n_actions, hidden_dim)
-    trainer = A2C(ac, **trainer_args)
-    # ac = MlpACTorch(obs_dim, n_actions, hidden_dim)
-    # trainer = A2CTorch(ac, **trainer_args)
+    trainer_args = dict(value_loss_coef=1, actor_loss_coef=1, entropy_coef=1e-5, learning_rate=5e-3)
+    # ac = MlpACManual(obs_dim, n_actions, hidden_dim); trainer = A2C(ac, **trainer_args)
+    ac = MlpACTorch(obs_dim, n_actions, hidden_dim); trainer = A2CTorch(ac, **trainer_args)
 
     traj = Traj(episode_steps)
-    obs = np.random.randint(0, 10, (N_parallel, obs_dim)).astype(np.float32)
+    obs = np.random.randint(0, 2, (N_parallel, obs_dim)).astype(np.float32)
     start_time = time.time()
     for e in range(N_episode):
         for step in range(episode_steps):
@@ -48,7 +46,7 @@ def simple_game():
         assert len(episode_rewards) > 0
         history["rewards"].append(np.sum(episode_rewards))
         traj.clear()
-        if (e % 2000 == 0) or (e == N_episode - 1):
+        if (e % 500 == 0) or (e == N_episode - 1):
             # plot to ./key_name.png, y=value, x=episode
             for key in history.keys():
                 plt.plot(history[key])

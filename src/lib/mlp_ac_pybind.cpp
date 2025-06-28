@@ -6,7 +6,6 @@ namespace py = pybind11;
 
 py::tuple mlp_forward(
     py::array_t<float> input,
-    py::array_t<float> shared_w, py::array_t<float> shared_b,
     py::array_t<float> actor1_w, py::array_t<float> actor1_b,
     py::array_t<float> actor2_w, py::array_t<float> actor2_b,
     py::array_t<float> actor_head_w, py::array_t<float> actor_head_b,
@@ -25,8 +24,6 @@ py::tuple mlp_forward(
     cuda_forward(
         static_cast<float*>(buf_input.ptr), batch, obs_dim, hidden_dim,
         n_actions, 1, // actor_output_dim, critic_output_dim
-        static_cast<float*>(shared_w.request().ptr),
-        static_cast<float*>(shared_b.request().ptr),
         static_cast<float*>(actor1_w.request().ptr),
         static_cast<float*>(actor1_b.request().ptr),
         static_cast<float*>(actor2_w.request().ptr),
@@ -51,7 +48,6 @@ py::tuple mlp_forward(
 
 py::tuple mlp_backward(
     py::array_t<float> input,
-    py::array_t<float> shared_w, py::array_t<float> shared_b,
     py::array_t<float> actor1_w, py::array_t<float> actor1_b,
     py::array_t<float> actor2_w, py::array_t<float> actor2_b,
     py::array_t<float> actor_head_w, py::array_t<float> actor_head_b,
@@ -63,15 +59,13 @@ py::tuple mlp_backward(
     int batch_size, int input_dim, int hidden_dim, int n_actions
 ) {
     std::vector<py::array_t<float>> grads;
-    grads.emplace_back(py::array_t<float>({input_dim, hidden_dim})); // shared_w
-    grads.emplace_back(py::array_t<float>({hidden_dim})); // shared_b
-    grads.emplace_back(py::array_t<float>({hidden_dim, hidden_dim})); // actor1_w
+    grads.emplace_back(py::array_t<float>({input_dim, hidden_dim})); // actor1_w
     grads.emplace_back(py::array_t<float>({hidden_dim})); // actor1_b
     grads.emplace_back(py::array_t<float>({hidden_dim, hidden_dim})); // actor2_w
     grads.emplace_back(py::array_t<float>({hidden_dim})); // actor2_b
     grads.emplace_back(py::array_t<float>({hidden_dim, n_actions})); // actor_head_w
     grads.emplace_back(py::array_t<float>({n_actions})); // actor_head_b
-    grads.emplace_back(py::array_t<float>({hidden_dim, hidden_dim})); // critic1_w
+    grads.emplace_back(py::array_t<float>({input_dim, hidden_dim})); // critic1_w
     grads.emplace_back(py::array_t<float>({hidden_dim})); // critic1_b
     grads.emplace_back(py::array_t<float>({hidden_dim, hidden_dim})); // critic2_w
     grads.emplace_back(py::array_t<float>({hidden_dim})); // critic2_b
@@ -81,8 +75,6 @@ py::tuple mlp_backward(
     cuda_backward(
         static_cast<float*>(input.request().ptr),
         batch_size, input_dim, hidden_dim, n_actions, 1,
-        static_cast<float*>(shared_w.request().ptr),
-        static_cast<float*>(shared_b.request().ptr),
         static_cast<float*>(actor1_w.request().ptr),
         static_cast<float*>(actor1_b.request().ptr),
         static_cast<float*>(actor2_w.request().ptr),
@@ -108,13 +100,11 @@ py::tuple mlp_backward(
         static_cast<float*>(grads[8].request().ptr),
         static_cast<float*>(grads[9].request().ptr),
         static_cast<float*>(grads[10].request().ptr),
-        static_cast<float*>(grads[11].request().ptr),
-        static_cast<float*>(grads[12].request().ptr),
-        static_cast<float*>(grads[13].request().ptr)
+        static_cast<float*>(grads[11].request().ptr)
     );
     return py::make_tuple(
         grads[0], grads[1], grads[2], grads[3], grads[4], grads[5], grads[6], grads[7],
-        grads[8], grads[9], grads[10], grads[11], grads[12], grads[13]
+        grads[8], grads[9], grads[10], grads[11]
     );
 }
 

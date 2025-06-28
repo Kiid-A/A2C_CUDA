@@ -9,19 +9,17 @@ class MlpACManual:
 
         def xavier(shape):
             fan_in, fan_out = shape[0], shape[1]
-            limit = np.sqrt(3.0 / (fan_in + fan_out))
+            limit = min(np.sqrt(3.0 / (fan_in + fan_out)), 0.2)
             return np.random.uniform(-limit, limit, size=shape).astype(np.float32)
 
-        # 权重和偏置
-        self.shared_w = xavier((obs_dim, hidden_dim))
-        self.shared_b = np.zeros(hidden_dim, dtype=np.float32)
-        self.actor1_w = xavier((hidden_dim, hidden_dim))
+        self.actor1_w = xavier((obs_dim, hidden_dim))
         self.actor1_b = np.zeros(hidden_dim, dtype=np.float32)
         self.actor2_w = xavier((hidden_dim, hidden_dim))
         self.actor2_b = np.zeros(hidden_dim, dtype=np.float32)
         self.actor_head_w = xavier((hidden_dim, n_actions))
         self.actor_head_b = np.zeros(n_actions, dtype=np.float32)
-        self.critic1_w = xavier((hidden_dim, hidden_dim))
+        
+        self.critic1_w = xavier((obs_dim, hidden_dim))
         self.critic1_b = np.zeros(hidden_dim, dtype=np.float32)
         self.critic2_w = xavier((hidden_dim, hidden_dim))
         self.critic2_b = np.zeros(hidden_dim, dtype=np.float32)
@@ -29,7 +27,6 @@ class MlpACManual:
         self.critic_head_b = np.zeros(1, dtype=np.float32)
 
         self.params = [
-            self.shared_w, self.shared_b,
             self.actor1_w, self.actor1_b,
             self.actor2_w, self.actor2_b,
             self.actor_head_w, self.actor_head_b,
@@ -54,7 +51,6 @@ class MlpACManual:
     def forward(self, obs):
         actor_out, critic_out = mlp_ac_cuda.mlp_forward(
             obs.astype(np.float32),
-            self.shared_w, self.shared_b,
             self.actor1_w, self.actor1_b,
             self.actor2_w, self.actor2_b,
             self.actor_head_w, self.actor_head_b,
@@ -69,7 +65,6 @@ class MlpACManual:
     def backward(self, obs, grad_actor_output, grad_critic_output):
         grads = mlp_ac_cuda.mlp_backward(
             obs.astype(np.float32),
-            self.shared_w, self.shared_b,
             self.actor1_w, self.actor1_b,
             self.actor2_w, self.actor2_b,
             self.actor_head_w, self.actor_head_b,
@@ -89,6 +84,8 @@ class MlpACManual:
         if not isinstance(obs, np.ndarray):
             obs = np.array(obs, dtype=np.float32)
         actor_out, critic_out = self.forward(obs)
+        print(actor_out)
+        print(critic_out)
         logits = actor_out
         logits = logits - np.max(logits, axis=1, keepdims=True)
         probs = np.exp(logits)

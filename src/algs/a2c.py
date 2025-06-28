@@ -83,8 +83,8 @@ class A2C:
         self.value_loss_coef = value_loss_coef
         self.actor_loss_coef = actor_loss_coef
         self.entropy_coef = entropy_coef
-        # self.optimizer = AdamOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
-        self.optimizer = SGDOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
+        self.optimizer = AdamOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
+        # self.optimizer = SGDOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
 
     def update(self, traj):
         print("traj finalize...")
@@ -107,8 +107,9 @@ class A2C:
         distEntropy = -np.sum(probs * np.log(probs + 1e-8), axis=1, keepdims=True)
 
         advantages = returns.reshape(-1, 1) - values
-        # advantages = (advantages - np.mean(advantages)) / (np.std(advantages) + 2e-8)
+        advantages = (advantages - np.mean(advantages)) / (np.std(advantages) + 2e-8)
 
+        print(advantages)
         value_loss = np.mean(np.power(advantages, 2)) * self.value_loss_coef
         action_loss = -np.mean(advantages * actLogProbs) * self.actor_loss_coef
         distEntropy_loss = -np.mean(distEntropy) * self.entropy_coef
@@ -122,9 +123,11 @@ class A2C:
         policy_grad = - (advantages * (one_hot - probs)) / len(advantages) * self.actor_loss_coef
         entropy_grad = - (np.log(probs + 1e-8) + 1) / len(advantages) * self.entropy_coef
         grad_actor = policy_grad + entropy_grad
+        grad_actor = - grad_actor
         
         # 修正后的critic梯度计算，增加稳定性
         grad_value = -2 * (advantages) / (len(advantages) + 1e-8) * self.value_loss_coef
+        grad_value = - grad_value
 
         self.optimizer.zero_grad()
 
@@ -154,12 +157,12 @@ class A2C:
             if not np.all(np.isfinite(g)):
                 print(f"Gradient {i} has NaN/Inf, skipping update.")
                 return
-        # 全局范数裁剪
-        total_norm = np.sqrt(sum(np.sum(g.astype(np.float64) ** 2) for g in grads))
-        if not np.isfinite(total_norm) or total_norm > 1e8:
-            print(f"Warning: Gradient norm overflow: {total_norm}, skipping update.")
-            return
-        clip_coef = max_norm / (total_norm + 1e-8)
-        if clip_coef < 1.0:
-            grads = [g * clip_coef for g in grads]
+        # # 全局范数裁剪
+        # total_norm = np.sqrt(sum(np.sum(g.astype(np.float64) ** 2) for g in grads))
+        # if not np.isfinite(total_norm) or total_norm > 1e8:
+        #     print(f"Warning: Gradient norm overflow: {total_norm}, skipping update.")
+        #     return
+        # clip_coef = max_norm / (total_norm + 1e-8)
+        # if clip_coef < 1.0:
+        #     grads = [g * clip_coef for g in grads]
         self.optimizer.step(grads)

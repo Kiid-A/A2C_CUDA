@@ -11,7 +11,7 @@ class A2CTorch:
         self.entropy_coef = entropy_coef
         self.optimizer = optim.Adam(actor_and_critic.parameters(), lr=learning_rate)
         # torch max thread
-        torch.set_num_threads(24)
+        torch.set_num_threads(1)
 
     def update(self, traj):
         traj.finalize()
