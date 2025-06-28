@@ -4,6 +4,7 @@
 #include <cuda_fp16.h>
 #include <cuda_runtime.h>
 #include <math.h>
+#include "mlp_ac.h"
 
 #define CEIL_DIV(a, b) (((a) + (b) - 1) / (b))
 
@@ -279,206 +280,112 @@ __global__ void optimized_shared_backward_kernel(
 }
 
 extern "C" {
-// 中间结果结构体
-struct IntermediateData {
-  float *d_shared_output;
-  float *d_actor_hidden;
-  float *d_critic_hidden;
-  float *d_actor_fc2_output;
-  float *d_critic_fc2_output;
-  float *d_actor_output;
-  float *d_critic_output;
-};
-
-// 内存管理助手函数
-void cuda_alloc_mem(IntermediateData *data, int batch_size, int input_dim,
-                    int hidden_dim, int output_dim) {
-  CHECK_CUDA(cudaMalloc(&data->d_shared_output,
-                        batch_size * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&data->d_actor_hidden,
-                        batch_size * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&data->d_critic_hidden,
-                        batch_size * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&data->d_actor_fc2_output,
-                        batch_size * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&data->d_critic_fc2_output,
-                        batch_size * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&data->d_actor_output,
-                        batch_size * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&data->d_critic_output,
-                        batch_size * output_dim * sizeof(float)));
-}
-
-void cuda_free_mem(IntermediateData *data) {
-  CHECK_CUDA(cudaFree(data->d_shared_output));
-  CHECK_CUDA(cudaFree(data->d_actor_hidden));
-  CHECK_CUDA(cudaFree(data->d_critic_hidden));
-  CHECK_CUDA(cudaFree(data->d_actor_fc2_output));
-  CHECK_CUDA(cudaFree(data->d_critic_fc2_output));
-  CHECK_CUDA(cudaFree(data->d_actor_output));
-  CHECK_CUDA(cudaFree(data->d_critic_output));
-}
-
-// 优化后的前向传播
-void cuda_forward(const float *input, int batch_size, int input_dim,
-                  int hidden_dim, int output_dim, const float *shared_w,
-                  const float *shared_b, const float *actor_fc1_w,
-                  const float *actor_fc1_b, const float *actor_fc2_w,
-                  const float *actor_fc2_b, const float *actor_head_w,
-                  const float *actor_head_b, const float *critic_fc1_w,
-                  const float *critic_fc1_b, const float *critic_fc2_w,
-                  const float *critic_fc2_b, const float *critic_head_w,
-                  const float *critic_head_b, float *actor_output,
-                  float *critic_output, IntermediateData *intermediates) {
-
-  // 分配中间结果内存
-  cuda_alloc_mem(intermediates, batch_size, input_dim, hidden_dim, output_dim);
-
-  // 设备指针
+void cuda_forward(const float *input, int batch_size, int input_dim, int hidden_dim,
+                  int actor_output_dim, int critic_output_dim,
+                  const float *shared_w, const float *shared_b,
+                  const float *actor_fc1_w, const float *actor_fc1_b,
+                  const float *actor_fc2_w, const float *actor_fc2_b,
+                  const float *actor_head_w, const float *actor_head_b,
+                  const float *critic_fc1_w, const float *critic_fc1_b,
+                  const float *critic_fc2_w, const float *critic_fc2_b,
+                  const float *critic_head_w, const float *critic_head_b,
+                  float *actor_output, float *critic_output) {
+  // 分配所有 device 内存
   float *d_input, *d_shared_w, *d_shared_b;
   float *d_actor_fc1_w, *d_actor_fc1_b, *d_actor_fc2_w, *d_actor_fc2_b;
   float *d_actor_head_w, *d_actor_head_b;
   float *d_critic_fc1_w, *d_critic_fc1_b, *d_critic_fc2_w, *d_critic_fc2_b;
   float *d_critic_head_w, *d_critic_head_b;
 
-  // 分配设备内存
+  float *d_shared_output, *d_actor_hidden, *d_actor_fc2_output, *d_actor_out;
+  float *d_critic_hidden, *d_critic_fc2_output, *d_critic_out;
+
+  // 分配 device 内存
   CHECK_CUDA(cudaMalloc(&d_input, batch_size * input_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_shared_w, hidden_dim * input_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_shared_b, hidden_dim * sizeof(float)));
-
-  CHECK_CUDA(
-      cudaMalloc(&d_actor_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_actor_fc1_b, hidden_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_actor_fc2_w, output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_actor_fc2_b, output_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_actor_head_w, output_dim * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_actor_head_b, output_dim * sizeof(float)));
-
-  CHECK_CUDA(
-      cudaMalloc(&d_critic_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_fc2_b, actor_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_head_w, hidden_dim * actor_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_head_b, actor_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_critic_fc1_b, hidden_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_critic_fc2_w, output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_critic_fc2_b, output_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_critic_head_w, output_dim * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_critic_head_b, output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_fc2_w, hidden_dim * hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_fc2_b, hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_head_w, hidden_dim * critic_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_head_b, critic_output_dim * sizeof(float)));
 
-  // 拷贝数据到设备
-  CHECK_CUDA(cudaMemcpy(d_input, input, batch_size * input_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_shared_w, shared_w,
-                        hidden_dim * input_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_shared_b, shared_b, hidden_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMalloc(&d_shared_output, batch_size * hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_hidden, batch_size * hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_fc2_output, batch_size * actor_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_out, batch_size * actor_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_hidden, batch_size * hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_fc2_output, batch_size * critic_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_out, batch_size * critic_output_dim * sizeof(float)));
 
-  CHECK_CUDA(cudaMemcpy(d_actor_fc1_w, actor_fc1_w,
-                        hidden_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_fc1_b, actor_fc1_b, hidden_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_fc2_w, actor_fc2_w,
-                        output_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_fc2_b, actor_fc2_b, output_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_head_w, actor_head_w,
-                        output_dim * output_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_head_b, actor_head_b,
-                        output_dim * sizeof(float), cudaMemcpyHostToDevice));
+  // 拷贝参数到 device
+  CHECK_CUDA(cudaMemcpy(d_input, input, batch_size * input_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_shared_w, shared_w, hidden_dim * input_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_shared_b, shared_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_fc1_w, actor_fc1_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_fc1_b, actor_fc1_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_fc2_w, actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_fc2_b, actor_fc2_b, actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_head_w, actor_head_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_head_b, actor_head_b, actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_fc1_w, critic_fc1_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_fc1_b, critic_fc1_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_fc2_w, critic_fc2_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_fc2_b, critic_fc2_b, critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_head_w, critic_head_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_head_b, critic_head_b, critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
 
-  CHECK_CUDA(cudaMemcpy(d_critic_fc1_w, critic_fc1_w,
-                        hidden_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_fc1_b, critic_fc1_b,
-                        hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_fc2_w, critic_fc2_w,
-                        output_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_fc2_b, critic_fc2_b,
-                        output_dim * sizeof(float), cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_head_w, critic_head_w,
-                        output_dim * output_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_head_b, critic_head_b,
-                        output_dim * sizeof(float), cudaMemcpyHostToDevice));
-
-  // 创建CUDA流用于并行计算
+  // CUDA流和核函数配置
   cudaStream_t actor_stream, critic_stream;
   CHECK_CUDA(cudaStreamCreate(&actor_stream));
   CHECK_CUDA(cudaStreamCreate(&critic_stream));
-
-  // 计算核函数配置
   dim3 block(TILE_SIZE, TILE_SIZE);
   size_t shared_mem_size = 2 * TILE_SIZE * TILE_SIZE * sizeof(float);
 
-  // 执行共享层前向传播
-  dim3 grid_shared((hidden_dim + TILE_SIZE - 1) / TILE_SIZE,
-                   (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+  // 共享层
+  dim3 grid_shared((hidden_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
   optimized_linear_forward_kernel<<<grid_shared, block, shared_mem_size>>>(
-      d_input, d_shared_w, d_shared_b, intermediates->d_shared_output,
-      input_dim, hidden_dim, batch_size);
+      d_input, d_shared_w, d_shared_b, d_shared_output, input_dim, hidden_dim, batch_size);
 
-  // 并行执行Actor和Critic的前向传播
-  // Actor路径
-  dim3 grid_actor_fc1((hidden_dim + TILE_SIZE - 1) / TILE_SIZE,
-                      (batch_size + TILE_SIZE - 1) / TILE_SIZE);
-  fc_relu_forward_kernel<<<grid_actor_fc1, block, shared_mem_size,
-                           actor_stream>>>(
-      intermediates->d_shared_output, d_actor_fc1_w, d_actor_fc1_b,
-      intermediates->d_actor_hidden, hidden_dim, hidden_dim, batch_size);
+  // Actor
+  dim3 grid_actor_fc1((hidden_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+  fc_relu_forward_kernel<<<grid_actor_fc1, block, shared_mem_size, actor_stream>>>(
+      d_shared_output, d_actor_fc1_w, d_actor_fc1_b, d_actor_hidden, hidden_dim, hidden_dim, batch_size);
 
-  dim3 grid_actor_fc2((output_dim + TILE_SIZE - 1) / TILE_SIZE,
-                      (batch_size + TILE_SIZE - 1) / TILE_SIZE);
-  fc_relu_forward_kernel<<<grid_actor_fc2, block, shared_mem_size,
-                           actor_stream>>>(
-      intermediates->d_actor_hidden, d_actor_fc2_w, d_actor_fc2_b,
-      intermediates->d_actor_fc2_output, hidden_dim, output_dim, batch_size);
+  dim3 grid_actor_fc2((actor_output_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+  fc_relu_forward_kernel<<<grid_actor_fc2, block, shared_mem_size, actor_stream>>>(
+      d_actor_hidden, d_actor_fc2_w, d_actor_fc2_b, d_actor_fc2_output, hidden_dim, actor_output_dim, batch_size);
 
-  // Actor Head层
-  optimized_linear_forward_kernel<<<grid_actor_fc2, block, shared_mem_size,
-                                    actor_stream>>>(
-      intermediates->d_actor_fc2_output, d_actor_head_w, d_actor_head_b,
-      intermediates->d_actor_output, output_dim, output_dim, batch_size);
+  optimized_linear_forward_kernel<<<grid_actor_fc2, block, shared_mem_size, actor_stream>>>(
+      d_actor_fc2_output, d_actor_head_w, d_actor_head_b, d_actor_out, hidden_dim, actor_output_dim, batch_size);
 
-  // Critic路径
-  dim3 grid_critic_fc1((hidden_dim + TILE_SIZE - 1) / TILE_SIZE,
-                       (batch_size + TILE_SIZE - 1) / TILE_SIZE);
-  fc_relu_forward_kernel<<<grid_critic_fc1, block, shared_mem_size,
-                           critic_stream>>>(
-      intermediates->d_shared_output, d_critic_fc1_w, d_critic_fc1_b,
-      intermediates->d_critic_hidden, hidden_dim, hidden_dim, batch_size);
+  // Critic
+  dim3 grid_critic_fc1((hidden_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+  fc_relu_forward_kernel<<<grid_critic_fc1, block, shared_mem_size, critic_stream>>>(
+      d_shared_output, d_critic_fc1_w, d_critic_fc1_b, d_critic_hidden, hidden_dim, hidden_dim, batch_size);
 
-  dim3 grid_critic_fc2((output_dim + TILE_SIZE - 1) / TILE_SIZE,
-                       (batch_size + TILE_SIZE - 1) / TILE_SIZE);
-  fc_relu_forward_kernel<<<grid_critic_fc2, block, shared_mem_size,
-                           critic_stream>>>(
-      intermediates->d_critic_hidden, d_critic_fc2_w, d_critic_fc2_b,
-      intermediates->d_critic_fc2_output, hidden_dim, output_dim, batch_size);
+  dim3 grid_critic_fc2((hidden_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+  fc_relu_forward_kernel<<<grid_critic_fc2, block, shared_mem_size, critic_stream>>>(
+      d_critic_hidden, d_critic_fc2_w, d_critic_fc2_b, d_critic_fc2_output, hidden_dim, critic_output_dim, batch_size);
 
-  // Critic Head层
-  optimized_linear_forward_kernel<<<grid_critic_fc2, block, shared_mem_size,
-                                    critic_stream>>>(
-      intermediates->d_critic_fc2_output, d_critic_head_w, d_critic_head_b,
-      intermediates->d_critic_output, output_dim, output_dim, batch_size);
+  optimized_linear_forward_kernel<<<grid_critic_fc2, block, shared_mem_size, critic_stream>>>(
+      d_critic_fc2_output, d_critic_head_w, d_critic_head_b, d_critic_out, hidden_dim, critic_output_dim, batch_size);
 
-  // 等待两个流完成
   CHECK_CUDA(cudaStreamSynchronize(actor_stream));
   CHECK_CUDA(cudaStreamSynchronize(critic_stream));
 
   // 拷贝结果回主机
-  CHECK_CUDA(cudaMemcpy(actor_output, intermediates->d_actor_output,
-                        batch_size * output_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(critic_output, intermediates->d_critic_output,
-                        batch_size * output_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
+  CHECK_CUDA(cudaMemcpy(actor_output, d_actor_out, batch_size * actor_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+  CHECK_CUDA(cudaMemcpy(critic_output, d_critic_out, batch_size * critic_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
 
-  // 释放设备内存 (保留中间结果)
+  // 释放所有 device 内存
   CHECK_CUDA(cudaFree(d_input));
   CHECK_CUDA(cudaFree(d_shared_w));
   CHECK_CUDA(cudaFree(d_shared_b));
@@ -494,8 +401,14 @@ void cuda_forward(const float *input, int batch_size, int input_dim,
   CHECK_CUDA(cudaFree(d_critic_fc2_b));
   CHECK_CUDA(cudaFree(d_critic_head_w));
   CHECK_CUDA(cudaFree(d_critic_head_b));
+  CHECK_CUDA(cudaFree(d_shared_output));
+  CHECK_CUDA(cudaFree(d_actor_hidden));
+  CHECK_CUDA(cudaFree(d_actor_fc2_output));
+  CHECK_CUDA(cudaFree(d_actor_out));
+  CHECK_CUDA(cudaFree(d_critic_hidden));
+  CHECK_CUDA(cudaFree(d_critic_fc2_output));
+  CHECK_CUDA(cudaFree(d_critic_out));
 
-  // 销毁CUDA流
   CHECK_CUDA(cudaStreamDestroy(actor_stream));
   CHECK_CUDA(cudaStreamDestroy(critic_stream));
 }
@@ -508,323 +421,354 @@ __global__ void merge_gradients_kernel(float *out, const float *a,
   }
 }
 
-// 优化后的反向传播
-void cuda_backward(const float *input, IntermediateData *fwd_data,
-                   const float *grad_actor_output,
-                   const float *grad_critic_output, int batch_size,
-                   int input_dim, int hidden_dim, int output_dim,
-                   const float *actor_fc2_w, const float *critic_fc2_w,
-                   const float *actor_head_w, const float *critic_head_w,
-                   float *grad_shared_w, float *grad_shared_b,
-                   float *grad_actor_fc1_w, float *grad_actor_fc1_b,
-                   float *grad_actor_fc2_w, float *grad_actor_fc2_b,
-                   float *grad_actor_head_w, float *grad_actor_head_b,
-                   float *grad_critic_fc1_w, float *grad_critic_fc1_b,
-                   float *grad_critic_fc2_w, float *grad_critic_fc2_b,
-                   float *grad_critic_head_w, float *grad_critic_head_b) {
+void cuda_backward(
+    const float *input, int batch_size, int input_dim, int hidden_dim, 
+    int actor_output_dim, int critic_output_dim,
+    const float *shared_w, const float *shared_b,
+    const float *actor_fc1_w, const float *actor_fc1_b,
+    const float *actor_fc2_w, const float *actor_fc2_b,
+    const float *actor_head_w, const float *actor_head_b,
+    const float *critic_fc1_w, const float *critic_fc1_b,
+    const float *critic_fc2_w, const float *critic_fc2_b,
+    const float *critic_head_w, const float *critic_head_b,
+    const float *grad_actor_output, const float *grad_critic_output,
+    float *grad_shared_w, float *grad_shared_b,
+    float *grad_actor_fc1_w, float *grad_actor_fc1_b,
+    float *grad_actor_fc2_w, float *grad_actor_fc2_b,
+    float *grad_actor_head_w, float *grad_actor_head_b,
+    float *grad_critic_fc1_w, float *grad_critic_fc1_b,
+    float *grad_critic_fc2_w, float *grad_critic_fc2_b,
+    float *grad_critic_head_w, float *grad_critic_head_b
+) {
+    // 1. 分配所有 device 内存（forward 所需的所有中间结果）
+    float *d_input, *d_shared_w, *d_shared_b;
+    float *d_actor_fc1_w, *d_actor_fc1_b, *d_actor_fc2_w, *d_actor_fc2_b;
+    float *d_actor_head_w, *d_actor_head_b;
+    float *d_critic_fc1_w, *d_critic_fc1_b, *d_critic_fc2_w, *d_critic_fc2_b;
+    float *d_critic_head_w, *d_critic_head_b;
 
-  // 设备内存指针
-  float *d_input, *d_actor_fc2_w, *d_critic_fc2_w;
-  float *d_actor_head_w, *d_critic_head_w;
-  float *d_grad_actor_output, *d_grad_critic_output;
-  float *d_grad_shared_w, *d_grad_shared_b;
-  float *d_grad_actor_fc1_w, *d_grad_actor_fc1_b;
-  float *d_grad_actor_fc2_w, *d_grad_actor_fc2_b;
-  float *d_grad_actor_head_w, *d_grad_actor_head_b;
-  float *d_grad_critic_fc1_w, *d_grad_critic_fc1_b;
-  float *d_grad_critic_fc2_w, *d_grad_critic_fc2_b;
-  float *d_grad_critic_head_w, *d_grad_critic_head_b;
+    float *d_shared_output, *d_actor_hidden, *d_actor_fc2_output;
+    float *d_actor_out, *d_critic_hidden, *d_critic_fc2_output, *d_critic_out;
 
-  // 梯度传递的中间结果
-  float *d_grad_actor_fc2_output, *d_grad_critic_fc2_output;
-  float *d_grad_actor_hidden, *d_grad_critic_hidden;
-  float *d_grad_shared_output;
+    float *d_grad_actor_output, *d_grad_critic_output;
+    float *d_grad_shared_w, *d_grad_shared_b;
+    float *d_grad_actor_fc1_w, *d_grad_actor_fc1_b;
+    float *d_grad_actor_fc2_w, *d_grad_actor_fc2_b;
+    float *d_grad_actor_head_w, *d_grad_actor_head_b;
+    float *d_grad_critic_fc1_w, *d_grad_critic_fc1_b;
+    float *d_grad_critic_fc2_w, *d_grad_critic_fc2_b;
+    float *d_grad_critic_head_w, *d_grad_critic_head_b;
 
-  // 分配设备内存
-  CHECK_CUDA(cudaMalloc(&d_input, batch_size * input_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_actor_fc2_w, output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_critic_fc2_w, output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_actor_head_w, output_dim * output_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_critic_head_w, output_dim * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_actor_output,
-                        batch_size * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_output,
-                        batch_size * output_dim * sizeof(float)));
+    float *d_grad_actor_fc2_output, *d_grad_critic_fc2_output;
+    float *d_grad_actor_hidden, *d_grad_critic_hidden;
+    float *d_grad_shared_output;
 
-  CHECK_CUDA(
-      cudaMalloc(&d_grad_shared_w, hidden_dim * input_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_shared_b, hidden_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_grad_actor_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_actor_fc1_b, hidden_dim * sizeof(float)));
-  CHECK_CUDA(
-      cudaMalloc(&d_grad_actor_fc2_w, output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_b, output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_actor_head_w,
-                        output_dim * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_actor_head_b, output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_fc1_w,
-                        hidden_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_fc1_b, hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_w,
-                        output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_b, output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_head_w,
-                        output_dim * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_head_b, output_dim * sizeof(float)));
+    // 分配 device 内存
+    CHECK_CUDA(cudaMalloc(&d_input, batch_size * input_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_shared_w, hidden_dim * input_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_shared_b, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_fc1_b, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_fc2_b, actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_head_w, actor_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_head_b, actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_fc1_b, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_fc2_w, critic_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_fc2_b, critic_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_head_w, critic_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_head_b, critic_output_dim * sizeof(float)));
 
-  CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_output,
-                        batch_size * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_output,
-                        batch_size * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_actor_hidden,
-                        batch_size * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_critic_hidden,
-                        batch_size * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_grad_shared_output,
-                        batch_size * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_shared_output, batch_size * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_hidden, batch_size * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_fc2_output, batch_size * actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_out, batch_size * actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_hidden, batch_size * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_fc2_output, batch_size * critic_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_out, batch_size * critic_output_dim * sizeof(float)));
 
-  // 拷贝数据到设备
-  CHECK_CUDA(cudaMemcpy(d_input, input, batch_size * input_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_fc2_w, actor_fc2_w,
-                        output_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_fc2_w, critic_fc2_w,
-                        output_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_head_w, actor_head_w,
-                        output_dim * output_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_head_w, critic_head_w,
-                        output_dim * output_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_grad_actor_output, grad_actor_output,
-                        batch_size * output_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_grad_critic_output, grad_critic_output,
-                        batch_size * output_dim * sizeof(float),
-                        cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_output, batch_size * actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_output, batch_size * critic_output_dim * sizeof(float)));
 
-  // 初始化梯度为0
-  CHECK_CUDA(
-      cudaMemset(d_grad_shared_w, 0, hidden_dim * input_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_shared_b, 0, hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_actor_fc1_w, 0,
-                        hidden_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_actor_fc1_b, 0, hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_actor_fc2_w, 0,
-                        output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_actor_fc2_b, 0, output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_actor_head_w, 0,
-                        output_dim * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_actor_head_b, 0, output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_critic_fc1_w, 0,
-                        hidden_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_critic_fc1_b, 0, hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_critic_fc2_w, 0,
-                        output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_critic_fc2_b, 0, output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_critic_head_w, 0,
-                        output_dim * output_dim * sizeof(float)));
-  CHECK_CUDA(cudaMemset(d_grad_critic_head_b, 0, output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_shared_w, hidden_dim * input_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_shared_b, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc1_b, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_b, actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_head_w, actor_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_head_b, actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc1_w, hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc1_b, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_w, critic_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_b, critic_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_head_w, critic_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_head_b, critic_output_dim * sizeof(float)));
 
-  // 创建CUDA流
-  cudaStream_t actor_stream, critic_stream;
-  CHECK_CUDA(cudaStreamCreate(&actor_stream));
-  CHECK_CUDA(cudaStreamCreate(&critic_stream));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_output, batch_size * actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_output, batch_size * critic_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_hidden, batch_size * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_hidden, batch_size * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_shared_output, batch_size * hidden_dim * sizeof(float)));
 
-  // Actor路径反向传播
-  // 1. Actor Head层梯度
-  dim3 grid_head_grad(output_dim, 1);
-  dim3 block_head_grad(BLOCK_DIM);
-  size_t shared_head_grad = BLOCK_DIM * sizeof(float);
+    // 2. 拷贝输入、参数、梯度到 device
+    CHECK_CUDA(cudaMemcpy(d_input, input, batch_size * input_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_shared_w, shared_w, hidden_dim * input_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_shared_b, shared_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_fc1_w, actor_fc1_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_fc1_b, actor_fc1_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_fc2_w, actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_fc2_b, actor_fc2_b, actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_head_w, actor_head_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_head_b, actor_head_b, actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_fc1_w, critic_fc1_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_fc1_b, critic_fc1_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_fc2_w, critic_fc2_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_fc2_b, critic_fc2_b, critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_head_w, critic_head_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_head_b, critic_head_b, critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_grad_actor_output, grad_actor_output, batch_size * actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_grad_critic_output, grad_critic_output, batch_size * critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
 
-  // 权重梯度
-  optimized_weight_grad_kernel<<<grid_head_grad, block_head_grad,
-                                 shared_head_grad, actor_stream>>>(
-      fwd_data->d_actor_fc2_output, d_grad_actor_output, d_grad_actor_head_w,
-      output_dim, output_dim, batch_size);
+    // 3. forward kernel（同 forward），保存所有中间结果
+    // 共享层
+    dim3 block(TILE_SIZE, TILE_SIZE);
+    size_t shared_mem_size = 2 * TILE_SIZE * TILE_SIZE * sizeof(float);
+    dim3 grid_shared((hidden_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+    optimized_linear_forward_kernel<<<grid_shared, block, shared_mem_size>>>(
+        d_input, d_shared_w, d_shared_b, d_shared_output, input_dim, hidden_dim, batch_size);
 
-  // 偏置梯度
-  optimized_bias_grad_kernel<<<grid_head_grad, block_head_grad,
-                               shared_head_grad, actor_stream>>>(
-      d_grad_actor_output, d_grad_actor_head_b, output_dim, batch_size);
+    // Actor
+    dim3 grid_actor_fc1((hidden_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+    fc_relu_forward_kernel<<<grid_actor_fc1, block, shared_mem_size>>>(
+        d_shared_output, d_actor_fc1_w, d_actor_fc1_b, d_actor_hidden, hidden_dim, hidden_dim, batch_size);
 
-  // 2. 计算Actor fc2输出梯度
-  compute_hidden_grad_kernel<<<(batch_size * output_dim + BLOCK_DIM - 1) /
-                                   BLOCK_DIM,
-                               BLOCK_DIM, 0, actor_stream>>>(
-      d_grad_actor_output, d_actor_head_w, d_grad_actor_fc2_output, output_dim,
-      output_dim, batch_size);
+    dim3 grid_actor_fc2((actor_output_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+    fc_relu_forward_kernel<<<grid_actor_fc2, block, shared_mem_size>>>(
+        d_actor_hidden, d_actor_fc2_w, d_actor_fc2_b, d_actor_fc2_output, hidden_dim, actor_output_dim, batch_size);
 
-  // 3. Actor fc2层梯度
-  // 权重梯度
-  optimized_weight_grad_kernel<<<dim3(output_dim, hidden_dim), block_head_grad,
-                                 shared_head_grad, actor_stream>>>(
-      fwd_data->d_actor_hidden, d_grad_actor_fc2_output, d_grad_actor_fc2_w,
-      hidden_dim, output_dim, batch_size);
+    optimized_linear_forward_kernel<<<grid_actor_fc2, block, shared_mem_size>>>(
+        d_actor_fc2_output, d_actor_head_w, d_actor_head_b, d_actor_out, hidden_dim, actor_output_dim, batch_size);
 
-  // 偏置梯度
-  optimized_bias_grad_kernel<<<dim3(output_dim, 1), block_head_grad,
-                               shared_head_grad, actor_stream>>>(
-      d_grad_actor_fc2_output, d_grad_actor_fc2_b, output_dim, batch_size);
+    // Critic
+    dim3 grid_critic_fc1((hidden_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+    fc_relu_forward_kernel<<<grid_critic_fc1, block, shared_mem_size>>>(
+        d_shared_output, d_critic_fc1_w, d_critic_fc1_b, d_critic_hidden, hidden_dim, hidden_dim, batch_size);
 
-  // 4. 计算Actor隐藏层梯度 (带relu导数)
-  compute_relu_hidden_grad_kernel<<<(batch_size * hidden_dim + BLOCK_DIM - 1) /
-                                        BLOCK_DIM,
-                                    BLOCK_DIM, 0, actor_stream>>>(
-      d_grad_actor_fc2_output, d_actor_fc2_w, fwd_data->d_actor_hidden,
-      d_grad_actor_hidden, hidden_dim, output_dim, batch_size);
+    dim3 grid_critic_fc2((critic_output_dim + TILE_SIZE - 1) / TILE_SIZE, (batch_size + TILE_SIZE - 1) / TILE_SIZE);
+    fc_relu_forward_kernel<<<grid_critic_fc2, block, shared_mem_size>>>(
+        d_critic_hidden, d_critic_fc2_w, d_critic_fc2_b, d_critic_fc2_output, hidden_dim, critic_output_dim, batch_size);
 
-  // 5. Actor fc1层梯度
-  // 权重梯度
-  optimized_weight_grad_kernel<<<dim3(hidden_dim, hidden_dim), block_head_grad,
-                                 shared_head_grad, actor_stream>>>(
-      fwd_data->d_shared_output, d_grad_actor_hidden, d_grad_actor_fc1_w,
-      hidden_dim, hidden_dim, batch_size);
+    optimized_linear_forward_kernel<<<grid_critic_fc2, block, shared_mem_size>>>(
+        d_critic_fc2_output, d_critic_head_w, d_critic_head_b, d_critic_out, hidden_dim, critic_output_dim, batch_size);
 
-  // 偏置梯度
-  optimized_bias_grad_kernel<<<dim3(hidden_dim, 1), block_head_grad,
-                               shared_head_grad, actor_stream>>>(
-      d_grad_actor_hidden, d_grad_actor_fc1_b, hidden_dim, batch_size);
+    // 4. backward kernel，计算所有梯度
+    // 初始化梯度为0
+    CHECK_CUDA(
+        cudaMemset(d_grad_shared_w, 0, hidden_dim * input_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_shared_b, 0, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_actor_fc1_w, 0,
+                          hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_actor_fc1_b, 0, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_actor_fc2_w, 0,
+                          actor_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_actor_fc2_b, 0, actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_actor_head_w, 0,
+                          hidden_dim * actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_actor_head_b, 0, actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_critic_fc1_w, 0,
+                          hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_critic_fc1_b, 0, hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_critic_fc2_w, 0,
+                          critic_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_critic_fc2_b, 0, critic_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_critic_head_w, 0,
+                          hidden_dim * critic_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_critic_head_b, 0, critic_output_dim * sizeof(float)));
 
-  // Critic路径反向传播 (与Actor类似)
-  // 1. Critic Head层梯度
-  optimized_weight_grad_kernel<<<grid_head_grad, block_head_grad,
-                                 shared_head_grad, critic_stream>>>(
-      fwd_data->d_critic_fc2_output, d_grad_critic_output, d_grad_critic_head_w,
-      output_dim, output_dim, batch_size);
-  optimized_bias_grad_kernel<<<grid_head_grad, block_head_grad,
-                               shared_head_grad, critic_stream>>>(
-      d_grad_critic_output, d_grad_critic_head_b, output_dim, batch_size);
+    // 创建CUDA流
+    cudaStream_t actor_stream, critic_stream;
+    CHECK_CUDA(cudaStreamCreate(&actor_stream));
+    CHECK_CUDA(cudaStreamCreate(&critic_stream));
 
-  // 2. 计算Critic fc2输出梯度
-  compute_hidden_grad_kernel<<<(batch_size * output_dim + BLOCK_DIM - 1) /
-                                   BLOCK_DIM,
-                               BLOCK_DIM, 0, critic_stream>>>(
-      d_grad_critic_output, d_critic_head_w, d_grad_critic_fc2_output,
-      output_dim, output_dim, batch_size);
+    // Actor路径反向传播
+    // 1. Actor Head层梯度
+    dim3 grid_head_grad(actor_output_dim, 1);
+    dim3 block_head_grad(BLOCK_DIM);
+    size_t shared_head_grad = BLOCK_DIM * sizeof(float);
 
-  // 3. Critic fc2层梯度
-  optimized_weight_grad_kernel<<<dim3(output_dim, hidden_dim), block_head_grad,
-                                 shared_head_grad, critic_stream>>>(
-      fwd_data->d_critic_hidden, d_grad_critic_fc2_output, d_grad_critic_fc2_w,
-      hidden_dim, output_dim, batch_size);
-  optimized_bias_grad_kernel<<<dim3(output_dim, 1), block_head_grad,
-                               shared_head_grad, critic_stream>>>(
-      d_grad_critic_fc2_output, d_grad_critic_fc2_b, output_dim, batch_size);
+    // 权重梯度
+    optimized_weight_grad_kernel<<<grid_head_grad, block_head_grad,
+                                  shared_head_grad, actor_stream>>>(
+        d_actor_fc2_output, d_grad_actor_output, d_grad_actor_head_w,
+        hidden_dim, actor_output_dim, batch_size);
 
-  // 4. 计算Critic隐藏层梯度 (带relu导数)
-  compute_relu_hidden_grad_kernel<<<(batch_size * hidden_dim + BLOCK_DIM - 1) /
-                                        BLOCK_DIM,
-                                    BLOCK_DIM, 0, critic_stream>>>(
-      d_grad_critic_fc2_output, d_critic_fc2_w, fwd_data->d_critic_hidden,
-      d_grad_critic_hidden, hidden_dim, output_dim, batch_size);
+    // 偏置梯度
+    optimized_bias_grad_kernel<<<grid_head_grad, block_head_grad,
+                                shared_head_grad, actor_stream>>>(
+        d_grad_actor_output, d_grad_actor_head_b, actor_output_dim, batch_size);
 
-  // 5. Critic fc1层梯度
-  optimized_weight_grad_kernel<<<dim3(hidden_dim, hidden_dim), block_head_grad,
-                                 shared_head_grad, critic_stream>>>(
-      fwd_data->d_shared_output, d_grad_critic_hidden, d_grad_critic_fc1_w,
-      hidden_dim, hidden_dim, batch_size);
-  optimized_bias_grad_kernel<<<dim3(hidden_dim, 1), block_head_grad,
-                               shared_head_grad, critic_stream>>>(
-      d_grad_critic_hidden, d_grad_critic_fc1_b, hidden_dim, batch_size);
+    // 2. 计算Actor fc2输出梯度
+    compute_hidden_grad_kernel<<<(batch_size * actor_output_dim + BLOCK_DIM - 1) /
+                                    BLOCK_DIM,
+                                BLOCK_DIM, 0, actor_stream>>>(
+        d_grad_actor_output, d_actor_head_w, d_grad_actor_fc2_output, actor_output_dim, 
+        hidden_dim, batch_size);
 
-  // 等待两个流完成
-  CHECK_CUDA(cudaStreamSynchronize(actor_stream));
-  CHECK_CUDA(cudaStreamSynchronize(critic_stream));
+    // 3. Actor fc2层梯度
+    // 权重梯度
+    optimized_weight_grad_kernel<<<dim3(actor_output_dim, hidden_dim), block_head_grad,
+                                  shared_head_grad, actor_stream>>>(
+        d_actor_hidden, d_grad_actor_fc2_output, d_grad_actor_fc2_w,
+        actor_output_dim, hidden_dim, batch_size);
 
-  printf("Actor and Critic backward pass completed.\n");
-  dim3 mergeBlock(256);
-  dim3 mergeGrid(CEIL_DIV(batch_size * hidden_dim, mergeBlock.x));
-  merge_gradients_kernel<<<mergeGrid, mergeBlock, 0>>>(
-      d_grad_shared_output, d_grad_actor_hidden, d_grad_critic_hidden,
-      batch_size * hidden_dim);
-  CHECK_CUDA(cudaDeviceSynchronize());
+    // 偏置梯度
+    optimized_bias_grad_kernel<<<dim3(actor_output_dim, 1), block_head_grad,
+                                shared_head_grad, actor_stream>>>(
+        d_grad_actor_fc2_output, d_grad_actor_fc2_b, actor_output_dim, batch_size);
 
-  printf("Shared layer gradients computed.\n");
+    // 4. 计算Actor隐藏层梯度 (带relu导数)
+    compute_relu_hidden_grad_kernel<<<(batch_size * hidden_dim + BLOCK_DIM - 1) /
+                                          BLOCK_DIM,
+                                      BLOCK_DIM, 0, actor_stream>>>(
+        d_grad_actor_fc2_output, d_actor_fc2_w, d_actor_hidden,
+        d_grad_actor_hidden, hidden_dim, actor_output_dim, batch_size);
 
-  // 执行共享层的反向传播
-  dim3 grid_shared_grad(hidden_dim, input_dim, 1);
-  dim3 block_shared_grad(1, 1, 1);
-  optimized_shared_backward_kernel<<<grid_shared_grad, block_shared_grad>>>(
-      d_input, d_grad_actor_hidden, d_grad_critic_hidden, d_grad_shared_w,
-      d_grad_shared_b, input_dim, hidden_dim, batch_size);
+    // 5. Actor fc1层梯度
+    // 权重梯度
+    optimized_weight_grad_kernel<<<dim3(hidden_dim, hidden_dim), block_head_grad,
+                                  shared_head_grad, actor_stream>>>(
+        d_shared_output, d_grad_actor_hidden, d_grad_actor_fc1_w,
+        hidden_dim, hidden_dim, batch_size);
 
-  // 拷贝梯度结果回主机
-  CHECK_CUDA(cudaMemcpy(grad_shared_w, d_grad_shared_w,
-                        hidden_dim * input_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_shared_b, d_grad_shared_b,
-                        hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    // 偏置梯度
+    optimized_bias_grad_kernel<<<dim3(hidden_dim, 1), block_head_grad,
+                                shared_head_grad, actor_stream>>>(
+        d_grad_actor_hidden, d_grad_actor_fc1_b, hidden_dim, batch_size);
 
-  CHECK_CUDA(cudaMemcpy(grad_actor_fc1_w, d_grad_actor_fc1_w,
-                        hidden_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_actor_fc1_b, d_grad_actor_fc1_b,
-                        hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_actor_fc2_w, d_grad_actor_fc2_w,
-                        output_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_actor_fc2_b, d_grad_actor_fc2_b,
-                        output_dim * sizeof(float), cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_actor_head_w, d_grad_actor_head_w,
-                        output_dim * output_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_actor_head_b, d_grad_actor_head_b,
-                        output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    // Critic路径反向传播 (与Actor类似)
+    // 1. Critic Head层梯度
+    optimized_weight_grad_kernel<<<grid_head_grad, block_head_grad,
+                                  shared_head_grad, critic_stream>>>(
+        d_critic_fc2_output, d_grad_critic_output, d_grad_critic_head_w,
+        hidden_dim, critic_output_dim, batch_size);
+    optimized_bias_grad_kernel<<<grid_head_grad, block_head_grad,
+                                shared_head_grad, critic_stream>>>(
+        d_grad_critic_output, d_grad_critic_head_b, critic_output_dim, batch_size);
 
-  CHECK_CUDA(cudaMemcpy(grad_critic_fc1_w, d_grad_critic_fc1_w,
-                        hidden_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_critic_fc1_b, d_grad_critic_fc1_b,
-                        hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_critic_fc2_w, d_grad_critic_fc2_w,
-                        output_dim * hidden_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_critic_fc2_b, d_grad_critic_fc2_b,
-                        output_dim * sizeof(float), cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_critic_head_w, d_grad_critic_head_w,
-                        output_dim * output_dim * sizeof(float),
-                        cudaMemcpyDeviceToHost));
-  CHECK_CUDA(cudaMemcpy(grad_critic_head_b, d_grad_critic_head_b,
-                        output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    // 2. 计算Critic fc2输出梯度
+    compute_hidden_grad_kernel<<<(batch_size * critic_output_dim + BLOCK_DIM - 1) /
+                                    BLOCK_DIM,
+                                BLOCK_DIM, 0, critic_stream>>>(
+        d_grad_critic_output, d_critic_head_w, d_grad_critic_fc2_output,
+        critic_output_dim, critic_output_dim, batch_size);
 
-  // 释放设备内存
-  CHECK_CUDA(cudaFree(d_input));
-  CHECK_CUDA(cudaFree(d_actor_fc2_w));
-  CHECK_CUDA(cudaFree(d_critic_fc2_w));
-  CHECK_CUDA(cudaFree(d_actor_head_w));
-  CHECK_CUDA(cudaFree(d_critic_head_w));
-  CHECK_CUDA(cudaFree(d_grad_actor_output));
-  CHECK_CUDA(cudaFree(d_grad_critic_output));
-  CHECK_CUDA(cudaFree(d_grad_shared_w));
-  CHECK_CUDA(cudaFree(d_grad_shared_b));
-  CHECK_CUDA(cudaFree(d_grad_actor_fc1_w));
-  CHECK_CUDA(cudaFree(d_grad_actor_fc1_b));
-  CHECK_CUDA(cudaFree(d_grad_actor_fc2_w));
-  CHECK_CUDA(cudaFree(d_grad_actor_fc2_b));
-  CHECK_CUDA(cudaFree(d_grad_actor_head_w));
-  CHECK_CUDA(cudaFree(d_grad_actor_head_b));
-  CHECK_CUDA(cudaFree(d_grad_critic_fc1_w));
-  CHECK_CUDA(cudaFree(d_grad_critic_fc1_b));
-  CHECK_CUDA(cudaFree(d_grad_critic_fc2_w));
-  CHECK_CUDA(cudaFree(d_grad_critic_fc2_b));
-  CHECK_CUDA(cudaFree(d_grad_critic_head_w));
-  CHECK_CUDA(cudaFree(d_grad_critic_head_b));
-  CHECK_CUDA(cudaFree(d_grad_actor_fc2_output));
-  CHECK_CUDA(cudaFree(d_grad_critic_fc2_output));
-  CHECK_CUDA(cudaFree(d_grad_actor_hidden));
-  CHECK_CUDA(cudaFree(d_grad_critic_hidden));
-  CHECK_CUDA(cudaFree(d_grad_shared_output));
+    // 3. Critic fc2层梯度
+    optimized_weight_grad_kernel<<<dim3(critic_output_dim, hidden_dim), block_head_grad,
+                                  shared_head_grad, critic_stream>>>(
+        d_critic_hidden, d_grad_critic_fc2_output, d_grad_critic_fc2_w,
+        critic_output_dim, hidden_dim, batch_size);
+    optimized_bias_grad_kernel<<<dim3(critic_output_dim, 1), block_head_grad,
+                                shared_head_grad, critic_stream>>>(
+        d_grad_critic_fc2_output, d_grad_critic_fc2_b, critic_output_dim, batch_size);
 
-  // 销毁CUDA流
-  CHECK_CUDA(cudaStreamDestroy(actor_stream));
-  CHECK_CUDA(cudaStreamDestroy(critic_stream));
+    // 4. 计算Critic隐藏层梯度 (带relu导数)
+    compute_relu_hidden_grad_kernel<<<(batch_size * critic_output_dim + BLOCK_DIM - 1) /
+                                          BLOCK_DIM,
+                                      BLOCK_DIM, 0, critic_stream>>>(
+        d_grad_critic_fc2_output, d_critic_fc2_w, d_critic_hidden,
+        d_grad_critic_hidden, critic_output_dim, hidden_dim, batch_size); 
+
+    // 5. Critic fc1层梯度
+    optimized_weight_grad_kernel<<<dim3(hidden_dim, hidden_dim), block_head_grad,
+                                  shared_head_grad, critic_stream>>>(
+        d_shared_output, d_grad_critic_hidden, d_grad_critic_fc1_w,
+        hidden_dim, hidden_dim, batch_size);
+    optimized_bias_grad_kernel<<<dim3(hidden_dim, 1), block_head_grad,
+                                shared_head_grad, critic_stream>>>(
+        d_grad_critic_hidden, d_grad_critic_fc1_b, hidden_dim, batch_size);
+
+    // 等待两个流完成
+    CHECK_CUDA(cudaStreamSynchronize(actor_stream));
+    CHECK_CUDA(cudaStreamSynchronize(critic_stream));
+
+    printf("Actor and Critic backward pass completed.\n");
+    dim3 mergeBlock(256);
+    dim3 mergeGrid(CEIL_DIV(batch_size * hidden_dim, mergeBlock.x));
+    merge_gradients_kernel<<<mergeGrid, mergeBlock, 0>>>(
+        d_grad_shared_output, d_grad_actor_hidden, d_grad_critic_hidden,
+        batch_size * hidden_dim);
+    CHECK_CUDA(cudaDeviceSynchronize());
+
+    printf("Shared layer gradients computed.\n");
+
+    // 执行共享层的反向传播
+    dim3 grid_shared_grad(hidden_dim, input_dim, 1);
+    dim3 block_shared_grad(1, 1, 1);
+    optimized_shared_backward_kernel<<<grid_shared_grad, block_shared_grad>>>(
+        d_input, d_grad_actor_hidden, d_grad_critic_hidden, d_grad_shared_w,
+        d_grad_shared_b, input_dim, hidden_dim, batch_size);
+
+    // 5. 拷贝所有梯度回主机
+    CHECK_CUDA(cudaMemcpy(grad_shared_w, d_grad_shared_w, hidden_dim * input_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_shared_b, d_grad_shared_b, hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_actor_fc1_w, d_grad_actor_fc1_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_actor_fc1_b, d_grad_actor_fc1_b, hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_actor_fc2_w, d_grad_actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_actor_fc2_b, d_grad_actor_fc2_b, actor_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_actor_head_w, d_grad_actor_head_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_actor_head_b, d_grad_actor_head_b, actor_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_critic_fc1_w, d_grad_critic_fc1_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_critic_fc1_b, d_grad_critic_fc1_b, hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_critic_fc2_w, d_grad_critic_fc2_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_critic_fc2_b, d_grad_critic_fc2_b, critic_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_critic_head_w, d_grad_critic_head_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_critic_head_b, d_grad_critic_head_b, critic_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+
+    // 6. 释放所有 device 内存
+    CHECK_CUDA(cudaFree(d_input));
+    CHECK_CUDA(cudaFree(d_shared_w));
+    CHECK_CUDA(cudaFree(d_shared_b));
+    CHECK_CUDA(cudaFree(d_actor_fc1_w));
+    CHECK_CUDA(cudaFree(d_actor_fc1_b));
+    CHECK_CUDA(cudaFree(d_actor_fc2_w));
+    CHECK_CUDA(cudaFree(d_actor_fc2_b));
+    CHECK_CUDA(cudaFree(d_actor_head_w));
+    CHECK_CUDA(cudaFree(d_actor_head_b));
+    CHECK_CUDA(cudaFree(d_critic_fc1_w));
+    CHECK_CUDA(cudaFree(d_critic_fc1_b));
+    CHECK_CUDA(cudaFree(d_critic_fc2_w));
+    CHECK_CUDA(cudaFree(d_critic_fc2_b));
+    CHECK_CUDA(cudaFree(d_critic_head_w));
+    CHECK_CUDA(cudaFree(d_critic_head_b));
+    CHECK_CUDA(cudaFree(d_shared_output));
+    CHECK_CUDA(cudaFree(d_actor_hidden));
+    CHECK_CUDA(cudaFree(d_actor_fc2_output));
+    CHECK_CUDA(cudaFree(d_actor_out));
+    CHECK_CUDA(cudaFree(d_critic_hidden));
+    CHECK_CUDA(cudaFree(d_critic_fc2_output));
+    CHECK_CUDA(cudaFree(d_critic_out));
+    CHECK_CUDA(cudaFree(d_grad_actor_output));
+    CHECK_CUDA(cudaFree(d_grad_critic_output));
+    CHECK_CUDA(cudaFree(d_grad_shared_w));
+    CHECK_CUDA(cudaFree(d_grad_shared_b));
+    CHECK_CUDA(cudaFree(d_grad_actor_fc1_w));
+    CHECK_CUDA(cudaFree(d_grad_actor_fc1_b));
+    CHECK_CUDA(cudaFree(d_grad_actor_fc2_w));
+    CHECK_CUDA(cudaFree(d_grad_actor_fc2_b));
+    CHECK_CUDA(cudaFree(d_grad_actor_head_w));
+    CHECK_CUDA(cudaFree(d_grad_actor_head_b));
+    CHECK_CUDA(cudaFree(d_grad_critic_fc1_w));
+    CHECK_CUDA(cudaFree(d_grad_critic_fc1_b));
+    CHECK_CUDA(cudaFree(d_grad_critic_fc2_w));
+    CHECK_CUDA(cudaFree(d_grad_critic_fc2_b));
+    CHECK_CUDA(cudaFree(d_grad_critic_head_w));
+    CHECK_CUDA(cudaFree(d_grad_critic_head_b));
+    CHECK_CUDA(cudaFree(d_grad_actor_fc2_output));
+    CHECK_CUDA(cudaFree(d_grad_critic_fc2_output));
+    CHECK_CUDA(cudaFree(d_grad_actor_hidden));
+    CHECK_CUDA(cudaFree(d_grad_critic_hidden));
+    CHECK_CUDA(cudaFree(d_grad_shared_output));
 }
 } // extern "C"

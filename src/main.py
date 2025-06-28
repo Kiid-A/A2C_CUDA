@@ -1,31 +1,30 @@
-import torch
+import numpy as np
 import time
 from algs.traj import Traj
-from algs.model import MlpAC
+from algs.model import MlpACManual
 from algs.a2c import A2C
 
 def simple_game():
     print("Simple game starting...")
     N_parallel = 1
-    N_episode = 5000
+    N_episode = 50
     episode_steps = 20
     obs_dim = 2
     n_actions = 2
     hidden_dim = 128
-    ac = MlpAC(obs_dim, n_actions, hidden_dim)
+    ac = MlpACManual(obs_dim, n_actions, hidden_dim)
     traj = Traj(episode_steps)
-    trainer = A2C(ac, 1., 1., 0.1, 1e-3)
-    obs = torch.randint(0, 10, (N_parallel, obs_dim)).float()
+    trainer = A2C(ac, value_loss_coef=1., actor_loss_coef=1., entropy_coef=0.01, learning_rate=5e-5)
+    obs = np.random.randint(0, 10, (N_parallel, obs_dim)).astype(np.float32)
     start_time = time.time()
     for e in range(N_episode):
         for step in range(episode_steps):
             print(f"\rEpisode {e}, Step {step}", end="")
-            with torch.no_grad():
-                action, value, actLogProbs = ac.act(obs)
-            reward = (action == obs.argmax(1).unsqueeze(1)).float() * 2 - 1
-            done = torch.ones((N_parallel, 1)) if e == episode_steps - 1 else torch.zeros((N_parallel, 1))
-            traj.remember(obs[0], action[0], reward[0], actLogProbs[0], value[0], done[0])
-            obs = torch.randint(0, 10, (N_parallel, obs_dim)).float()
+            action, value, actLogProbs = ac.act(obs)
+            reward = (action == np.argmax(obs[0])).astype(np.float32) * 2 - 1
+            done = np.ones((N_parallel, 1), dtype=np.float32) if e == episode_steps - 1 else np.zeros((N_parallel, 1), dtype=np.float32)
+            traj.remember(obs[0], action, reward, actLogProbs, value, done)
+            obs = np.random.randint(0, 10, (N_parallel, obs_dim)).astype(np.float32)
         print("\r\n")
         print(f"Episode {e} begins to update:")
         train_info = trainer.update(traj)
@@ -38,5 +37,4 @@ def simple_game():
     print(f"Training completed in {duration} seconds.")
 
 if __name__ == "__main__":
-    torch.set_num_threads(12)
     simple_game()
