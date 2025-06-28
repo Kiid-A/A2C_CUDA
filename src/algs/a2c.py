@@ -50,6 +50,32 @@ class AdamOptimizer:
             p[:] = np.random.uniform(-0.01, 0.01, size=p.shape).astype(np.float32)
         self.zero_grad()  # 同时重置优化器状态
 
+class SGDOptimizer:
+    def __init__(self, params, lr=1e-3, momentum=0.9):
+        """
+        参数:
+            params: 模型参数列表（NumPy 数组）
+            lr: 学习率（默认 1e-3）
+            momentum: 动量系数（默认 0.9，设为 0 则为普通 SGD）
+        """
+        self.params = params
+        self.lr = lr
+        self.momentum = momentum
+        self.velocity = [np.zeros_like(p) for p in params]  # 动量累积
+
+    def step(self, grads):
+        """
+        执行一步参数更新
+        """
+        for i, (p, g) in enumerate(zip(self.params, grads)):
+            # 动量更新
+            self.velocity[i] = self.momentum * self.velocity[i] + g
+            # 参数更新
+            p -= self.lr * self.velocity[i]
+
+    def zero_grad(self):
+        """清空动量状态"""
+        self.velocity = [np.zeros_like(p) for p in self.params]
 
 class A2C:
     def __init__(self, actor_and_critic, value_loss_coef=1., actor_loss_coef=1., entropy_coef=1e-3, learning_rate=1e-3):
@@ -57,7 +83,8 @@ class A2C:
         self.value_loss_coef = value_loss_coef
         self.actor_loss_coef = actor_loss_coef
         self.entropy_coef = entropy_coef
-        self.optimizer = AdamOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
+        # self.optimizer = AdamOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
+        self.optimizer = SGDOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
 
     def update(self, traj):
         print("traj finalize...")
@@ -107,6 +134,11 @@ class A2C:
         self._apply_grads(grads)
 
         return {
+            "policy_grad": np.mean(policy_grad),
+            "entropy_grad": np.mean(entropy_grad),
+            "grad_actor": np.mean(grad_actor),
+            "grad_value": np.mean(grad_value),
+
             "Value loss": float(value_loss),
             "Action loss": float(action_loss),
             "distEntropy loss": float(distEntropy_loss),

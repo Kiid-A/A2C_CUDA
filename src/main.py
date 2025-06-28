@@ -18,11 +18,11 @@ def simple_game():
     obs_dim = 2
     n_actions = 2
     hidden_dim = 128
-
-    # ac = MlpACManual(obs_dim, n_actions, hidden_dim)
-    # trainer = A2C(ac, value_loss_coef=0.5, actor_loss_coef=1., entropy_coef=0.0, learning_rate=2e-5)
-    ac = MlpACTorch(obs_dim, n_actions, hidden_dim)
-    trainer = A2CTorch(ac, value_loss_coef=0.5, actor_loss_coef=1., entropy_coef=1e-3, learning_rate=2e-5)
+    trainer_args = dict(value_loss_coef=0.5, actor_loss_coef=1., entropy_coef=1e-3, learning_rate=2e-5)
+    ac = MlpACManual(obs_dim, n_actions, hidden_dim)
+    trainer = A2C(ac, **trainer_args)
+    # ac = MlpACTorch(obs_dim, n_actions, hidden_dim)
+    # trainer = A2CTorch(ac, **trainer_args)
 
     traj = Traj(episode_steps)
     obs = np.random.randint(0, 10, (N_parallel, obs_dim)).astype(np.float32)
