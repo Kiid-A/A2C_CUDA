@@ -8,6 +8,9 @@ ssh.sh
 .vscode/
 
 /.marscode
+/.cache
 /build
 __pycache__
 *.pyc
+
+/src/*.png

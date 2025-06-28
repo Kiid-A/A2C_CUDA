@@ -97,3 +97,50 @@ class MlpACManual:
         value = critic_out.squeeze()
         actLogProbs = np.log(probs[np.arange(len(action)), action] + 1e-8)
         return action, value, actLogProbs
+
+
+import torch.nn as nn
+import torch
+
+class MlpACTorch(nn.Module):
+    def __init__(self, obs_dim, n_actions, hidden_dim=64):
+        super(MlpACTorch, self).__init__()
+        self.shared = nn.Sequential(
+            nn.Linear(obs_dim, hidden_dim),
+            nn.ReLU()
+        )
+        self.actor = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, n_actions)
+        )
+        self.critic = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, 1)
+        )
+        
+        # 初始化权重
+        for layer in self.modules():
+            if isinstance(layer, nn.Linear):
+                nn.init.xavier_uniform_(layer.weight)
+                nn.init.zeros_(layer.bias)
+
+    def forward(self, x):
+        shared_out = self.shared(x)
+        return self.actor(shared_out), self.critic(shared_out)
+
+    def act(self, obs):
+        if not isinstance(obs, torch.Tensor):
+            obs = torch.FloatTensor(obs)
+        with torch.no_grad():
+            logits, value = self.forward(obs)
+        probs = torch.softmax(logits, dim=-1)
+        action = torch.multinomial(probs, 1).numpy()
+        value = value.squeeze().numpy()
+        act_log_prob = torch.log(probs.gather(1, torch.LongTensor(action))).numpy()
+        return action, value, act_log_prob

@@ -2,6 +2,7 @@
 rm -rf build
 mkdir build && cd build
 cmake .. \
+    -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
     -DCUDAToolkit_ROOT=/opt/cuda \
     -DCMAKE_CUDA_COMPILER=/opt/cuda/bin/nvcc \
     -DPython3_ROOT_DIR=/usr/lib/python3.13 \
