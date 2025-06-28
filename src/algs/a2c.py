@@ -103,31 +103,34 @@ class A2C:
 
         values = critic_out
 
+        print(actions.shape)
         actLogProbs = np.log(probs[np.arange(len(actions)), actions] + 1e-8)
         distEntropy = -np.sum(probs * np.log(probs + 1e-8), axis=1, keepdims=True)
+        target_actions = np.argmax(observations, axis=1)
+        action_loss = -np.mean(np.log(probs[np.arange(len(target_actions)), target_actions] + 1e-8)) * self.actor_loss_coef
+        grad_actor = np.zeros_like(probs)
+        grad_actor[np.arange(len(target_actions)), target_actions] = -1.0 / (probs[np.arange(len(target_actions)), target_actions] + 1e-8)
+        grad_actor = grad_actor / len(target_actions) * self.actor_loss_coef
 
         advantages = returns.reshape(-1, 1) - values
         advantages = (advantages - np.mean(advantages)) / (np.std(advantages) + 2e-8)
 
         print(advantages)
         value_loss = np.mean(np.power(advantages, 2)) * self.value_loss_coef
-        action_loss = -np.mean(advantages * actLogProbs) * self.actor_loss_coef
+        # action_loss = -np.mean(advantages * actLogProbs) * self.actor_loss_coef
         distEntropy_loss = -np.mean(distEntropy) * self.entropy_coef
 
-        loss = (value_loss  + action_loss + distEntropy_loss)
+        loss = (value_loss + action_loss + distEntropy_loss)
 
         one_hot = np.zeros_like(probs)
         one_hot[np.arange(len(actions)), actions] = 1
         
-        # 修正后的actor梯度计算，包含策略梯度和熵正则化梯度
         policy_grad = - (advantages * (one_hot - probs)) / len(advantages) * self.actor_loss_coef
         entropy_grad = - (np.log(probs + 1e-8) + 1) / len(advantages) * self.entropy_coef
-        grad_actor = policy_grad + entropy_grad
-        grad_actor = - grad_actor
+        grad_actor += entropy_grad
         
-        # 修正后的critic梯度计算，增加稳定性
         grad_value = -2 * (advantages) / (len(advantages) + 1e-8) * self.value_loss_coef
-        grad_value = - grad_value
+        # grad_value = - grad_value
 
         self.optimizer.zero_grad()
 
@@ -137,8 +140,8 @@ class A2C:
         self._apply_grads(grads)
 
         return {
-            "policy_grad": np.mean(policy_grad),
-            "entropy_grad": np.mean(entropy_grad),
+            # "policy_grad": np.mean(policy_grad),
+            # "entropy_grad": np.mean(entropy_grad),
             "grad_actor": np.mean(grad_actor),
             "grad_value": np.mean(grad_value),
 

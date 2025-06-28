@@ -2,10 +2,11 @@ import numpy as np
 import mlp_ac_cuda
 
 class MlpACManual:
-    def __init__(self, obs_dim, n_actions, hidden_dim=64):
+    def __init__(self, obs_dim, n_actions, hidden_dim=64, cpu=True):
         self.obs_dim = obs_dim
         self.n_actions = n_actions
         self.hidden_dim = hidden_dim
+        self.cpu = cpu
 
         def xavier(shape):
             fan_in, fan_out = shape[0], shape[1]
@@ -49,6 +50,8 @@ class MlpACManual:
         pass
 
     def forward(self, obs):
+        if self.cpu: return self.forward_numpy(obs)
+
         actor_out, critic_out = mlp_ac_cuda.mlp_forward(
             obs.astype(np.float32),
             self.actor1_w, self.actor1_b,
@@ -60,6 +63,22 @@ class MlpACManual:
             self.hidden_dim,
             self.n_actions
         )
+        return actor_out, critic_out
+    
+    def forward_numpy(self, obs):
+        if not isinstance(obs, np.ndarray):
+            obs = np.array(obs, dtype=np.float32)
+            
+        # Actor forward pass
+        actor_h1 = np.maximum(0, obs @ self.actor1_w + self.actor1_b)
+        actor_h2 = np.maximum(0, actor_h1 @ self.actor2_w + self.actor2_b)
+        actor_out = actor_h2 @ self.actor_head_w + self.actor_head_b
+        
+        # Critic forward pass
+        critic_h1 = np.maximum(0, obs @ self.critic1_w + self.critic1_b)
+        critic_h2 = np.maximum(0, critic_h1 @ self.critic2_w + self.critic2_b)
+        critic_out = critic_h2 @ self.critic_head_w + self.critic_head_b
+        
         return actor_out, critic_out
 
     def backward(self, obs, grad_actor_output, grad_critic_output):

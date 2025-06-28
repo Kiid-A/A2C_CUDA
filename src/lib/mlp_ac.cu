@@ -278,8 +278,8 @@ void cuda_forward(const float *input, int batch_size, int input_dim, int hidden_
   CHECK_CUDA(cudaMalloc(&d_input, batch_size * input_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_actor_fc1_w, input_dim * hidden_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_actor_fc1_b, hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_actor_fc2_b, actor_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_fc2_w, hidden_dim * hidden_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_fc2_b, hidden_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_actor_head_w, hidden_dim * actor_output_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_actor_head_b, actor_output_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_critic_fc1_w, input_dim * hidden_dim * sizeof(float)));
@@ -290,25 +290,25 @@ void cuda_forward(const float *input, int batch_size, int input_dim, int hidden_
   CHECK_CUDA(cudaMalloc(&d_critic_head_b, 1 * sizeof(float)));
 
   CHECK_CUDA(cudaMalloc(&d_actor_hidden, batch_size * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_actor_fc2_output, batch_size * actor_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_actor_fc2_output, batch_size * hidden_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_actor_out, batch_size * actor_output_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_critic_hidden, batch_size * hidden_dim * sizeof(float)));
-  CHECK_CUDA(cudaMalloc(&d_critic_fc2_output, batch_size * critic_output_dim * sizeof(float)));
+  CHECK_CUDA(cudaMalloc(&d_critic_fc2_output, batch_size * hidden_dim * sizeof(float)));
   CHECK_CUDA(cudaMalloc(&d_critic_out, batch_size * critic_output_dim * sizeof(float)));
 
   // 拷贝参数到 device
   CHECK_CUDA(cudaMemcpy(d_input, input, batch_size * input_dim * sizeof(float), cudaMemcpyHostToDevice));
   CHECK_CUDA(cudaMemcpy(d_actor_fc1_w, actor_fc1_w, input_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
   CHECK_CUDA(cudaMemcpy(d_actor_fc1_b, actor_fc1_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_fc2_w, actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_fc2_b, actor_fc2_b, actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_actor_head_w, actor_head_w, actor_output_dim * actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_fc2_w, actor_fc2_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_fc2_b, actor_fc2_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_actor_head_w, actor_head_w, hidden_dim * actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
   CHECK_CUDA(cudaMemcpy(d_actor_head_b, actor_head_b, actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
   CHECK_CUDA(cudaMemcpy(d_critic_fc1_w, critic_fc1_w, input_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
   CHECK_CUDA(cudaMemcpy(d_critic_fc1_b, critic_fc1_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_fc2_w, critic_fc2_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_fc2_b, critic_fc2_b, critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
-  CHECK_CUDA(cudaMemcpy(d_critic_head_w, critic_head_w, critic_output_dim * critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_fc2_w, critic_fc2_w,  hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_fc2_b, critic_fc2_b,  hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+  CHECK_CUDA(cudaMemcpy(d_critic_head_w, critic_head_w,  hidden_dim * critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
   CHECK_CUDA(cudaMemcpy(d_critic_head_b, critic_head_b, critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
 
   // CUDA流和核函数配置
@@ -443,10 +443,10 @@ void cuda_backward(
     CHECK_CUDA(cudaMalloc(&d_critic_head_b, critic_output_dim * sizeof(float)));
 
     CHECK_CUDA(cudaMalloc(&d_actor_hidden, batch_size * hidden_dim * sizeof(float)));
-    CHECK_CUDA(cudaMalloc(&d_actor_fc2_output, batch_size * actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_actor_fc2_output, batch_size * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_actor_out, batch_size * actor_output_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_critic_hidden, batch_size * hidden_dim * sizeof(float)));
-    CHECK_CUDA(cudaMalloc(&d_critic_fc2_output, batch_size * critic_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_critic_fc2_output, batch_size * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_critic_out, batch_size * critic_output_dim * sizeof(float)));
 
     CHECK_CUDA(cudaMalloc(&d_grad_actor_output, batch_size * actor_output_dim * sizeof(float)));
@@ -454,19 +454,19 @@ void cuda_backward(
 
     CHECK_CUDA(cudaMalloc(&d_grad_actor_fc1_w, input_dim * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_actor_fc1_b, hidden_dim * sizeof(float)));
-    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float)));
-    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_b, actor_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_w, hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_b, hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_actor_head_w, actor_output_dim * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_actor_head_b, actor_output_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_critic_fc1_w, input_dim * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_critic_fc1_b, hidden_dim * sizeof(float)));
-    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_w, critic_output_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_w, hidden_dim * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_b, hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_critic_head_w, critic_output_dim * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_critic_head_b, critic_output_dim * sizeof(float)));
 
-    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_output, batch_size * actor_output_dim * sizeof(float)));
-    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_output, batch_size * critic_output_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_actor_fc2_output, batch_size * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMalloc(&d_grad_critic_fc2_output, batch_size * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_actor_hidden, batch_size * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMalloc(&d_grad_critic_hidden, batch_size * hidden_dim * sizeof(float)));
 
@@ -474,15 +474,15 @@ void cuda_backward(
     CHECK_CUDA(cudaMemcpy(d_input, input, batch_size * input_dim * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_actor_fc1_w, actor_fc1_w, input_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_actor_fc1_b, actor_fc1_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-    CHECK_CUDA(cudaMemcpy(d_actor_fc2_w, actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-    CHECK_CUDA(cudaMemcpy(d_actor_fc2_b, actor_fc2_b, actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
-    CHECK_CUDA(cudaMemcpy(d_actor_head_w, actor_head_w, actor_output_dim * actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_fc2_w, actor_fc2_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_fc2_b, actor_fc2_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_actor_head_w, actor_head_w, hidden_dim * actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_actor_head_b, actor_head_b, actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_critic_fc1_w, critic_fc1_w, input_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_critic_fc1_b, critic_fc1_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-    CHECK_CUDA(cudaMemcpy(d_critic_fc2_w, critic_fc2_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
-    CHECK_CUDA(cudaMemcpy(d_critic_fc2_b, critic_fc2_b, critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
-    CHECK_CUDA(cudaMemcpy(d_critic_head_w, critic_head_w, critic_output_dim * critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_fc2_w, critic_fc2_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_fc2_b, critic_fc2_b, hidden_dim * sizeof(float), cudaMemcpyHostToDevice));
+    CHECK_CUDA(cudaMemcpy(d_critic_head_w, critic_head_w, hidden_dim * critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_critic_head_b, critic_head_b, critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_grad_actor_output, grad_actor_output, batch_size * actor_output_dim * sizeof(float), cudaMemcpyHostToDevice));
     CHECK_CUDA(cudaMemcpy(d_grad_critic_output, grad_critic_output, batch_size * critic_output_dim * sizeof(float), cudaMemcpyHostToDevice));
@@ -521,8 +521,8 @@ void cuda_backward(
                           input_dim * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMemset(d_grad_actor_fc1_b, 0, hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMemset(d_grad_actor_fc2_w, 0,
-                          actor_output_dim * hidden_dim * sizeof(float)));
-    CHECK_CUDA(cudaMemset(d_grad_actor_fc2_b, 0, actor_output_dim * sizeof(float)));
+                          hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_actor_fc2_b, 0, hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMemset(d_grad_actor_head_w, 0,
                           hidden_dim * actor_output_dim * sizeof(float)));
     CHECK_CUDA(cudaMemset(d_grad_actor_head_b, 0, actor_output_dim * sizeof(float)));
@@ -530,8 +530,8 @@ void cuda_backward(
                           input_dim * hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMemset(d_grad_critic_fc1_b, 0, hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMemset(d_grad_critic_fc2_w, 0,
-                          critic_output_dim * hidden_dim * sizeof(float)));
-    CHECK_CUDA(cudaMemset(d_grad_critic_fc2_b, 0, critic_output_dim * sizeof(float)));
+                          hidden_dim * hidden_dim * sizeof(float)));
+    CHECK_CUDA(cudaMemset(d_grad_critic_fc2_b, 0, hidden_dim * sizeof(float)));
     CHECK_CUDA(cudaMemset(d_grad_critic_head_w, 0,
                           hidden_dim * critic_output_dim * sizeof(float)));
     CHECK_CUDA(cudaMemset(d_grad_critic_head_b, 0, critic_output_dim * sizeof(float)));
@@ -651,14 +651,14 @@ void cuda_backward(
     // 5. 拷贝所有梯度回主机
     CHECK_CUDA(cudaMemcpy(grad_actor_fc1_w, d_grad_actor_fc1_w, input_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
     CHECK_CUDA(cudaMemcpy(grad_actor_fc1_b, d_grad_actor_fc1_b, hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
-    CHECK_CUDA(cudaMemcpy(grad_actor_fc2_w, d_grad_actor_fc2_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
-    CHECK_CUDA(cudaMemcpy(grad_actor_fc2_b, d_grad_actor_fc2_b, actor_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_actor_fc2_w, d_grad_actor_fc2_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_actor_fc2_b, d_grad_actor_fc2_b, hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
     CHECK_CUDA(cudaMemcpy(grad_actor_head_w, d_grad_actor_head_w, actor_output_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
     CHECK_CUDA(cudaMemcpy(grad_actor_head_b, d_grad_actor_head_b, actor_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
     CHECK_CUDA(cudaMemcpy(grad_critic_fc1_w, d_grad_critic_fc1_w, input_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
     CHECK_CUDA(cudaMemcpy(grad_critic_fc1_b, d_grad_critic_fc1_b, hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
-    CHECK_CUDA(cudaMemcpy(grad_critic_fc2_w, d_grad_critic_fc2_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
-    CHECK_CUDA(cudaMemcpy(grad_critic_fc2_b, d_grad_critic_fc2_b, critic_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_critic_fc2_w, d_grad_critic_fc2_w, hidden_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
+    CHECK_CUDA(cudaMemcpy(grad_critic_fc2_b, d_grad_critic_fc2_b, hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
     CHECK_CUDA(cudaMemcpy(grad_critic_head_w, d_grad_critic_head_w, critic_output_dim * hidden_dim * sizeof(float), cudaMemcpyDeviceToHost));
     CHECK_CUDA(cudaMemcpy(grad_critic_head_b, d_grad_critic_head_b, critic_output_dim * sizeof(float), cudaMemcpyDeviceToHost));
 

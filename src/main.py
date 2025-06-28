@@ -13,13 +13,13 @@ def simple_game():
 
     print("Simple game starting...")
     N_parallel = 1
-    N_episode = 2000
+    N_episode = 100
     episode_steps = 20
     obs_dim = 2
     n_actions = 2
-    hidden_dim = 128
-    trainer_args = dict(value_loss_coef=1, actor_loss_coef=1, entropy_coef=1e-5, learning_rate=5e-3)
-    # ac = MlpACManual(obs_dim, n_actions, hidden_dim); trainer = A2C(ac, **trainer_args)
+    hidden_dim = 12800
+    trainer_args = dict(value_loss_coef=1, actor_loss_coef=1, entropy_coef=1e-4, learning_rate=2e-3)
+    # ac = MlpACManual(obs_dim, n_actions, hidden_dim, cpu=True); trainer = A2C(ac, **trainer_args)
     ac = MlpACTorch(obs_dim, n_actions, hidden_dim); trainer = A2CTorch(ac, **trainer_args)
 
     traj = Traj(episode_steps)
@@ -32,7 +32,7 @@ def simple_game():
             reward = (action == np.argmax(obs[0])).astype(np.float32)
             done = np.ones((N_parallel, 1), dtype=np.float32) if e == episode_steps - 1 else np.zeros((N_parallel, 1), dtype=np.float32)
             traj.remember(obs[0], action, reward, actLogProbs, value, done)
-            obs = np.random.randint(0, 10, (N_parallel, obs_dim)).astype(np.float32)
+            obs = np.random.randint(0, 2, (N_parallel, obs_dim)).astype(np.float32)
         print("\r\n")
         print(f"Episode {e} begins to update:")
         train_info = trainer.update(traj)
@@ -53,6 +53,8 @@ def simple_game():
                 plt.title(key)
                 plt.savefig(f"./{key}.png")
                 plt.clf()
+        duration = time.time() - start_time
+        print(f"SPE = {duration/(e + 1)}")
     end_time = time.time()
     duration = end_time - start_time
     print(f"Training completed in {duration} seconds.")
