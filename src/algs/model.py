@@ -28,6 +28,29 @@ class MlpACManual:
         self.critic_head_w = xavier((hidden_dim, 1))
         self.critic_head_b = np.zeros(1, dtype=np.float32)
 
+        self.params = [
+            self.shared_w, self.shared_b,
+            self.actor1_w, self.actor1_b,
+            self.actor2_w, self.actor2_b,
+            self.actor_head_w, self.actor_head_b,
+            self.critic1_w, self.critic1_b,
+            self.critic2_w, self.critic2_b,
+            self.critic_head_w, self.critic_head_b
+        ]
+
+    def parameters(self):
+        return self.params
+
+    def state_dict(self):
+        return [p.copy() for p in self.params]
+
+    def load_state_dict(self, state):
+        for p, s in zip(self.params, state):
+            np.copyto(p, s)
+
+    def zero_grad(self):
+        pass
+
     def forward(self, obs):
         actor_out, critic_out = mlp_ac_cuda.mlp_forward(
             obs.astype(np.float32),
@@ -38,7 +61,8 @@ class MlpACManual:
             self.critic1_w, self.critic1_b,
             self.critic2_w, self.critic2_b,
             self.critic_head_w, self.critic_head_b,
-            self.hidden_dim, self.n_actions
+            self.hidden_dim,
+            self.n_actions
         )
         return actor_out, critic_out
 
@@ -54,7 +78,10 @@ class MlpACManual:
             self.critic_head_w, self.critic_head_b,
             grad_actor_output.astype(np.float32),
             grad_critic_output.astype(np.float32),
-            obs.shape[0], self.obs_dim, self.hidden_dim, self.n_actions
+            obs.shape[0],        # batch_size
+            self.obs_dim,        # input_dim
+            self.hidden_dim,     # hidden_dim
+            self.n_actions,      # actor_output_dim
         )
         return grads
 

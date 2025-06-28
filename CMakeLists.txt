@@ -7,7 +7,6 @@ set(CUDAToolkit_ROOT "/usr/local/cuda-12.8")
 set(CMAKE_CUDA_COMPILER "/usr/local/cuda-12.8/bin/nvcc")
 set(Python3_EXECUTABLE /usr/bin/python3.10)
 
-# 手动指定 CUDA 架构
 set(CMAKE_CUDA_ARCHITECTURES 86)
 
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
