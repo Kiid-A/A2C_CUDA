@@ -1,1468 +1,1414 @@
 Simple game starting...
-Episode 0, Step 0Episode 0, Step 1Episode 0, Step 2Episode 0, Step 3Episode 0, Step 4Episode 0, Step 5Episode 0, Step 6Episode 0, Step 7Episode 0, Step 8Episode 0, Step 9
+Episode 0, Step 0Episode 0, Step 1Episode 0, Step 2Episode 0, Step 3Episode 0, Step 4Episode 0, Step 5Episode 0, Step 6Episode 0, Step 7Episode 0, Step 8Episode 0, Step 9Episode 0, Step 10Episode 0, Step 11Episode 0, Step 12Episode 0, Step 13Episode 0, Step 14Episode 0, Step 15Episode 0, Step 16Episode 0, Step 17Episode 0, Step 18Episode 0, Step 19
 
 Episode 0 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 0 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 1.5199184133507515e-08
-distEntropy loss: -0.36162903904914856
-Loss: 0.4963836669921875
-total_episode_reward: -1.7881393432617188e-07
-mean_episode_reward: -1.7881394143159923e-08
-num_steps: 10
-Episode 1, Step 0Episode 1, Step 1Episode 1, Step 2Episode 1, Step 3Episode 1, Step 4Episode 1, Step 5Episode 1, Step 6Episode 1, Step 7Episode 1, Step 8Episode 1, Step 9
+Value loss: 24.24423599243164
+Action loss: -9.536743306171047e-08
+distEntropy loss: -0.6911535859107971
+Loss: 12.115206718444824
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 1, Step 0Episode 1, Step 1Episode 1, Step 2Episode 1, Step 3Episode 1, Step 4Episode 1, Step 5Episode 1, Step 6Episode 1, Step 7Episode 1, Step 8Episode 1, Step 9Episode 1, Step 10Episode 1, Step 11Episode 1, Step 12Episode 1, Step 13Episode 1, Step 14Episode 1, Step 15Episode 1, Step 16Episode 1, Step 17Episode 1, Step 18Episode 1, Step 19
 
 Episode 1 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 1 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 5.881302111987452e-09
-distEntropy loss: -0.253194659948349
-Loss: 0.49746811389923096
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 2, Step 0Episode 2, Step 1Episode 2, Step 2Episode 2, Step 3Episode 2, Step 4Episode 2, Step 5Episode 2, Step 6Episode 2, Step 7Episode 2, Step 8Episode 2, Step 9
+Value loss: 10.570548057556152
+Action loss: 9.536743306171047e-08
+distEntropy loss: -0.6931401491165161
+Loss: 5.2783427238464355
+total_episode_reward: 6.0
+mean_episode_reward: 0.30000001192092896
+num_steps: 20
+Episode 2, Step 0Episode 2, Step 1Episode 2, Step 2Episode 2, Step 3Episode 2, Step 4Episode 2, Step 5Episode 2, Step 6Episode 2, Step 7Episode 2, Step 8Episode 2, Step 9Episode 2, Step 10Episode 2, Step 11Episode 2, Step 12Episode 2, Step 13Episode 2, Step 14Episode 2, Step 15Episode 2, Step 16Episode 2, Step 17Episode 2, Step 18Episode 2, Step 19
 
 Episode 2 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 2 finished, Train info:
-Value loss: 0.9999997019767761
-Action loss: -2.3003667859455845e-09
-distEntropy loss: -0.20773382484912872
-Loss: 0.49792250990867615
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 3, Step 0Episode 3, Step 1Episode 3, Step 2Episode 3, Step 3Episode 3, Step 4Episode 3, Step 5Episode 3, Step 6Episode 3, Step 7Episode 3, Step 8Episode 3, Step 9
+Value loss: 13.974400520324707
+Action loss: -0.0
+distEntropy loss: -0.6786827445030212
+Loss: 6.980413436889648
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 3, Step 0Episode 3, Step 1Episode 3, Step 2Episode 3, Step 3Episode 3, Step 4Episode 3, Step 5Episode 3, Step 6Episode 3, Step 7Episode 3, Step 8Episode 3, Step 9Episode 3, Step 10Episode 3, Step 11Episode 3, Step 12Episode 3, Step 13Episode 3, Step 14Episode 3, Step 15Episode 3, Step 16Episode 3, Step 17Episode 3, Step 18Episode 3, Step 19
 
 Episode 3 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 3 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 4.470348358154297e-08
-distEntropy loss: -0.6931262016296387
-Loss: 0.49306872487068176
-total_episode_reward: 1.7881393432617188e-07
-mean_episode_reward: 1.7881394143159923e-08
-num_steps: 10
-Episode 4, Step 0Episode 4, Step 1Episode 4, Step 2Episode 4, Step 3Episode 4, Step 4Episode 4, Step 5Episode 4, Step 6Episode 4, Step 7Episode 4, Step 8Episode 4, Step 9
+Value loss: 33.95890808105469
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6750569939613342
+Loss: 16.97270393371582
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 4, Step 0Episode 4, Step 1Episode 4, Step 2Episode 4, Step 3Episode 4, Step 4Episode 4, Step 5Episode 4, Step 6Episode 4, Step 7Episode 4, Step 8Episode 4, Step 9Episode 4, Step 10Episode 4, Step 11Episode 4, Step 12Episode 4, Step 13Episode 4, Step 14Episode 4, Step 15Episode 4, Step 16Episode 4, Step 17Episode 4, Step 18Episode 4, Step 19
 
 Episode 4 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 4 finished, Train info:
-Value loss: 1.0
-Action loss: 2.8088688708294285e-08
-distEntropy loss: -0.3515790104866028
-Loss: 0.4964842200279236
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 5, Step 0Episode 5, Step 1Episode 5, Step 2Episode 5, Step 3Episode 5, Step 4Episode 5, Step 5Episode 5, Step 6Episode 5, Step 7Episode 5, Step 8Episode 5, Step 9
+Value loss: 49.28887176513672
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.6884378790855408
+Loss: 24.63755226135254
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 5, Step 0Episode 5, Step 1Episode 5, Step 2Episode 5, Step 3Episode 5, Step 4Episode 5, Step 5Episode 5, Step 6Episode 5, Step 7Episode 5, Step 8Episode 5, Step 9Episode 5, Step 10Episode 5, Step 11Episode 5, Step 12Episode 5, Step 13Episode 5, Step 14Episode 5, Step 15Episode 5, Step 16Episode 5, Step 17Episode 5, Step 18Episode 5, Step 19
 
 Episode 5 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 5 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -4.390254559893947e-08
-distEntropy loss: -0.3619038462638855
-Loss: 0.4963809549808502
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 6, Step 0Episode 6, Step 1Episode 6, Step 2Episode 6, Step 3Episode 6, Step 4Episode 6, Step 5Episode 6, Step 6Episode 6, Step 7Episode 6, Step 8Episode 6, Step 9
+Value loss: 50.30134963989258
+Action loss: 1.5258788721439487e-07
+distEntropy loss: -0.6765841841697693
+Loss: 25.143909454345703
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 6, Step 0Episode 6, Step 1Episode 6, Step 2Episode 6, Step 3Episode 6, Step 4Episode 6, Step 5Episode 6, Step 6Episode 6, Step 7Episode 6, Step 8Episode 6, Step 9Episode 6, Step 10Episode 6, Step 11Episode 6, Step 12Episode 6, Step 13Episode 6, Step 14Episode 6, Step 15Episode 6, Step 16Episode 6, Step 17Episode 6, Step 18Episode 6, Step 19
 
 Episode 6 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 6 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: -1.3560057077199872e-08
-distEntropy loss: -0.28285616636276245
-Loss: 0.4971713721752167
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 7, Step 0Episode 7, Step 1Episode 7, Step 2Episode 7, Step 3Episode 7, Step 4Episode 7, Step 5Episode 7, Step 6Episode 7, Step 7Episode 7, Step 8Episode 7, Step 9
+Value loss: 53.26104736328125
+Action loss: -1.335144048653092e-07
+distEntropy loss: -0.6930869221687317
+Loss: 26.623592376708984
+total_episode_reward: 13.0
+mean_episode_reward: 0.6499999761581421
+num_steps: 20
+Episode 7, Step 0Episode 7, Step 1Episode 7, Step 2Episode 7, Step 3Episode 7, Step 4Episode 7, Step 5Episode 7, Step 6Episode 7, Step 7Episode 7, Step 8Episode 7, Step 9Episode 7, Step 10Episode 7, Step 11Episode 7, Step 12Episode 7, Step 13Episode 7, Step 14Episode 7, Step 15Episode 7, Step 16Episode 7, Step 17Episode 7, Step 18Episode 7, Step 19
 
 Episode 7 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 7 finished, Train info:
-Value loss: 1.0
-Action loss: -9.53674295089968e-09
-distEntropy loss: -0.6930898427963257
-Loss: 0.4930691123008728
-total_episode_reward: -1.1920928955078125e-07
-mean_episode_reward: -1.1920929132713809e-08
-num_steps: 10
-Episode 8, Step 0Episode 8, Step 1Episode 8, Step 2Episode 8, Step 3Episode 8, Step 4Episode 8, Step 5Episode 8, Step 6Episode 8, Step 7Episode 8, Step 8Episode 8, Step 9
+Value loss: 17.87247085571289
+Action loss: -1.7166138377433526e-07
+distEntropy loss: -0.6785300970077515
+Loss: 8.929450035095215
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 8, Step 0Episode 8, Step 1Episode 8, Step 2Episode 8, Step 3Episode 8, Step 4Episode 8, Step 5Episode 8, Step 6Episode 8, Step 7Episode 8, Step 8Episode 8, Step 9Episode 8, Step 10Episode 8, Step 11Episode 8, Step 12Episode 8, Step 13Episode 8, Step 14Episode 8, Step 15Episode 8, Step 16Episode 8, Step 17Episode 8, Step 18Episode 8, Step 19
 
 Episode 8 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 8 finished, Train info:
-Value loss: 1.0
-Action loss: 1.19209286886246e-09
-distEntropy loss: -0.27544164657592773
-Loss: 0.49724557995796204
-total_episode_reward: 1.7881393432617188e-07
-mean_episode_reward: 1.7881394143159923e-08
-num_steps: 10
-Episode 9, Step 0Episode 9, Step 1Episode 9, Step 2Episode 9, Step 3Episode 9, Step 4Episode 9, Step 5Episode 9, Step 6Episode 9, Step 7Episode 9, Step 8Episode 9, Step 9
+Value loss: 32.208377838134766
+Action loss: -1.1444091541079615e-07
+distEntropy loss: -0.6931455731391907
+Loss: 16.097257614135742
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 9, Step 0Episode 9, Step 1Episode 9, Step 2Episode 9, Step 3Episode 9, Step 4Episode 9, Step 5Episode 9, Step 6Episode 9, Step 7Episode 9, Step 8Episode 9, Step 9Episode 9, Step 10Episode 9, Step 11Episode 9, Step 12Episode 9, Step 13Episode 9, Step 14Episode 9, Step 15Episode 9, Step 16Episode 9, Step 17Episode 9, Step 18Episode 9, Step 19
 
 Episode 9 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 9 finished, Train info:
-Value loss: 1.0
-Action loss: -1.6018748993928966e-08
-distEntropy loss: -0.2621102035045624
-Loss: 0.4973788559436798
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 10, Step 0Episode 10, Step 1Episode 10, Step 2Episode 10, Step 3Episode 10, Step 4Episode 10, Step 5Episode 10, Step 6Episode 10, Step 7Episode 10, Step 8Episode 10, Step 9
+Value loss: 24.812952041625977
+Action loss: -0.0
+distEntropy loss: -0.6747015118598938
+Loss: 12.399728775024414
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 10, Step 0Episode 10, Step 1Episode 10, Step 2Episode 10, Step 3Episode 10, Step 4Episode 10, Step 5Episode 10, Step 6Episode 10, Step 7Episode 10, Step 8Episode 10, Step 9Episode 10, Step 10Episode 10, Step 11Episode 10, Step 12Episode 10, Step 13Episode 10, Step 14Episode 10, Step 15Episode 10, Step 16Episode 10, Step 17Episode 10, Step 18Episode 10, Step 19
 
 Episode 10 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 10 finished, Train info:
-Value loss: 1.0
-Action loss: 3.233552092751779e-08
-distEntropy loss: -0.2890069782733917
-Loss: 0.497109979391098
-total_episode_reward: -1.1920928955078125e-07
-mean_episode_reward: -1.1920929132713809e-08
-num_steps: 10
-Episode 11, Step 0Episode 11, Step 1Episode 11, Step 2Episode 11, Step 3Episode 11, Step 4Episode 11, Step 5Episode 11, Step 6Episode 11, Step 7Episode 11, Step 8Episode 11, Step 9
+Value loss: 22.103940963745117
+Action loss: 1.907348590179936e-08
+distEntropy loss: -0.6838086843490601
+Loss: 11.045132637023926
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 11, Step 0Episode 11, Step 1Episode 11, Step 2Episode 11, Step 3Episode 11, Step 4Episode 11, Step 5Episode 11, Step 6Episode 11, Step 7Episode 11, Step 8Episode 11, Step 9Episode 11, Step 10Episode 11, Step 11Episode 11, Step 12Episode 11, Step 13Episode 11, Step 14Episode 11, Step 15Episode 11, Step 16Episode 11, Step 17Episode 11, Step 18Episode 11, Step 19
 
 Episode 11 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Warning: Gradient norm overflow: 5.0090042810995016e+35, skipping update.
 Episode 11 finished, Train info:
-Value loss: 1.0
-Action loss: -4.880130077822287e-09
-distEntropy loss: -0.23277027904987335
-Loss: 0.49767228960990906
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 12, Step 0Episode 12, Step 1Episode 12, Step 2Episode 12, Step 3Episode 12, Step 4Episode 12, Step 5Episode 12, Step 6Episode 12, Step 7Episode 12, Step 8Episode 12, Step 9
+Value loss: 16.145915985107422
+Action loss: -0.0
+distEntropy loss: -0.6870629191398621
+Loss: 8.06608772277832
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 12, Step 0Episode 12, Step 1Episode 12, Step 2Episode 12, Step 3Episode 12, Step 4Episode 12, Step 5Episode 12, Step 6Episode 12, Step 7Episode 12, Step 8Episode 12, Step 9Episode 12, Step 10Episode 12, Step 11Episode 12, Step 12Episode 12, Step 13Episode 12, Step 14Episode 12, Step 15Episode 12, Step 16Episode 12, Step 17Episode 12, Step 18Episode 12, Step 19
 
 Episode 12 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 12 finished, Train info:
-Value loss: 1.0
-Action loss: -1.7434357957313296e-08
-distEntropy loss: -0.30150288343429565
-Loss: 0.49698492884635925
-total_episode_reward: 1.7881393432617188e-07
-mean_episode_reward: 1.7881394143159923e-08
-num_steps: 10
-Episode 13, Step 0Episode 13, Step 1Episode 13, Step 2Episode 13, Step 3Episode 13, Step 4Episode 13, Step 5Episode 13, Step 6Episode 13, Step 7Episode 13, Step 8Episode 13, Step 9
+Value loss: 21.7951602935791
+Action loss: -0.0
+distEntropy loss: -0.6829323768615723
+Loss: 10.890750885009766
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 13, Step 0Episode 13, Step 1Episode 13, Step 2Episode 13, Step 3Episode 13, Step 4Episode 13, Step 5Episode 13, Step 6Episode 13, Step 7Episode 13, Step 8Episode 13, Step 9Episode 13, Step 10Episode 13, Step 11Episode 13, Step 12Episode 13, Step 13Episode 13, Step 14Episode 13, Step 15Episode 13, Step 16Episode 13, Step 17Episode 13, Step 18Episode 13, Step 19
 
 Episode 13 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 13 finished, Train info:
-Value loss: 1.0
-Action loss: -2.2947787670091202e-08
-distEntropy loss: -0.6931092143058777
-Loss: 0.4930688738822937
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 14, Step 0Episode 14, Step 1Episode 14, Step 2Episode 14, Step 3Episode 14, Step 4Episode 14, Step 5Episode 14, Step 6Episode 14, Step 7Episode 14, Step 8Episode 14, Step 9
+Value loss: 21.89649772644043
+Action loss: -0.0
+distEntropy loss: -0.6707111597061157
+Loss: 10.94154167175293
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 14, Step 0Episode 14, Step 1Episode 14, Step 2Episode 14, Step 3Episode 14, Step 4Episode 14, Step 5Episode 14, Step 6Episode 14, Step 7Episode 14, Step 8Episode 14, Step 9Episode 14, Step 10Episode 14, Step 11Episode 14, Step 12Episode 14, Step 13Episode 14, Step 14Episode 14, Step 15Episode 14, Step 16Episode 14, Step 17Episode 14, Step 18Episode 14, Step 19
 
 Episode 14 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 14 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 6.342306591022862e-08
-distEntropy loss: -0.39644768834114075
-Loss: 0.496035635471344
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 15, Step 0Episode 15, Step 1Episode 15, Step 2Episode 15, Step 3Episode 15, Step 4Episode 15, Step 5Episode 15, Step 6Episode 15, Step 7Episode 15, Step 8Episode 15, Step 9
+Value loss: 20.740262985229492
+Action loss: -1.1444091541079615e-07
+distEntropy loss: -0.6813246011734009
+Loss: 10.36331844329834
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 15, Step 0Episode 15, Step 1Episode 15, Step 2Episode 15, Step 3Episode 15, Step 4Episode 15, Step 5Episode 15, Step 6Episode 15, Step 7Episode 15, Step 8Episode 15, Step 9Episode 15, Step 10Episode 15, Step 11Episode 15, Step 12Episode 15, Step 13Episode 15, Step 14Episode 15, Step 15Episode 15, Step 16Episode 15, Step 17Episode 15, Step 18Episode 15, Step 19
 
 Episode 15 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 15 finished, Train info:
-Value loss: 1.0
-Action loss: -1.0468065525515158e-08
-distEntropy loss: -0.2534925043582916
-Loss: 0.4974650740623474
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 16, Step 0Episode 16, Step 1Episode 16, Step 2Episode 16, Step 3Episode 16, Step 4Episode 16, Step 5Episode 16, Step 6Episode 16, Step 7Episode 16, Step 8Episode 16, Step 9
+Value loss: 34.2501106262207
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.664722740650177
+Loss: 17.118408203125
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 16, Step 0Episode 16, Step 1Episode 16, Step 2Episode 16, Step 3Episode 16, Step 4Episode 16, Step 5Episode 16, Step 6Episode 16, Step 7Episode 16, Step 8Episode 16, Step 9Episode 16, Step 10Episode 16, Step 11Episode 16, Step 12Episode 16, Step 13Episode 16, Step 14Episode 16, Step 15Episode 16, Step 16Episode 16, Step 17Episode 16, Step 18Episode 16, Step 19
 
 Episode 16 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 16 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 1.974403929239088e-08
-distEntropy loss: -0.2703053951263428
-Loss: 0.49729692935943604
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 17, Step 0Episode 17, Step 1Episode 17, Step 2Episode 17, Step 3Episode 17, Step 4Episode 17, Step 5Episode 17, Step 6Episode 17, Step 7Episode 17, Step 8Episode 17, Step 9
+Value loss: 31.862045288085938
+Action loss: 7.629394360719743e-08
+distEntropy loss: -0.6821795701980591
+Loss: 15.924201011657715
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 17, Step 0Episode 17, Step 1Episode 17, Step 2Episode 17, Step 3Episode 17, Step 4Episode 17, Step 5Episode 17, Step 6Episode 17, Step 7Episode 17, Step 8Episode 17, Step 9Episode 17, Step 10Episode 17, Step 11Episode 17, Step 12Episode 17, Step 13Episode 17, Step 14Episode 17, Step 15Episode 17, Step 16Episode 17, Step 17Episode 17, Step 18Episode 17, Step 19
 
 Episode 17 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 17 finished, Train info:
-Value loss: 1.0
-Action loss: 2.210959770820864e-08
-distEntropy loss: -0.2695878744125366
-Loss: 0.49730411171913147
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 18, Step 0Episode 18, Step 1Episode 18, Step 2Episode 18, Step 3Episode 18, Step 4Episode 18, Step 5Episode 18, Step 6Episode 18, Step 7Episode 18, Step 8Episode 18, Step 9
+Value loss: 20.700267791748047
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.693093478679657
+Loss: 10.343202590942383
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 18, Step 0Episode 18, Step 1Episode 18, Step 2Episode 18, Step 3Episode 18, Step 4Episode 18, Step 5Episode 18, Step 6Episode 18, Step 7Episode 18, Step 8Episode 18, Step 9Episode 18, Step 10Episode 18, Step 11Episode 18, Step 12Episode 18, Step 13Episode 18, Step 14Episode 18, Step 15Episode 18, Step 16Episode 18, Step 17Episode 18, Step 18Episode 18, Step 19
 
 Episode 18 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 18 finished, Train info:
-Value loss: 1.0
-Action loss: 2.309679913992113e-08
-distEntropy loss: -0.32882195711135864
-Loss: 0.496711790561676
-total_episode_reward: -2.682209014892578e-07
-mean_episode_reward: -2.6822089438383045e-08
-num_steps: 10
-Episode 19, Step 0Episode 19, Step 1Episode 19, Step 2Episode 19, Step 3Episode 19, Step 4Episode 19, Step 5Episode 19, Step 6Episode 19, Step 7Episode 19, Step 8Episode 19, Step 9
+Value loss: 31.80686378479004
+Action loss: 7.629394360719743e-08
+distEntropy loss: -0.6905159950256348
+Loss: 15.896526336669922
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 19, Step 0Episode 19, Step 1Episode 19, Step 2Episode 19, Step 3Episode 19, Step 4Episode 19, Step 5Episode 19, Step 6Episode 19, Step 7Episode 19, Step 8Episode 19, Step 9Episode 19, Step 10Episode 19, Step 11Episode 19, Step 12Episode 19, Step 13Episode 19, Step 14Episode 19, Step 15Episode 19, Step 16Episode 19, Step 17Episode 19, Step 18Episode 19, Step 19
 
 Episode 19 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 19 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: -2.9206276508375595e-08
-distEntropy loss: -0.23575952649116516
-Loss: 0.49764227867126465
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 20, Step 0Episode 20, Step 1Episode 20, Step 2Episode 20, Step 3Episode 20, Step 4Episode 20, Step 5Episode 20, Step 6Episode 20, Step 7Episode 20, Step 8Episode 20, Step 9
+Value loss: 40.276527404785156
+Action loss: -0.0
+distEntropy loss: -0.6756418347358704
+Loss: 20.131507873535156
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 20, Step 0Episode 20, Step 1Episode 20, Step 2Episode 20, Step 3Episode 20, Step 4Episode 20, Step 5Episode 20, Step 6Episode 20, Step 7Episode 20, Step 8Episode 20, Step 9Episode 20, Step 10Episode 20, Step 11Episode 20, Step 12Episode 20, Step 13Episode 20, Step 14Episode 20, Step 15Episode 20, Step 16Episode 20, Step 17Episode 20, Step 18Episode 20, Step 19
 
 Episode 20 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 20 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 4.172325152040912e-09
-distEntropy loss: -0.6931358575820923
-Loss: 0.4930686950683594
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 21, Step 0Episode 21, Step 1Episode 21, Step 2Episode 21, Step 3Episode 21, Step 4Episode 21, Step 5Episode 21, Step 6Episode 21, Step 7Episode 21, Step 8Episode 21, Step 9
+Value loss: 40.458885192871094
+Action loss: 9.536743306171047e-08
+distEntropy loss: -0.6785261034965515
+Loss: 20.222658157348633
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 21, Step 0Episode 21, Step 1Episode 21, Step 2Episode 21, Step 3Episode 21, Step 4Episode 21, Step 5Episode 21, Step 6Episode 21, Step 7Episode 21, Step 8Episode 21, Step 9Episode 21, Step 10Episode 21, Step 11Episode 21, Step 12Episode 21, Step 13Episode 21, Step 14Episode 21, Step 15Episode 21, Step 16Episode 21, Step 17Episode 21, Step 18Episode 21, Step 19
 
 Episode 21 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 21 finished, Train info:
-Value loss: 1.0
-Action loss: 2.38418573772492e-09
-distEntropy loss: -0.3471451997756958
-Loss: 0.4965285360813141
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 22, Step 0Episode 22, Step 1Episode 22, Step 2Episode 22, Step 3Episode 22, Step 4Episode 22, Step 5Episode 22, Step 6Episode 22, Step 7Episode 22, Step 8Episode 22, Step 9
+Value loss: 23.251907348632812
+Action loss: 1.907348590179936e-08
+distEntropy loss: -0.6839467287063599
+Loss: 11.61911392211914
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 22, Step 0Episode 22, Step 1Episode 22, Step 2Episode 22, Step 3Episode 22, Step 4Episode 22, Step 5Episode 22, Step 6Episode 22, Step 7Episode 22, Step 8Episode 22, Step 9Episode 22, Step 10Episode 22, Step 11Episode 22, Step 12Episode 22, Step 13Episode 22, Step 14Episode 22, Step 15Episode 22, Step 16Episode 22, Step 17Episode 22, Step 18Episode 22, Step 19
 
 Episode 22 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 22 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -6.593763757223314e-09
-distEntropy loss: -0.3001972734928131
-Loss: 0.4969981014728546
-total_episode_reward: -1.7881393432617188e-07
-mean_episode_reward: -1.7881394143159923e-08
-num_steps: 10
-Episode 23, Step 0Episode 23, Step 1Episode 23, Step 2Episode 23, Step 3Episode 23, Step 4Episode 23, Step 5Episode 23, Step 6Episode 23, Step 7Episode 23, Step 8Episode 23, Step 9
+Value loss: 44.33551788330078
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.664806067943573
+Loss: 22.16111183166504
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 23, Step 0Episode 23, Step 1Episode 23, Step 2Episode 23, Step 3Episode 23, Step 4Episode 23, Step 5Episode 23, Step 6Episode 23, Step 7Episode 23, Step 8Episode 23, Step 9Episode 23, Step 10Episode 23, Step 11Episode 23, Step 12Episode 23, Step 13Episode 23, Step 14Episode 23, Step 15Episode 23, Step 16Episode 23, Step 17Episode 23, Step 18Episode 23, Step 19
 
 Episode 23 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 23 finished, Train info:
-Value loss: 1.0
-Action loss: 3.5008415721904385e-08
-distEntropy loss: -0.42426204681396484
-Loss: 0.49575743079185486
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 24, Step 0Episode 24, Step 1Episode 24, Step 2Episode 24, Step 3Episode 24, Step 4Episode 24, Step 5Episode 24, Step 6Episode 24, Step 7Episode 24, Step 8Episode 24, Step 9
+Value loss: 17.401872634887695
+Action loss: 1.907348590179936e-08
+distEntropy loss: -0.6931465268135071
+Loss: 8.694005012512207
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 24, Step 0Episode 24, Step 1Episode 24, Step 2Episode 24, Step 3Episode 24, Step 4Episode 24, Step 5Episode 24, Step 6Episode 24, Step 7Episode 24, Step 8Episode 24, Step 9Episode 24, Step 10Episode 24, Step 11Episode 24, Step 12Episode 24, Step 13Episode 24, Step 14Episode 24, Step 15Episode 24, Step 16Episode 24, Step 17Episode 24, Step 18Episode 24, Step 19
 
 Episode 24 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 24 finished, Train info:
-Value loss: 1.0
-Action loss: 1.2069940602543738e-08
-distEntropy loss: -0.40304526686668396
-Loss: 0.4959695339202881
-total_episode_reward: -4.76837158203125e-07
-mean_episode_reward: -4.7683716530855236e-08
-num_steps: 10
-Episode 25, Step 0Episode 25, Step 1Episode 25, Step 2Episode 25, Step 3Episode 25, Step 4Episode 25, Step 5Episode 25, Step 6Episode 25, Step 7Episode 25, Step 8Episode 25, Step 9
+Value loss: 30.060745239257812
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.6930092573165894
+Loss: 15.023442268371582
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 25, Step 0Episode 25, Step 1Episode 25, Step 2Episode 25, Step 3Episode 25, Step 4Episode 25, Step 5Episode 25, Step 6Episode 25, Step 7Episode 25, Step 8Episode 25, Step 9Episode 25, Step 10Episode 25, Step 11Episode 25, Step 12Episode 25, Step 13Episode 25, Step 14Episode 25, Step 15Episode 25, Step 16Episode 25, Step 17Episode 25, Step 18Episode 25, Step 19
 
 Episode 25 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 25 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 2.38418573772492e-09
-distEntropy loss: -0.4704081118106842
-Loss: 0.4952959716320038
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 26, Step 0Episode 26, Step 1Episode 26, Step 2Episode 26, Step 3Episode 26, Step 4Episode 26, Step 5Episode 26, Step 6Episode 26, Step 7Episode 26, Step 8Episode 26, Step 9
+Value loss: 32.32109069824219
+Action loss: -5.7220457705398076e-08
+distEntropy loss: -0.6862689852714539
+Loss: 16.153682708740234
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 26, Step 0Episode 26, Step 1Episode 26, Step 2Episode 26, Step 3Episode 26, Step 4Episode 26, Step 5Episode 26, Step 6Episode 26, Step 7Episode 26, Step 8Episode 26, Step 9Episode 26, Step 10Episode 26, Step 11Episode 26, Step 12Episode 26, Step 13Episode 26, Step 14Episode 26, Step 15Episode 26, Step 16Episode 26, Step 17Episode 26, Step 18Episode 26, Step 19
 
 Episode 26 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 26 finished, Train info:
-Value loss: 1.0
-Action loss: -9.53674295089968e-09
-distEntropy loss: -0.3631792962551117
-Loss: 0.4963681995868683
-total_episode_reward: -2.980232238769531e-07
-mean_episode_reward: -2.9802322387695312e-08
-num_steps: 10
-Episode 27, Step 0Episode 27, Step 1Episode 27, Step 2Episode 27, Step 3Episode 27, Step 4Episode 27, Step 5Episode 27, Step 6Episode 27, Step 7Episode 27, Step 8Episode 27, Step 9
+Value loss: 24.231117248535156
+Action loss: 7.629394360719743e-08
+distEntropy loss: -0.6619306802749634
+Loss: 12.108939170837402
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 27, Step 0Episode 27, Step 1Episode 27, Step 2Episode 27, Step 3Episode 27, Step 4Episode 27, Step 5Episode 27, Step 6Episode 27, Step 7Episode 27, Step 8Episode 27, Step 9Episode 27, Step 10Episode 27, Step 11Episode 27, Step 12Episode 27, Step 13Episode 27, Step 14Episode 27, Step 15Episode 27, Step 16Episode 27, Step 17Episode 27, Step 18Episode 27, Step 19
 
 Episode 27 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 27 finished, Train info:
-Value loss: 1.0
-Action loss: 1.3709068547029801e-08
-distEntropy loss: -0.37240299582481384
-Loss: 0.49627596139907837
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 28, Step 0Episode 28, Step 1Episode 28, Step 2Episode 28, Step 3Episode 28, Step 4Episode 28, Step 5Episode 28, Step 6Episode 28, Step 7Episode 28, Step 8Episode 28, Step 9
+Value loss: 20.481426239013672
+Action loss: -5.7220457705398076e-08
+distEntropy loss: -0.6930907368659973
+Loss: 10.233781814575195
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 28, Step 0Episode 28, Step 1Episode 28, Step 2Episode 28, Step 3Episode 28, Step 4Episode 28, Step 5Episode 28, Step 6Episode 28, Step 7Episode 28, Step 8Episode 28, Step 9Episode 28, Step 10Episode 28, Step 11Episode 28, Step 12Episode 28, Step 13Episode 28, Step 14Episode 28, Step 15Episode 28, Step 16Episode 28, Step 17Episode 28, Step 18Episode 28, Step 19
 
 Episode 28 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 28 finished, Train info:
-Value loss: 1.0
-Action loss: 1.19209286886246e-09
-distEntropy loss: -0.47064104676246643
-Loss: 0.49529358744621277
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 29, Step 0Episode 29, Step 1Episode 29, Step 2Episode 29, Step 3Episode 29, Step 4Episode 29, Step 5Episode 29, Step 6Episode 29, Step 7Episode 29, Step 8Episode 29, Step 9
+Value loss: 31.946508407592773
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.6747100353240967
+Loss: 15.966506958007812
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 29, Step 0Episode 29, Step 1Episode 29, Step 2Episode 29, Step 3Episode 29, Step 4Episode 29, Step 5Episode 29, Step 6Episode 29, Step 7Episode 29, Step 8Episode 29, Step 9Episode 29, Step 10Episode 29, Step 11Episode 29, Step 12Episode 29, Step 13Episode 29, Step 14Episode 29, Step 15Episode 29, Step 16Episode 29, Step 17Episode 29, Step 18Episode 29, Step 19
 
 Episode 29 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 29 finished, Train info:
-Value loss: 1.0
-Action loss: -4.187226210206063e-08
-distEntropy loss: -0.39161139726638794
-Loss: 0.4960838556289673
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 30, Step 0Episode 30, Step 1Episode 30, Step 2Episode 30, Step 3Episode 30, Step 4Episode 30, Step 5Episode 30, Step 6Episode 30, Step 7Episode 30, Step 8Episode 30, Step 9
+Value loss: 36.06195068359375
+Action loss: -1.907348590179936e-08
+distEntropy loss: -0.6930853128433228
+Loss: 18.024044036865234
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 30, Step 0Episode 30, Step 1Episode 30, Step 2Episode 30, Step 3Episode 30, Step 4Episode 30, Step 5Episode 30, Step 6Episode 30, Step 7Episode 30, Step 8Episode 30, Step 9Episode 30, Step 10Episode 30, Step 11Episode 30, Step 12Episode 30, Step 13Episode 30, Step 14Episode 30, Step 15Episode 30, Step 16Episode 30, Step 17Episode 30, Step 18Episode 30, Step 19
 
 Episode 30 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 30 finished, Train info:
-Value loss: 1.000000238418579
-Action loss: 1.4305114426349519e-08
-distEntropy loss: -0.21123242378234863
-Loss: 0.4978877902030945
-total_episode_reward: -1.1920928955078125e-07
-mean_episode_reward: -1.1920929132713809e-08
-num_steps: 10
-Episode 31, Step 0Episode 31, Step 1Episode 31, Step 2Episode 31, Step 3Episode 31, Step 4Episode 31, Step 5Episode 31, Step 6Episode 31, Step 7Episode 31, Step 8Episode 31, Step 9
+Value loss: 21.251867294311523
+Action loss: 1.907348590179936e-08
+distEntropy loss: -0.6931294202804565
+Loss: 10.619002342224121
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 31, Step 0Episode 31, Step 1Episode 31, Step 2Episode 31, Step 3Episode 31, Step 4Episode 31, Step 5Episode 31, Step 6Episode 31, Step 7Episode 31, Step 8Episode 31, Step 9Episode 31, Step 10Episode 31, Step 11Episode 31, Step 12Episode 31, Step 13Episode 31, Step 14Episode 31, Step 15Episode 31, Step 16Episode 31, Step 17Episode 31, Step 18Episode 31, Step 19
 
 Episode 31 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Warning: Gradient norm overflow: 1.4307825548965734e+21, skipping update.
 Episode 31 finished, Train info:
-Value loss: 1.000000238418579
-Action loss: -9.53674295089968e-09
-distEntropy loss: -0.6923969388008118
-Loss: 0.4930761456489563
-total_episode_reward: 1.7881393432617188e-07
-mean_episode_reward: 1.7881394143159923e-08
-num_steps: 10
-Episode 32, Step 0Episode 32, Step 1Episode 32, Step 2Episode 32, Step 3Episode 32, Step 4Episode 32, Step 5Episode 32, Step 6Episode 32, Step 7Episode 32, Step 8Episode 32, Step 9
+Value loss: 76.52943420410156
+Action loss: 9.536743306171047e-08
+distEntropy loss: -0.693135142326355
+Loss: 38.25778579711914
+total_episode_reward: 16.0
+mean_episode_reward: 0.800000011920929
+num_steps: 20
+Episode 32, Step 0Episode 32, Step 1Episode 32, Step 2Episode 32, Step 3Episode 32, Step 4Episode 32, Step 5Episode 32, Step 6Episode 32, Step 7Episode 32, Step 8Episode 32, Step 9Episode 32, Step 10Episode 32, Step 11Episode 32, Step 12Episode 32, Step 13Episode 32, Step 14Episode 32, Step 15Episode 32, Step 16Episode 32, Step 17Episode 32, Step 18Episode 32, Step 19
 
 Episode 32 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 32 finished, Train info:
-Value loss: 1.0
-Action loss: 6.8359078397861595e-09
-distEntropy loss: -0.2908383011817932
-Loss: 0.4970916211605072
-total_episode_reward: 3.5762786865234375e-07
-mean_episode_reward: 3.5762788286319847e-08
-num_steps: 10
-Episode 33, Step 0Episode 33, Step 1Episode 33, Step 2Episode 33, Step 3Episode 33, Step 4Episode 33, Step 5Episode 33, Step 6Episode 33, Step 7Episode 33, Step 8Episode 33, Step 9
+Value loss: 10.437779426574707
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.693095326423645
+Loss: 5.211958885192871
+total_episode_reward: 6.0
+mean_episode_reward: 0.30000001192092896
+num_steps: 20
+Episode 33, Step 0Episode 33, Step 1Episode 33, Step 2Episode 33, Step 3Episode 33, Step 4Episode 33, Step 5Episode 33, Step 6Episode 33, Step 7Episode 33, Step 8Episode 33, Step 9Episode 33, Step 10Episode 33, Step 11Episode 33, Step 12Episode 33, Step 13Episode 33, Step 14Episode 33, Step 15Episode 33, Step 16Episode 33, Step 17Episode 33, Step 18Episode 33, Step 19
 
 Episode 33 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 33 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -7.152557657263969e-08
-distEntropy loss: -0.3873831629753113
-Loss: 0.4961261749267578
-total_episode_reward: 3.5762786865234375e-07
-mean_episode_reward: 3.5762788286319847e-08
-num_steps: 10
-Episode 34, Step 0Episode 34, Step 1Episode 34, Step 2Episode 34, Step 3Episode 34, Step 4Episode 34, Step 5Episode 34, Step 6Episode 34, Step 7Episode 34, Step 8Episode 34, Step 9
+Value loss: 6.256186485290527
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.678199291229248
+Loss: 3.1213111877441406
+total_episode_reward: 5.0
+mean_episode_reward: 0.25
+num_steps: 20
+Episode 34, Step 0Episode 34, Step 1Episode 34, Step 2Episode 34, Step 3Episode 34, Step 4Episode 34, Step 5Episode 34, Step 6Episode 34, Step 7Episode 34, Step 8Episode 34, Step 9Episode 34, Step 10Episode 34, Step 11Episode 34, Step 12Episode 34, Step 13Episode 34, Step 14Episode 34, Step 15Episode 34, Step 16Episode 34, Step 17Episode 34, Step 18Episode 34, Step 19
 
 Episode 34 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 34 finished, Train info:
-Value loss: 0.9999997019767761
-Action loss: 2.1383165460520104e-08
-distEntropy loss: -0.3524499833583832
-Loss: 0.49647536873817444
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 35, Step 0Episode 35, Step 1Episode 35, Step 2Episode 35, Step 3Episode 35, Step 4Episode 35, Step 5Episode 35, Step 6Episode 35, Step 7Episode 35, Step 8Episode 35, Step 9
+Value loss: 27.988964080810547
+Action loss: 1.1444091541079615e-07
+distEntropy loss: -0.6930499076843262
+Loss: 13.98755168914795
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 35, Step 0Episode 35, Step 1Episode 35, Step 2Episode 35, Step 3Episode 35, Step 4Episode 35, Step 5Episode 35, Step 6Episode 35, Step 7Episode 35, Step 8Episode 35, Step 9Episode 35, Step 10Episode 35, Step 11Episode 35, Step 12Episode 35, Step 13Episode 35, Step 14Episode 35, Step 15Episode 35, Step 16Episode 35, Step 17Episode 35, Step 18Episode 35, Step 19
 
 Episode 35 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 35 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: -5.215406329028838e-09
-distEntropy loss: -0.6930985450744629
-Loss: 0.49306896328926086
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 36, Step 0Episode 36, Step 1Episode 36, Step 2Episode 36, Step 3Episode 36, Step 4Episode 36, Step 5Episode 36, Step 6Episode 36, Step 7Episode 36, Step 8Episode 36, Step 9
+Value loss: 60.879112243652344
+Action loss: -0.0
+distEntropy loss: -0.6803296208381653
+Loss: 30.43275260925293
+total_episode_reward: 14.0
+mean_episode_reward: 0.699999988079071
+num_steps: 20
+Episode 36, Step 0Episode 36, Step 1Episode 36, Step 2Episode 36, Step 3Episode 36, Step 4Episode 36, Step 5Episode 36, Step 6Episode 36, Step 7Episode 36, Step 8Episode 36, Step 9Episode 36, Step 10Episode 36, Step 11Episode 36, Step 12Episode 36, Step 13Episode 36, Step 14Episode 36, Step 15Episode 36, Step 16Episode 36, Step 17Episode 36, Step 18Episode 36, Step 19
 
 Episode 36 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 36 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 2.265442056170741e-09
-distEntropy loss: -0.23951010406017303
-Loss: 0.4976048469543457
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 37, Step 0Episode 37, Step 1Episode 37, Step 2Episode 37, Step 3Episode 37, Step 4Episode 37, Step 5Episode 37, Step 6Episode 37, Step 7Episode 37, Step 8Episode 37, Step 9
+Value loss: 14.20875358581543
+Action loss: 1.907348590179936e-08
+distEntropy loss: -0.6928667426109314
+Loss: 7.097448348999023
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 37, Step 0Episode 37, Step 1Episode 37, Step 2Episode 37, Step 3Episode 37, Step 4Episode 37, Step 5Episode 37, Step 6Episode 37, Step 7Episode 37, Step 8Episode 37, Step 9Episode 37, Step 10Episode 37, Step 11Episode 37, Step 12Episode 37, Step 13Episode 37, Step 14Episode 37, Step 15Episode 37, Step 16Episode 37, Step 17Episode 37, Step 18Episode 37, Step 19
 
 Episode 37 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 37 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: -1.028180136586343e-07
-distEntropy loss: -0.2919498085975647
-Loss: 0.49708032608032227
-total_episode_reward: -2.682209014892578e-07
-mean_episode_reward: -2.6822089438383045e-08
-num_steps: 10
-Episode 38, Step 0Episode 38, Step 1Episode 38, Step 2Episode 38, Step 3Episode 38, Step 4Episode 38, Step 5Episode 38, Step 6Episode 38, Step 7Episode 38, Step 8Episode 38, Step 9
+Value loss: 51.876007080078125
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.6735303401947021
+Loss: 25.9312686920166
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 38, Step 0Episode 38, Step 1Episode 38, Step 2Episode 38, Step 3Episode 38, Step 4Episode 38, Step 5Episode 38, Step 6Episode 38, Step 7Episode 38, Step 8Episode 38, Step 9Episode 38, Step 10Episode 38, Step 11Episode 38, Step 12Episode 38, Step 13Episode 38, Step 14Episode 38, Step 15Episode 38, Step 16Episode 38, Step 17Episode 38, Step 18Episode 38, Step 19
 
 Episode 38 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 38 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: -4.0009616952829674e-08
-distEntropy loss: -0.29373425245285034
-Loss: 0.4970625340938568
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 39, Step 0Episode 39, Step 1Episode 39, Step 2Episode 39, Step 3Episode 39, Step 4Episode 39, Step 5Episode 39, Step 6Episode 39, Step 7Episode 39, Step 8Episode 39, Step 9
+Value loss: 24.538787841796875
+Action loss: 7.629394360719743e-08
+distEntropy loss: -0.693128764629364
+Loss: 12.262462615966797
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 39, Step 0Episode 39, Step 1Episode 39, Step 2Episode 39, Step 3Episode 39, Step 4Episode 39, Step 5Episode 39, Step 6Episode 39, Step 7Episode 39, Step 8Episode 39, Step 9Episode 39, Step 10Episode 39, Step 11Episode 39, Step 12Episode 39, Step 13Episode 39, Step 14Episode 39, Step 15Episode 39, Step 16Episode 39, Step 17Episode 39, Step 18Episode 39, Step 19
 
 Episode 39 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 39 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -9.53674295089968e-09
-distEntropy loss: -0.2414274513721466
-Loss: 0.4975857734680176
-total_episode_reward: -1.1920928955078125e-07
-mean_episode_reward: -1.1920929132713809e-08
-num_steps: 10
-Episode 40, Step 0Episode 40, Step 1Episode 40, Step 2Episode 40, Step 3Episode 40, Step 4Episode 40, Step 5Episode 40, Step 6Episode 40, Step 7Episode 40, Step 8Episode 40, Step 9
+Value loss: 28.2286319732666
+Action loss: -0.0
+distEntropy loss: -0.6900098323822021
+Loss: 14.107416152954102
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 40, Step 0Episode 40, Step 1Episode 40, Step 2Episode 40, Step 3Episode 40, Step 4Episode 40, Step 5Episode 40, Step 6Episode 40, Step 7Episode 40, Step 8Episode 40, Step 9Episode 40, Step 10Episode 40, Step 11Episode 40, Step 12Episode 40, Step 13Episode 40, Step 14Episode 40, Step 15Episode 40, Step 16Episode 40, Step 17Episode 40, Step 18Episode 40, Step 19
 
 Episode 40 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 40 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 7.95349475168905e-09
-distEntropy loss: -0.24124498665332794
-Loss: 0.49758750200271606
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 41, Step 0Episode 41, Step 1Episode 41, Step 2Episode 41, Step 3Episode 41, Step 4Episode 41, Step 5Episode 41, Step 6Episode 41, Step 7Episode 41, Step 8Episode 41, Step 9
+Value loss: 58.815940856933594
+Action loss: -1.1444091541079615e-07
+distEntropy loss: -0.6802867650985718
+Loss: 29.401166915893555
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 41, Step 0Episode 41, Step 1Episode 41, Step 2Episode 41, Step 3Episode 41, Step 4Episode 41, Step 5Episode 41, Step 6Episode 41, Step 7Episode 41, Step 8Episode 41, Step 9Episode 41, Step 10Episode 41, Step 11Episode 41, Step 12Episode 41, Step 13Episode 41, Step 14Episode 41, Step 15Episode 41, Step 16Episode 41, Step 17Episode 41, Step 18Episode 41, Step 19
 
 Episode 41 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 41 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 8.940696516468449e-10
-distEntropy loss: -0.3186585009098053
-Loss: 0.4968133568763733
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 42, Step 0Episode 42, Step 1Episode 42, Step 2Episode 42, Step 3Episode 42, Step 4Episode 42, Step 5Episode 42, Step 6Episode 42, Step 7Episode 42, Step 8Episode 42, Step 9
+Value loss: 50.85030746459961
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.670567512512207
+Loss: 25.418447494506836
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 42, Step 0Episode 42, Step 1Episode 42, Step 2Episode 42, Step 3Episode 42, Step 4Episode 42, Step 5Episode 42, Step 6Episode 42, Step 7Episode 42, Step 8Episode 42, Step 9Episode 42, Step 10Episode 42, Step 11Episode 42, Step 12Episode 42, Step 13Episode 42, Step 14Episode 42, Step 15Episode 42, Step 16Episode 42, Step 17Episode 42, Step 18Episode 42, Step 19
 
 Episode 42 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 42 finished, Train info:
-Value loss: 1.0
-Action loss: -2.9802322387695312e-08
-distEntropy loss: -0.6931372880935669
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-Shared layer gradients computed.
-Actor and Critic backward pass completed.
-SharLoss: 0.4930686056613922
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 43, Step 0Episode 43, Step 1Episode 43, Step 2Episode 43, Step 3Episode 43, Step 4Episode 43, Step 5Episode 43, Step 6Episode 43, Step 7Episode 43, Step 8Episode 43, Step 9
+Value loss: 10.2900972366333
+Action loss: -0.0
+distEntropy loss: -0.6706043481826782
+Loss: 5.138342380523682
+total_episode_reward: 5.0
+mean_episode_reward: 0.25
+num_steps: 20
+Episode 43, Step 0Episode 43, Step 1Episode 43, Step 2Episode 43, Step 3Episode 43, Step 4Episode 43, Step 5Episode 43, Step 6Episode 43, Step 7Episode 43, Step 8Episode 43, Step 9Episode 43, Step 10Episode 43, Step 11Episode 43, Step 12Episode 43, Step 13Episode 43, Step 14Episode 43, Step 15Episode 43, Step 16Episode 43, Step 17Episode 43, Step 18Episode 43, Step 19
 
 Episode 43 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 43 finished, Train info:
-Value loss: 1.0
-Action loss: 1.0263175198588215e-08
-distEntropy loss: -0.2966022193431854
-Loss: 0.4970339834690094
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 44, Step 0Episode 44, Step 1Episode 44, Step 2Episode 44, Step 3Episode 44, Step 4Episode 44, Step 5Episode 44, Step 6Episode 44, Step 7Episode 44, Step 8Episode 44, Step 9
+Value loss: 39.10248947143555
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.6708108186721802
+Loss: 19.544536590576172
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 44, Step 0Episode 44, Step 1Episode 44, Step 2Episode 44, Step 3Episode 44, Step 4Episode 44, Step 5Episode 44, Step 6Episode 44, Step 7Episode 44, Step 8Episode 44, Step 9Episode 44, Step 10Episode 44, Step 11Episode 44, Step 12Episode 44, Step 13Episode 44, Step 14Episode 44, Step 15Episode 44, Step 16Episode 44, Step 17Episode 44, Step 18Episode 44, Step 19
 
 Episode 44 begins to update:
 traj finalize...
-Optimizer state reset (momentum and iteration counter cleared).
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+Shared layer gradients computed.
+Actor and Critic backward pass completed.
+SharOptimizer state reset (momentum and iteration counter cleared).
 Episode 44 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 4.470348358154297e-08
-distEntropy loss: -0.6920846104621887
-Loss: 0.493079274892807
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 45, Step 0Episode 45, Step 1Episode 45, Step 2Episode 45, Step 3Episode 45, Step 4Episode 45, Step 5Episode 45, Step 6Episode 45, Step 7Episode 45, Step 8Episode 45, Step 9
+Value loss: 36.256439208984375
+Action loss: -0.0
+distEntropy loss: -0.6919561624526978
+Loss: 18.121299743652344
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 45, Step 0Episode 45, Step 1Episode 45, Step 2Episode 45, Step 3Episode 45, Step 4Episode 45, Step 5Episode 45, Step 6Episode 45, Step 7Episode 45, Step 8Episode 45, Step 9Episode 45, Step 10Episode 45, Step 11Episode 45, Step 12Episode 45, Step 13Episode 45, Step 14Episode 45, Step 15Episode 45, Step 16Episode 45, Step 17Episode 45, Step 18Episode 45, Step 19
 
 Episode 45 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 45 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: -3.628432665436776e-08
-distEntropy loss: -0.3255075216293335
-Loss: 0.4967448115348816
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 46, Step 0Episode 46, Step 1Episode 46, Step 2Episode 46, Step 3Episode 46, Step 4Episode 46, Step 5Episode 46, Step 6Episode 46, Step 7Episode 46, Step 8Episode 46, Step 9
+Value loss: 39.78760528564453
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6787043809890747
+Loss: 19.88701629638672
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 46, Step 0Episode 46, Step 1Episode 46, Step 2Episode 46, Step 3Episode 46, Step 4Episode 46, Step 5Episode 46, Step 6Episode 46, Step 7Episode 46, Step 8Episode 46, Step 9Episode 46, Step 10Episode 46, Step 11Episode 46, Step 12Episode 46, Step 13Episode 46, Step 14Episode 46, Step 15Episode 46, Step 16Episode 46, Step 17Episode 46, Step 18Episode 46, Step 19
 
 Episode 46 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 46 finished, Train info:
-Value loss: 1.0
-Action loss: 2.086162576020456e-09
-distEntropy loss: -0.37932252883911133
-Loss: 0.49620676040649414
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 47, Step 0Episode 47, Step 1Episode 47, Step 2Episode 47, Step 3Episode 47, Step 4Episode 47, Step 5Episode 47, Step 6Episode 47, Step 7Episode 47, Step 8Episode 47, Step 9
+Value loss: 10.174440383911133
+Action loss: -7.629394360719743e-08
+distEntropy loss: -0.6186583638191223
+Loss: 5.081033706665039
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 47, Step 0Episode 47, Step 1Episode 47, Step 2Episode 47, Step 3Episode 47, Step 4Episode 47, Step 5Episode 47, Step 6Episode 47, Step 7Episode 47, Step 8Episode 47, Step 9Episode 47, Step 10Episode 47, Step 11Episode 47, Step 12Episode 47, Step 13Episode 47, Step 14Episode 47, Step 15Episode 47, Step 16Episode 47, Step 17Episode 47, Step 18Episode 47, Step 19
 
 Episode 47 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 47 finished, Train info:
-Value loss: 1.0
-Action loss: -1.1920929132713809e-08
-distEntropy loss: -0.6931134462356567
-Loss: 0.4930688738822937
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 48, Step 0Episode 48, Step 1Episode 48, Step 2Episode 48, Step 3Episode 48, Step 4Episode 48, Step 5Episode 48, Step 6Episode 48, Step 7Episode 48, Step 8Episode 48, Step 9
+Value loss: 45.919036865234375
+Action loss: -0.0
+distEntropy loss: -0.6776272058486938
+Loss: 22.952741622924805
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 48, Step 0Episode 48, Step 1Episode 48, Step 2Episode 48, Step 3Episode 48, Step 4Episode 48, Step 5Episode 48, Step 6Episode 48, Step 7Episode 48, Step 8Episode 48, Step 9Episode 48, Step 10Episode 48, Step 11Episode 48, Step 12Episode 48, Step 13Episode 48, Step 14Episode 48, Step 15Episode 48, Step 16Episode 48, Step 17Episode 48, Step 18Episode 48, Step 19
 
 Episode 48 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 48 finished, Train info:
-Value loss: 1.0
-Action loss: -8.419156038996789e-09
-distEntropy loss: -0.31055766344070435
-Loss: 0.4968944191932678
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 49, Step 0Episode 49, Step 1Episode 49, Step 2Episode 49, Step 3Episode 49, Step 4Episode 49, Step 5Episode 49, Step 6Episode 49, Step 7Episode 49, Step 8Episode 49, Step 9
+Value loss: 37.575252532958984
+Action loss: -1.5258788721439487e-07
+distEntropy loss: -0.6830464601516724
+Loss: 18.78079605102539
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 49, Step 0Episode 49, Step 1Episode 49, Step 2Episode 49, Step 3Episode 49, Step 4Episode 49, Step 5Episode 49, Step 6Episode 49, Step 7Episode 49, Step 8Episode 49, Step 9Episode 49, Step 10Episode 49, Step 11Episode 49, Step 12Episode 49, Step 13Episode 49, Step 14Episode 49, Step 15Episode 49, Step 16Episode 49, Step 17Episode 49, Step 18Episode 49, Step 19
 
 Episode 49 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 49 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: -1.5735626845980732e-07
-distEntropy loss: -0.6559782028198242
-Loss: 0.4934399724006653
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 50, Step 0Episode 50, Step 1Episode 50, Step 2Episode 50, Step 3Episode 50, Step 4Episode 50, Step 5Episode 50, Step 6Episode 50, Step 7Episode 50, Step 8Episode 50, Step 9
+Value loss: 39.082374572753906
+Action loss: -0.0
+distEntropy loss: -0.6766986846923828
+Loss: 19.534420013427734
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 50, Step 0Episode 50, Step 1Episode 50, Step 2Episode 50, Step 3Episode 50, Step 4Episode 50, Step 5Episode 50, Step 6Episode 50, Step 7Episode 50, Step 8Episode 50, Step 9Episode 50, Step 10Episode 50, Step 11Episode 50, Step 12Episode 50, Step 13Episode 50, Step 14Episode 50, Step 15Episode 50, Step 16Episode 50, Step 17Episode 50, Step 18Episode 50, Step 19
 
 Episode 50 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 50 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: -4.172325152040912e-09
-distEntropy loss: -0.6931309700012207
-Loss: 0.4930686354637146
-total_episode_reward: 1.7881393432617188e-07
-mean_episode_reward: 1.7881394143159923e-08
-num_steps: 10
-Episode 51, Step 0Episode 51, Step 1Episode 51, Step 2Episode 51, Step 3Episode 51, Step 4Episode 51, Step 5Episode 51, Step 6Episode 51, Step 7Episode 51, Step 8Episode 51, Step 9
+Value loss: 33.69596481323242
+Action loss: -1.907348590179936e-08
+distEntropy loss: -0.6655065417289734
+Loss: 16.841327667236328
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 51, Step 0Episode 51, Step 1Episode 51, Step 2Episode 51, Step 3Episode 51, Step 4Episode 51, Step 5Episode 51, Step 6Episode 51, Step 7Episode 51, Step 8Episode 51, Step 9Episode 51, Step 10Episode 51, Step 11Episode 51, Step 12Episode 51, Step 13Episode 51, Step 14Episode 51, Step 15Episode 51, Step 16Episode 51, Step 17Episode 51, Step 18Episode 51, Step 19
 
 Episode 51 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 51 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 2.5450136220683817e-08
-distEntropy loss: -0.31122446060180664
-Loss: 0.49688780307769775
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 52, Step 0Episode 52, Step 1Episode 52, Step 2Episode 52, Step 3Episode 52, Step 4Episode 52, Step 5Episode 52, Step 6Episode 52, Step 7Episode 52, Step 8Episode 52, Step 9
+Value loss: 18.791654586791992
+Action loss: -1.907348590179936e-08
+distEntropy loss: -0.6811409592628479
+Loss: 9.389016151428223
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 52, Step 0Episode 52, Step 1Episode 52, Step 2Episode 52, Step 3Episode 52, Step 4Episode 52, Step 5Episode 52, Step 6Episode 52, Step 7Episode 52, Step 8Episode 52, Step 9Episode 52, Step 10Episode 52, Step 11Episode 52, Step 12Episode 52, Step 13Episode 52, Step 14Episode 52, Step 15Episode 52, Step 16Episode 52, Step 17Episode 52, Step 18Episode 52, Step 19
 
 Episode 52 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 52 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: -6.158835930136775e-08
-distEntropy loss: -0.29333406686782837
-Loss: 0.49706652760505676
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 53, Step 0Episode 53, Step 1Episode 53, Step 2Episode 53, Step 3Episode 53, Step 4Episode 53, Step 5Episode 53, Step 6Episode 53, Step 7Episode 53, Step 8Episode 53, Step 9
+Value loss: 20.3541316986084
+Action loss: -7.629394360719743e-08
+distEntropy loss: -0.677832841873169
+Loss: 10.170287132263184
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 53, Step 0Episode 53, Step 1Episode 53, Step 2Episode 53, Step 3Episode 53, Step 4Episode 53, Step 5Episode 53, Step 6Episode 53, Step 7Episode 53, Step 8Episode 53, Step 9Episode 53, Step 10Episode 53, Step 11Episode 53, Step 12Episode 53, Step 13Episode 53, Step 14Episode 53, Step 15Episode 53, Step 16Episode 53, Step 17Episode 53, Step 18Episode 53, Step 19
 
 Episode 53 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 53 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 4.712492174263616e-09
-distEntropy loss: -0.23236992955207825
-Loss: 0.49767637252807617
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 54, Step 0Episode 54, Step 1Episode 54, Step 2Episode 54, Step 3Episode 54, Step 4Episode 54, Step 5Episode 54, Step 6Episode 54, Step 7Episode 54, Step 8Episode 54, Step 9
+Value loss: 31.538217544555664
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6877156496047974
+Loss: 15.762231826782227
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 54, Step 0Episode 54, Step 1Episode 54, Step 2Episode 54, Step 3Episode 54, Step 4Episode 54, Step 5Episode 54, Step 6Episode 54, Step 7Episode 54, Step 8Episode 54, Step 9Episode 54, Step 10Episode 54, Step 11Episode 54, Step 12Episode 54, Step 13Episode 54, Step 14Episode 54, Step 15Episode 54, Step 16Episode 54, Step 17Episode 54, Step 18Episode 54, Step 19
 
 Episode 54 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 54 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 1.518521486332247e-08
-distEntropy loss: -0.2765863835811615
-Loss: 0.4972341060638428
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 55, Step 0Episode 55, Step 1Episode 55, Step 2Episode 55, Step 3Episode 55, Step 4Episode 55, Step 5Episode 55, Step 6Episode 55, Step 7Episode 55, Step 8Episode 55, Step 9
+Value loss: 31.228336334228516
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6889301538467407
+Loss: 15.607278823852539
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 55, Step 0Episode 55, Step 1Episode 55, Step 2Episode 55, Step 3Episode 55, Step 4Episode 55, Step 5Episode 55, Step 6Episode 55, Step 7Episode 55, Step 8Episode 55, Step 9Episode 55, Step 10Episode 55, Step 11Episode 55, Step 12Episode 55, Step 13Episode 55, Step 14Episode 55, Step 15Episode 55, Step 16Episode 55, Step 17Episode 55, Step 18Episode 55, Step 19
 
 Episode 55 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 55 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -4.0046872484822416e-09
-distEntropy loss: -0.29298898577690125
-Loss: 0.49707016348838806
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 56, Step 0Episode 56, Step 1Episode 56, Step 2Episode 56, Step 3Episode 56, Step 4Episode 56, Step 5Episode 56, Step 6Episode 56, Step 7Episode 56, Step 8Episode 56, Step 9
+Value loss: 20.530353546142578
+Action loss: 9.536743306171047e-08
+distEntropy loss: -0.6853414177894592
+Loss: 10.258323669433594
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 56, Step 0Episode 56, Step 1Episode 56, Step 2Episode 56, Step 3Episode 56, Step 4Episode 56, Step 5Episode 56, Step 6Episode 56, Step 7Episode 56, Step 8Episode 56, Step 9Episode 56, Step 10Episode 56, Step 11Episode 56, Step 12Episode 56, Step 13Episode 56, Step 14Episode 56, Step 15Episode 56, Step 16Episode 56, Step 17Episode 56, Step 18Episode 56, Step 19
 
 Episode 56 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 56 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 3.695488004495928e-08
-distEntropy loss: -0.6541718244552612
-Loss: 0.49345824122428894
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 57, Step 0Episode 57, Step 1Episode 57, Step 2Episode 57, Step 3Episode 57, Step 4Episode 57, Step 5Episode 57, Step 6Episode 57, Step 7Episode 57, Step 8Episode 57, Step 9
+Value loss: 25.413793563842773
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6914352178573608
+Loss: 12.699982643127441
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 57, Step 0Episode 57, Step 1Episode 57, Step 2Episode 57, Step 3Episode 57, Step 4Episode 57, Step 5Episode 57, Step 6Episode 57, Step 7Episode 57, Step 8Episode 57, Step 9Episode 57, Step 10Episode 57, Step 11Episode 57, Step 12Episode 57, Step 13Episode 57, Step 14Episode 57, Step 15Episode 57, Step 16Episode 57, Step 17Episode 57, Step 18Episode 57, Step 19
 
 Episode 57 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 57 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: 2.4288892674917406e-08
-distEntropy loss: -0.2913622260093689
-Loss: 0.4970863163471222
-total_episode_reward: -1.1920928955078125e-07
-mean_episode_reward: -1.1920929132713809e-08
-num_steps: 10
-Episode 58, Step 0Episode 58, Step 1Episode 58, Step 2Episode 58, Step 3Episode 58, Step 4Episode 58, Step 5Episode 58, Step 6Episode 58, Step 7Episode 58, Step 8Episode 58, Step 9
+Value loss: 11.274559020996094
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.683785080909729
+Loss: 5.630441665649414
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 58, Step 0Episode 58, Step 1Episode 58, Step 2Episode 58, Step 3Episode 58, Step 4Episode 58, Step 5Episode 58, Step 6Episode 58, Step 7Episode 58, Step 8Episode 58, Step 9Episode 58, Step 10Episode 58, Step 11Episode 58, Step 12Episode 58, Step 13Episode 58, Step 14Episode 58, Step 15Episode 58, Step 16Episode 58, Step 17Episode 58, Step 18Episode 58, Step 19
 
 Episode 58 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 58 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: -1.4901161193847656e-08
-distEntropy loss: -0.3057078719139099
-Loss: 0.4969428479671478
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 59, Step 0Episode 59, Step 1Episode 59, Step 2Episode 59, Step 3Episode 59, Step 4Episode 59, Step 5Episode 59, Step 6Episode 59, Step 7Episode 59, Step 8Episode 59, Step 9
+Value loss: 26.861141204833984
+Action loss: -0.0
+distEntropy loss: -0.6807554960250854
+Loss: 13.423763275146484
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 59, Step 0Episode 59, Step 1Episode 59, Step 2Episode 59, Step 3Episode 59, Step 4Episode 59, Step 5Episode 59, Step 6Episode 59, Step 7Episode 59, Step 8Episode 59, Step 9Episode 59, Step 10Episode 59, Step 11Episode 59, Step 12Episode 59, Step 13Episode 59, Step 14Episode 59, Step 15Episode 59, Step 16Episode 59, Step 17Episode 59, Step 18Episode 59, Step 19
 
 Episode 59 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 59 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -2.2351741790771484e-08
-distEntropy loss: -0.4256937503814697
-Loss: 0.49574312567710876
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 60, Step 0Episode 60, Step 1Episode 60, Step 2Episode 60, Step 3Episode 60, Step 4Episode 60, Step 5Episode 60, Step 6Episode 60, Step 7Episode 60, Step 8Episode 60, Step 9
+Value loss: 47.18354034423828
+Action loss: -0.0
+distEntropy loss: -0.693139910697937
+Loss: 23.5848388671875
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 60, Step 0Episode 60, Step 1Episode 60, Step 2Episode 60, Step 3Episode 60, Step 4Episode 60, Step 5Episode 60, Step 6Episode 60, Step 7Episode 60, Step 8Episode 60, Step 9Episode 60, Step 10Episode 60, Step 11Episode 60, Step 12Episode 60, Step 13Episode 60, Step 14Episode 60, Step 15Episode 60, Step 16Episode 60, Step 17Episode 60, Step 18Episode 60, Step 19
 
 Episode 60 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 60 finished, Train info:
-Value loss: 1.0
-Action loss: -5.7667492114887864e-08
-distEntropy loss: -0.2243904173374176
-Loss: 0.4977560341358185
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 61, Step 0Episode 61, Step 1Episode 61, Step 2Episode 61, Step 3Episode 61, Step 4Episode 61, Step 5Episode 61, Step 6Episode 61, Step 7Episode 61, Step 8Episode 61, Step 9
+Value loss: 38.53927993774414
+Action loss: -0.0
+distEntropy loss: -0.6862943768501282
+Loss: 19.26277732849121
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 61, Step 0Episode 61, Step 1Episode 61, Step 2Episode 61, Step 3Episode 61, Step 4Episode 61, Step 5Episode 61, Step 6Episode 61, Step 7Episode 61, Step 8Episode 61, Step 9Episode 61, Step 10Episode 61, Step 11Episode 61, Step 12Episode 61, Step 13Episode 61, Step 14Episode 61, Step 15Episode 61, Step 16Episode 61, Step 17Episode 61, Step 18Episode 61, Step 19
 
 Episode 61 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 61 finished, Train info:
-Value loss: 1.0
-Action loss: -2.1187588572502136e-08
-distEntropy loss: -0.23560187220573425
-Loss: 0.49764394760131836
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 62, Step 0Episode 62, Step 1Episode 62, Step 2Episode 62, Step 3Episode 62, Step 4Episode 62, Step 5Episode 62, Step 6Episode 62, Step 7Episode 62, Step 8Episode 62, Step 9
+Value loss: 17.681476593017578
+Action loss: 1.335144048653092e-07
+distEntropy loss: -0.6931446194648743
+Loss: 8.833806991577148
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 62, Step 0Episode 62, Step 1Episode 62, Step 2Episode 62, Step 3Episode 62, Step 4Episode 62, Step 5Episode 62, Step 6Episode 62, Step 7Episode 62, Step 8Episode 62, Step 9Episode 62, Step 10Episode 62, Step 11Episode 62, Step 12Episode 62, Step 13Episode 62, Step 14Episode 62, Step 15Episode 62, Step 16Episode 62, Step 17Episode 62, Step 18Episode 62, Step 19
 
 Episode 62 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 62 finished, Train info:
-Value loss: 1.000000238418579
-Action loss: 4.470348535789981e-09
-distEntropy loss: -0.6931262016296387
-Loss: 0.4930688440799713
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 63, Step 0Episode 63, Step 1Episode 63, Step 2Episode 63, Step 3Episode 63, Step 4Episode 63, Step 5Episode 63, Step 6Episode 63, Step 7Episode 63, Step 8Episode 63, Step 9
+Value loss: 11.952927589416504
+Action loss: -0.0
+distEntropy loss: -0.6698894500732422
+Loss: 5.969764709472656
+total_episode_reward: 6.0
+mean_episode_reward: 0.30000001192092896
+num_steps: 20
+Episode 63, Step 0Episode 63, Step 1Episode 63, Step 2Episode 63, Step 3Episode 63, Step 4Episode 63, Step 5Episode 63, Step 6Episode 63, Step 7Episode 63, Step 8Episode 63, Step 9Episode 63, Step 10Episode 63, Step 11Episode 63, Step 12Episode 63, Step 13Episode 63, Step 14Episode 63, Step 15Episode 63, Step 16Episode 63, Step 17Episode 63, Step 18Episode 63, Step 19
 
 Episode 63 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 63 finished, Train info:
-Value loss: 1.0
-Action loss: -4.61936000561991e-09
-distEntropy loss: -0.30063802003860474
-Loss: 0.49699363112449646
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 64, Step 0Episode 64, Step 1Episode 64, Step 2Episode 64, Step 3Episode 64, Step 4Episode 64, Step 5Episode 64, Step 6Episode 64, Step 7Episode 64, Step 8Episode 64, Step 9
+Value loss: 18.738208770751953
+Action loss: 1.9073486612342094e-07
+distEntropy loss: -0.6731840968132019
+Loss: 9.362372398376465
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 64, Step 0Episode 64, Step 1Episode 64, Step 2Episode 64, Step 3Episode 64, Step 4Episode 64, Step 5Episode 64, Step 6Episode 64, Step 7Episode 64, Step 8Episode 64, Step 9Episode 64, Step 10Episode 64, Step 11Episode 64, Step 12Episode 64, Step 13Episode 64, Step 14Episode 64, Step 15Episode 64, Step 16Episode 64, Step 17Episode 64, Step 18Episode 64, Step 19
 
 Episode 64 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 64 finished, Train info:
-Value loss: 1.0
-Action loss: 7.543712876589836e-10
-distEntropy loss: -0.34130826592445374
-Loss: 0.4965869188308716
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 65, Step 0Episode 65, Step 1Episode 65, Step 2Episode 65, Step 3Episode 65, Step 4Episode 65, Step 5Episode 65, Step 6Episode 65, Step 7Episode 65, Step 8Episode 65, Step 9
+Value loss: 58.21881103515625
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.6714198589324951
+Loss: 29.102691650390625
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 65, Step 0Episode 65, Step 1Episode 65, Step 2Episode 65, Step 3Episode 65, Step 4Episode 65, Step 5Episode 65, Step 6Episode 65, Step 7Episode 65, Step 8Episode 65, Step 9Episode 65, Step 10Episode 65, Step 11Episode 65, Step 12Episode 65, Step 13Episode 65, Step 14Episode 65, Step 15Episode 65, Step 16Episode 65, Step 17Episode 65, Step 18Episode 65, Step 19
 
 Episode 65 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 65 finished, Train info:
-Value loss: 1.0
-Action loss: 5.7220457705398076e-08
-distEntropy loss: -0.1692887395620346
-Loss: 0.49830716848373413
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 66, Step 0Episode 66, Step 1Episode 66, Step 2Episode 66, Step 3Episode 66, Step 4Episode 66, Step 5Episode 66, Step 6Episode 66, Step 7Episode 66, Step 8Episode 66, Step 9
+Value loss: 44.79993438720703
+Action loss: -1.907348590179936e-08
+distEntropy loss: -0.6735860109329224
+Loss: 22.393230438232422
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 66, Step 0Episode 66, Step 1Episode 66, Step 2Episode 66, Step 3Episode 66, Step 4Episode 66, Step 5Episode 66, Step 6Episode 66, Step 7Episode 66, Step 8Episode 66, Step 9Episode 66, Step 10Episode 66, Step 11Episode 66, Step 12Episode 66, Step 13Episode 66, Step 14Episode 66, Step 15Episode 66, Step 16Episode 66, Step 17Episode 66, Step 18Episode 66, Step 19
 
 Episode 66 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 66 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 2.38418573772492e-09
-distEntropy loss: -0.35947734117507935
-Loss: 0.49640515446662903
-total_episode_reward: 1.7881393432617188e-07
-mean_episode_reward: 1.7881394143159923e-08
-num_steps: 10
-Episode 67, Step 0Episode 67, Step 1Episode 67, Step 2Episode 67, Step 3Episode 67, Step 4Episode 67, Step 5Episode 67, Step 6Episode 67, Step 7Episode 67, Step 8Episode 67, Step 9
+Value loss: 15.421745300292969
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.6877827644348145
+Loss: 7.7039947509765625
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 67, Step 0Episode 67, Step 1Episode 67, Step 2Episode 67, Step 3Episode 67, Step 4Episode 67, Step 5Episode 67, Step 6Episode 67, Step 7Episode 67, Step 8Episode 67, Step 9Episode 67, Step 10Episode 67, Step 11Episode 67, Step 12Episode 67, Step 13Episode 67, Step 14Episode 67, Step 15Episode 67, Step 16Episode 67, Step 17Episode 67, Step 18Episode 67, Step 19
 
 Episode 67 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 67 finished, Train info:
-Value loss: 1.0
-Action loss: 5.395849989042745e-09
-distEntropy loss: -0.2062191218137741
-Loss: 0.49793779850006104
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 68, Step 0Episode 68, Step 1Episode 68, Step 2Episode 68, Step 3Episode 68, Step 4Episode 68, Step 5Episode 68, Step 6Episode 68, Step 7Episode 68, Step 8Episode 68, Step 9
+Value loss: 28.593494415283203
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6785150170326233
+Loss: 14.289961814880371
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 68, Step 0Episode 68, Step 1Episode 68, Step 2Episode 68, Step 3Episode 68, Step 4Episode 68, Step 5Episode 68, Step 6Episode 68, Step 7Episode 68, Step 8Episode 68, Step 9Episode 68, Step 10Episode 68, Step 11Episode 68, Step 12Episode 68, Step 13Episode 68, Step 14Episode 68, Step 15Episode 68, Step 16Episode 68, Step 17Episode 68, Step 18Episode 68, Step 19
 
 Episode 68 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 68 finished, Train info:
-Value loss: 1.0
-Action loss: -1.0728836485895954e-08
-distEntropy loss: -0.6931419968605042
-Loss: 0.4930685758590698
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 69, Step 0Episode 69, Step 1Episode 69, Step 2Episode 69, Step 3Episode 69, Step 4Episode 69, Step 5Episode 69, Step 6Episode 69, Step 7Episode 69, Step 8Episode 69, Step 9
+Value loss: 33.352882385253906
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.693139374256134
+Loss: 16.669509887695312
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 69, Step 0Episode 69, Step 1Episode 69, Step 2Episode 69, Step 3Episode 69, Step 4Episode 69, Step 5Episode 69, Step 6Episode 69, Step 7Episode 69, Step 8Episode 69, Step 9Episode 69, Step 10Episode 69, Step 11Episode 69, Step 12Episode 69, Step 13Episode 69, Step 14Episode 69, Step 15Episode 69, Step 16Episode 69, Step 17Episode 69, Step 18Episode 69, Step 19
 
 Episode 69 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 69 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -1.19209286886246e-09
-distEntropy loss: -0.6931461095809937
-Loss: 0.4930686056613922
-total_episode_reward: -2.682209014892578e-07
-mean_episode_reward: -2.6822089438383045e-08
-num_steps: 10
-Episode 70, Step 0Episode 70, Step 1Episode 70, Step 2Episode 70, Step 3Episode 70, Step 4Episode 70, Step 5Episode 70, Step 6Episode 70, Step 7Episode 70, Step 8Episode 70, Step 9
+Value loss: 18.93410873413086
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.6687728762626648
+Loss: 9.460366249084473
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 70, Step 0Episode 70, Step 1Episode 70, Step 2Episode 70, Step 3Episode 70, Step 4Episode 70, Step 5Episode 70, Step 6Episode 70, Step 7Episode 70, Step 8Episode 70, Step 9Episode 70, Step 10Episode 70, Step 11Episode 70, Step 12Episode 70, Step 13Episode 70, Step 14Episode 70, Step 15Episode 70, Step 16Episode 70, Step 17Episode 70, Step 18Episode 70, Step 19
 
 Episode 70 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 70 finished, Train info:
-Value loss: 1.0
-Action loss: 8.344650304081824e-09
-distEntropy loss: -0.6931363940238953
-Loss: 0.4930686354637146
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 71, Step 0Episode 71, Step 1Episode 71, Step 2Episode 71, Step 3Episode 71, Step 4Episode 71, Step 5Episode 71, Step 6Episode 71, Step 7Episode 71, Step 8Episode 71, Step 9
+Value loss: 22.740985870361328
+Action loss: -7.629394360719743e-08
+distEntropy loss: -0.6803753972053528
+Loss: 11.363689422607422
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 71, Step 0Episode 71, Step 1Episode 71, Step 2Episode 71, Step 3Episode 71, Step 4Episode 71, Step 5Episode 71, Step 6Episode 71, Step 7Episode 71, Step 8Episode 71, Step 9Episode 71, Step 10Episode 71, Step 11Episode 71, Step 12Episode 71, Step 13Episode 71, Step 14Episode 71, Step 15Episode 71, Step 16Episode 71, Step 17Episode 71, Step 18Episode 71, Step 19
 
 Episode 71 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 71 finished, Train info:
-Value loss: 1.0
-Action loss: 2.771616003371946e-08
-distEntropy loss: -0.4243709444999695
-Loss: 0.4957562983036041
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 72, Step 0Episode 72, Step 1Episode 72, Step 2Episode 72, Step 3Episode 72, Step 4Episode 72, Step 5Episode 72, Step 6Episode 72, Step 7Episode 72, Step 8Episode 72, Step 9
+Value loss: 20.487712860107422
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.6711572408676147
+Loss: 10.237144470214844
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 72, Step 0Episode 72, Step 1Episode 72, Step 2Episode 72, Step 3Episode 72, Step 4Episode 72, Step 5Episode 72, Step 6Episode 72, Step 7Episode 72, Step 8Episode 72, Step 9Episode 72, Step 10Episode 72, Step 11Episode 72, Step 12Episode 72, Step 13Episode 72, Step 14Episode 72, Step 15Episode 72, Step 16Episode 72, Step 17Episode 72, Step 18Episode 72, Step 19
 
 Episode 72 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 72 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 4.390254559893947e-08
-distEntropy loss: -0.32554662227630615
-Loss: 0.49674466252326965
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 73, Step 0Episode 73, Step 1Episode 73, Step 2Episode 73, Step 3Episode 73, Step 4Episode 73, Step 5Episode 73, Step 6Episode 73, Step 7Episode 73, Step 8Episode 73, Step 9
+Value loss: 35.689849853515625
+Action loss: -7.629394360719743e-08
+distEntropy loss: -0.6931467056274414
+Loss: 17.837993621826172
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 73, Step 0Episode 73, Step 1Episode 73, Step 2Episode 73, Step 3Episode 73, Step 4Episode 73, Step 5Episode 73, Step 6Episode 73, Step 7Episode 73, Step 8Episode 73, Step 9Episode 73, Step 10Episode 73, Step 11Episode 73, Step 12Episode 73, Step 13Episode 73, Step 14Episode 73, Step 15Episode 73, Step 16Episode 73, Step 17Episode 73, Step 18Episode 73, Step 19
 
 Episode 73 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 73 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 4.76837147544984e-09
-distEntropy loss: -0.3186863362789154
-Loss: 0.4968130886554718
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 74, Step 0Episode 74, Step 1Episode 74, Step 2Episode 74, Step 3Episode 74, Step 4Episode 74, Step 5Episode 74, Step 6Episode 74, Step 7Episode 74, Step 8Episode 74, Step 9
+Value loss: 17.624927520751953
+Action loss: -5.7220457705398076e-08
+distEntropy loss: -0.693145751953125
+Loss: 8.805532455444336
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 74, Step 0Episode 74, Step 1Episode 74, Step 2Episode 74, Step 3Episode 74, Step 4Episode 74, Step 5Episode 74, Step 6Episode 74, Step 7Episode 74, Step 8Episode 74, Step 9Episode 74, Step 10Episode 74, Step 11Episode 74, Step 12Episode 74, Step 13Episode 74, Step 14Episode 74, Step 15Episode 74, Step 16Episode 74, Step 17Episode 74, Step 18Episode 74, Step 19
 
 Episode 74 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 74 finished, Train info:
-Value loss: 1.0
-Action loss: 1.7881394143159923e-08
-distEntropy loss: -0.6931278109550476
-Loss: 0.49306872487068176
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 75, Step 0Episode 75, Step 1Episode 75, Step 2Episode 75, Step 3Episode 75, Step 4Episode 75, Step 5Episode 75, Step 6Episode 75, Step 7Episode 75, Step 8Episode 75, Step 9
+Value loss: 26.510982513427734
+Action loss: 7.629394360719743e-08
+distEntropy loss: -0.684093713760376
+Loss: 13.248650550842285
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 75, Step 0Episode 75, Step 1Episode 75, Step 2Episode 75, Step 3Episode 75, Step 4Episode 75, Step 5Episode 75, Step 6Episode 75, Step 7Episode 75, Step 8Episode 75, Step 9Episode 75, Step 10Episode 75, Step 11Episode 75, Step 12Episode 75, Step 13Episode 75, Step 14Episode 75, Step 15Episode 75, Step 16Episode 75, Step 17Episode 75, Step 18Episode 75, Step 19
 
 Episode 75 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 75 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: 2.9802322831784522e-09
-distEntropy loss: -0.2915986180305481
-Loss: 0.4970839321613312
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 76, Step 0Episode 76, Step 1Episode 76, Step 2Episode 76, Step 3Episode 76, Step 4Episode 76, Step 5Episode 76, Step 6Episode 76, Step 7Episode 76, Step 8Episode 76, Step 9
+Value loss: 30.832111358642578
+Action loss: 1.5258788721439487e-07
+distEntropy loss: -0.657886266708374
+Loss: 15.409477233886719
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 76, Step 0Episode 76, Step 1Episode 76, Step 2Episode 76, Step 3Episode 76, Step 4Episode 76, Step 5Episode 76, Step 6Episode 76, Step 7Episode 76, Step 8Episode 76, Step 9Episode 76, Step 10Episode 76, Step 11Episode 76, Step 12Episode 76, Step 13Episode 76, Step 14Episode 76, Step 15Episode 76, Step 16Episode 76, Step 17Episode 76, Step 18Episode 76, Step 19
 
 Episode 76 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 76 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -3.814697180359872e-08
-distEntropy loss: -0.6931406259536743
-Loss: 0.4930686056613922
-total_episode_reward: 1.1920928955078125e-07
-mean_episode_reward: 1.1920929132713809e-08
-num_steps: 10
-Episode 77, Step 0Episode 77, Step 1Episode 77, Step 2Episode 77, Step 3Episode 77, Step 4Episode 77, Step 5Episode 77, Step 6Episode 77, Step 7Episode 77, Step 8Episode 77, Step 9
+Value loss: 52.701927185058594
+Action loss: -1.335144048653092e-07
+distEntropy loss: -0.6930848956108093
+Loss: 26.344032287597656
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 77, Step 0Episode 77, Step 1Episode 77, Step 2Episode 77, Step 3Episode 77, Step 4Episode 77, Step 5Episode 77, Step 6Episode 77, Step 7Episode 77, Step 8Episode 77, Step 9Episode 77, Step 10Episode 77, Step 11Episode 77, Step 12Episode 77, Step 13Episode 77, Step 14Episode 77, Step 15Episode 77, Step 16Episode 77, Step 17Episode 77, Step 18Episode 77, Step 19
 
 Episode 77 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 77 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 1.609325472884393e-08
-distEntropy loss: -0.6931266188621521
-Loss: 0.49306878447532654
-total_episode_reward: -2.682209014892578e-07
-mean_episode_reward: -2.6822089438383045e-08
-num_steps: 10
-Episode 78, Step 0Episode 78, Step 1Episode 78, Step 2Episode 78, Step 3Episode 78, Step 4Episode 78, Step 5Episode 78, Step 6Episode 78, Step 7Episode 78, Step 8Episode 78, Step 9
+Value loss: 27.832366943359375
+Action loss: -7.629394360719743e-08
+distEntropy loss: -0.6877644062042236
+Loss: 13.909305572509766
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 78, Step 0Episode 78, Step 1Episode 78, Step 2Episode 78, Step 3Episode 78, Step 4Episode 78, Step 5Episode 78, Step 6Episode 78, Step 7Episode 78, Step 8Episode 78, Step 9Episode 78, Step 10Episode 78, Step 11Episode 78, Step 12Episode 78, Step 13Episode 78, Step 14Episode 78, Step 15Episode 78, Step 16Episode 78, Step 17Episode 78, Step 18Episode 78, Step 19
 
 Episode 78 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 78 finished, Train info:
-Value loss: 1.0
-Action loss: -2.957880518295042e-08
-distEntropy loss: -0.2924194037914276
-Loss: 0.49707576632499695
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 79, Step 0Episode 79, Step 1Episode 79, Step 2Episode 79, Step 3Episode 79, Step 4Episode 79, Step 5Episode 79, Step 6Episode 79, Step 7Episode 79, Step 8Episode 79, Step 9
+Value loss: 31.054973602294922
+Action loss: -1.5258788721439487e-07
+distEntropy loss: -0.6737679243087769
+Loss: 15.52074909210205
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 79, Step 0Episode 79, Step 1Episode 79, Step 2Episode 79, Step 3Episode 79, Step 4Episode 79, Step 5Episode 79, Step 6Episode 79, Step 7Episode 79, Step 8Episode 79, Step 9Episode 79, Step 10Episode 79, Step 11Episode 79, Step 12Episode 79, Step 13Episode 79, Step 14Episode 79, Step 15Episode 79, Step 16Episode 79, Step 17Episode 79, Step 18Episode 79, Step 19
 
 Episode 79 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 79 finished, Train info:
-Value loss: 1.0
-Action loss: 4.968605971100715e-09
-distEntropy loss: -0.2470400631427765
-Loss: 0.4975295960903168
-total_episode_reward: -2.384185791015625e-07
-mean_episode_reward: -2.3841858265427618e-08
-num_steps: 10
-Episode 80, Step 0Episode 80, Step 1Episode 80, Step 2Episode 80, Step 3Episode 80, Step 4Episode 80, Step 5Episode 80, Step 6Episode 80, Step 7Episode 80, Step 8Episode 80, Step 9
+Value loss: 35.042335510253906
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.6905392408370972
+Loss: 17.514263153076172
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 80, Step 0Episode 80, Step 1Episode 80, Step 2Episode 80, Step 3Episode 80, Step 4Episode 80, Step 5Episode 80, Step 6Episode 80, Step 7Episode 80, Step 8Episode 80, Step 9Episode 80, Step 10Episode 80, Step 11Episode 80, Step 12Episode 80, Step 13Episode 80, Step 14Episode 80, Step 15Episode 80, Step 16Episode 80, Step 17Episode 80, Step 18Episode 80, Step 19
 
 Episode 80 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 80 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -8.344650304081824e-09
-distEntropy loss: -0.693131685256958
-Loss: 0.49306875467300415
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 81, Step 0Episode 81, Step 1Episode 81, Step 2Episode 81, Step 3Episode 81, Step 4Episode 81, Step 5Episode 81, Step 6Episode 81, Step 7Episode 81, Step 8Episode 81, Step 9
+Value loss: 7.598570346832275
+Action loss: 1.5258788721439487e-07
+distEntropy loss: -0.693145751953125
+Loss: 3.792353868484497
+total_episode_reward: 5.0
+mean_episode_reward: 0.25
+num_steps: 20
+Episode 81, Step 0Episode 81, Step 1Episode 81, Step 2Episode 81, Step 3Episode 81, Step 4Episode 81, Step 5Episode 81, Step 6Episode 81, Step 7Episode 81, Step 8Episode 81, Step 9Episode 81, Step 10Episode 81, Step 11Episode 81, Step 12Episode 81, Step 13Episode 81, Step 14Episode 81, Step 15Episode 81, Step 16Episode 81, Step 17Episode 81, Step 18Episode 81, Step 19
 
 Episode 81 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 81 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -1.7881393032936899e-09
-distEntropy loss: -0.37650755047798157
-Loss: 0.4962349832057953
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 82, Step 0Episode 82, Step 1Episode 82, Step 2Episode 82, Step 3Episode 82, Step 4Episode 82, Step 5Episode 82, Step 6Episode 82, Step 7Episode 82, Step 8Episode 82, Step 9
+Value loss: 59.02138137817383
+Action loss: -0.0
+distEntropy loss: -0.6931390762329102
+Loss: 29.503759384155273
+total_episode_reward: 13.0
+mean_episode_reward: 0.6499999761581421
+num_steps: 20
+Episode 82, Step 0Episode 82, Step 1Episode 82, Step 2Episode 82, Step 3Episode 82, Step 4Episode 82, Step 5Episode 82, Step 6Episode 82, Step 7Episode 82, Step 8Episode 82, Step 9Episode 82, Step 10Episode 82, Step 11Episode 82, Step 12Episode 82, Step 13Episode 82, Step 14Episode 82, Step 15Episode 82, Step 16Episode 82, Step 17Episode 82, Step 18Episode 82, Step 19
 
 Episode 82 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Warning: Gradient norm overflow: 1.4145176978373647e+21, skipping update.
 Episode 82 finished, Train info:
-Value loss: 1.000000238418579
-Action loss: 1.6880221664905548e-09
-distEntropy loss: -0.22783012688159943
-Loss: 0.4977218210697174
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 83, Step 0Episode 83, Step 1Episode 83, Step 2Episode 83, Step 3Episode 83, Step 4Episode 83, Step 5Episode 83, Step 6Episode 83, Step 7Episode 83, Step 8Episode 83, Step 9
+Value loss: 13.897067070007324
+Action loss: 1.907348590179936e-08
+distEntropy loss: -0.6929140090942383
+Loss: 6.9416046142578125
+total_episode_reward: 6.0
+mean_episode_reward: 0.30000001192092896
+num_steps: 20
+Episode 83, Step 0Episode 83, Step 1Episode 83, Step 2Episode 83, Step 3Episode 83, Step 4Episode 83, Step 5Episode 83, Step 6Episode 83, Step 7Episode 83, Step 8Episode 83, Step 9Episode 83, Step 10Episode 83, Step 11Episode 83, Step 12Episode 83, Step 13Episode 83, Step 14Episode 83, Step 15Episode 83, Step 16Episode 83, Step 17Episode 83, Step 18Episode 83, Step 19
 
 Episode 83 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 83 finished, Train info:
-Value loss: 1.0
-Action loss: 4.6044586810012333e-08
-distEntropy loss: -0.6888378858566284
-Loss: 0.49311167001724243
-total_episode_reward: 1.7881393432617188e-07
-mean_episode_reward: 1.7881394143159923e-08
-num_steps: 10
-Episode 84, Step 0Episode 84, Step 1Episode 84, Step 2Episode 84, Step 3Episode 84, Step 4Episode 84, Step 5Episode 84, Step 6Episode 84, Step 7Episode 84, Step 8Episode 84, Step 9
+Value loss: 25.29075813293457
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6931455731391907
+Loss: 12.638447761535645
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 84, Step 0Episode 84, Step 1Episode 84, Step 2Episode 84, Step 3Episode 84, Step 4Episode 84, Step 5Episode 84, Step 6Episode 84, Step 7Episode 84, Step 8Episode 84, Step 9Episode 84, Step 10Episode 84, Step 11Episode 84, Step 12Episode 84, Step 13Episode 84, Step 14Episode 84, Step 15Episode 84, Step 16Episode 84, Step 17Episode 84, Step 18Episode 84, Step 19
 
 Episode 84 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 84 finished, Train info:
-Value loss: 1.000000238418579
-Action loss: 3.5390257835388184e-08
-distEntropy loss: -0.2596491277217865
-Loss: 0.49740368127822876
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 85, Step 0Episode 85, Step 1Episode 85, Step 2Episode 85, Step 3Episode 85, Step 4Episode 85, Step 5Episode 85, Step 6Episode 85, Step 7Episode 85, Step 8Episode 85, Step 9
+Value loss: 44.00347137451172
+Action loss: -0.0
+distEntropy loss: -0.6783722639083862
+Loss: 21.994951248168945
+total_episode_reward: 12.0
+mean_episode_reward: 0.6000000238418579
+num_steps: 20
+Episode 85, Step 0Episode 85, Step 1Episode 85, Step 2Episode 85, Step 3Episode 85, Step 4Episode 85, Step 5Episode 85, Step 6Episode 85, Step 7Episode 85, Step 8Episode 85, Step 9Episode 85, Step 10Episode 85, Step 11Episode 85, Step 12Episode 85, Step 13Episode 85, Step 14Episode 85, Step 15Episode 85, Step 16Episode 85, Step 17Episode 85, Step 18Episode 85, Step 19
 
 Episode 85 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 85 finished, Train info:
-Value loss: 1.0
-Action loss: 9.417534130307104e-08
-distEntropy loss: -0.3116534352302551
-Loss: 0.4968835711479187
-total_episode_reward: 2.384185791015625e-07
-mean_episode_reward: 2.3841858265427618e-08
-num_steps: 10
-Episode 86, Step 0Episode 86, Step 1Episode 86, Step 2Episode 86, Step 3Episode 86, Step 4Episode 86, Step 5Episode 86, Step 6Episode 86, Step 7Episode 86, Step 8Episode 86, Step 9
+Value loss: 22.850074768066406
+Action loss: -5.7220457705398076e-08
+distEntropy loss: -0.6852926015853882
+Loss: 11.418184280395508
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 86, Step 0Episode 86, Step 1Episode 86, Step 2Episode 86, Step 3Episode 86, Step 4Episode 86, Step 5Episode 86, Step 6Episode 86, Step 7Episode 86, Step 8Episode 86, Step 9Episode 86, Step 10Episode 86, Step 11Episode 86, Step 12Episode 86, Step 13Episode 86, Step 14Episode 86, Step 15Episode 86, Step 16Episode 86, Step 17Episode 86, Step 18Episode 86, Step 19
 
 Episode 86 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 86 finished, Train info:
-Value loss: 1.0
-Action loss: 2.0265579436795633e-08
-distEntropy loss: -0.29727703332901
-Loss: 0.4970272183418274
-total_episode_reward: -1.7881393432617188e-07
-mean_episode_reward: -1.7881394143159923e-08
-num_steps: 10
-Episode 87, Step 0Episode 87, Step 1Episode 87, Step 2Episode 87, Step 3Episode 87, Step 4Episode 87, Step 5Episode 87, Step 6Episode 87, Step 7Episode 87, Step 8Episode 87, Step 9
+Value loss: 34.105533599853516
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.6931432485580444
+Loss: 17.045835494995117
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 87, Step 0Episode 87, Step 1Episode 87, Step 2Episode 87, Step 3Episode 87, Step 4Episode 87, Step 5Episode 87, Step 6Episode 87, Step 7Episode 87, Step 8Episode 87, Step 9Episode 87, Step 10Episode 87, Step 11Episode 87, Step 12Episode 87, Step 13Episode 87, Step 14Episode 87, Step 15Episode 87, Step 16Episode 87, Step 17Episode 87, Step 18Episode 87, Step 19
 
 Episode 87 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Warning: Gradient norm overflow: 1.3022930993958148e+21, skipping update.
 Episode 87 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: -3.695488004495928e-08
-distEntropy loss: -0.6931372880935669
-Loss: 0.4930686354637146
-total_episode_reward: -1.1920928955078125e-07
-mean_episode_reward: -1.1920929132713809e-08
-num_steps: 10
-Episode 88, Step 0Episode 88, Step 1Episode 88, Step 2Episode 88, Step 3Episode 88, Step 4Episode 88, Step 5Episode 88, Step 6Episode 88, Step 7Episode 88, Step 8Episode 88, Step 9
+Value loss: 53.9167594909668
+Action loss: -9.536743306171047e-08
+distEntropy loss: -0.6783254146575928
+Loss: 26.951597213745117
+total_episode_reward: 13.0
+mean_episode_reward: 0.6499999761581421
+num_steps: 20
+Episode 88, Step 0Episode 88, Step 1Episode 88, Step 2Episode 88, Step 3Episode 88, Step 4Episode 88, Step 5Episode 88, Step 6Episode 88, Step 7Episode 88, Step 8Episode 88, Step 9Episode 88, Step 10Episode 88, Step 11Episode 88, Step 12Episode 88, Step 13Episode 88, Step 14Episode 88, Step 15Episode 88, Step 16Episode 88, Step 17Episode 88, Step 18Episode 88, Step 19
 
 Episode 88 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Warning: Gradient norm overflow: 1.0029330369562537e+21, skipping update.
 Episode 88 finished, Train info:
-Value loss: 1.0
-Action loss: 1.3828277189986693e-07
-distEntropy loss: -0.29907840490341187
-Loss: 0.4970093369483948
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 89, Step 0Episode 89, Step 1Episode 89, Step 2Episode 89, Step 3Episode 89, Step 4Episode 89, Step 5Episode 89, Step 6Episode 89, Step 7Episode 89, Step 8Episode 89, Step 9
+Value loss: 17.933650970458984
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6893989443778992
+Loss: 8.959931373596191
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 89, Step 0Episode 89, Step 1Episode 89, Step 2Episode 89, Step 3Episode 89, Step 4Episode 89, Step 5Episode 89, Step 6Episode 89, Step 7Episode 89, Step 8Episode 89, Step 9Episode 89, Step 10Episode 89, Step 11Episode 89, Step 12Episode 89, Step 13Episode 89, Step 14Episode 89, Step 15Episode 89, Step 16Episode 89, Step 17Episode 89, Step 18Episode 89, Step 19
 
 Episode 89 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 89 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: -3.6358834165639564e-08
-distEntropy loss: -0.6762708425521851
-Loss: 0.493237167596817
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 90, Step 0Episode 90, Step 1Episode 90, Step 2Episode 90, Step 3Episode 90, Step 4Episode 90, Step 5Episode 90, Step 6Episode 90, Step 7Episode 90, Step 8Episode 90, Step 9
+Value loss: 31.122486114501953
+Action loss: 1.335144048653092e-07
+distEntropy loss: -0.6874926090240479
+Loss: 15.554368019104004
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 90, Step 0Episode 90, Step 1Episode 90, Step 2Episode 90, Step 3Episode 90, Step 4Episode 90, Step 5Episode 90, Step 6Episode 90, Step 7Episode 90, Step 8Episode 90, Step 9Episode 90, Step 10Episode 90, Step 11Episode 90, Step 12Episode 90, Step 13Episode 90, Step 14Episode 90, Step 15Episode 90, Step 16Episode 90, Step 17Episode 90, Step 18Episode 90, Step 19
 
 Episode 90 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 90 finished, Train info:
-Value loss: 1.0
-Action loss: -1.3113021779531664e-08
-distEntropy loss: -0.6661802530288696
-Loss: 0.4933381974697113
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 91, Step 0Episode 91, Step 1Episode 91, Step 2Episode 91, Step 3Episode 91, Step 4Episode 91, Step 5Episode 91, Step 6Episode 91, Step 7Episode 91, Step 8Episode 91, Step 9
+Value loss: 36.23262023925781
+Action loss: -1.1444091541079615e-07
+distEntropy loss: -0.6835371255874634
+Loss: 18.109474182128906
+total_episode_reward: 11.0
+mean_episode_reward: 0.550000011920929
+num_steps: 20
+Episode 91, Step 0Episode 91, Step 1Episode 91, Step 2Episode 91, Step 3Episode 91, Step 4Episode 91, Step 5Episode 91, Step 6Episode 91, Step 7Episode 91, Step 8Episode 91, Step 9Episode 91, Step 10Episode 91, Step 11Episode 91, Step 12Episode 91, Step 13Episode 91, Step 14Episode 91, Step 15Episode 91, Step 16Episode 91, Step 17Episode 91, Step 18Episode 91, Step 19
 
 Episode 91 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 91 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 1.7404556729161413e-07
-distEntropy loss: -0.27581125497817993
-Loss: 0.49724212288856506
-total_episode_reward: -7.152557373046875e-07
-mean_episode_reward: -7.152557657263969e-08
-num_steps: 10
-Episode 92, Step 0Episode 92, Step 1Episode 92, Step 2Episode 92, Step 3Episode 92, Step 4Episode 92, Step 5Episode 92, Step 6Episode 92, Step 7Episode 92, Step 8Episode 92, Step 9
+Value loss: 19.028779983520508
+Action loss: -1.1444091541079615e-07
+distEntropy loss: -0.6887105107307434
+Loss: 9.507502555847168
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Episode 92, Step 0Episode 92, Step 1Episode 92, Step 2Episode 92, Step 3Episode 92, Step 4Episode 92, Step 5Episode 92, Step 6Episode 92, Step 7Episode 92, Step 8Episode 92, Step 9Episode 92, Step 10Episode 92, Step 11Episode 92, Step 12Episode 92, Step 13Episode 92, Step 14Episode 92, Step 15Episode 92, Step 16Episode 92, Step 17Episode 92, Step 18Episode 92, Step 19
 
 Episode 92 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 92 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: 1.5161932154228452e-08
-distEntropy loss: -0.3233940005302429
-Loss: 0.49676600098609924
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 93, Step 0Episode 93, Step 1Episode 93, Step 2Episode 93, Step 3Episode 93, Step 4Episode 93, Step 5Episode 93, Step 6Episode 93, Step 7Episode 93, Step 8Episode 93, Step 9
+Value loss: 24.930173873901367
+Action loss: 1.907348590179936e-08
+distEntropy loss: -0.6761952638626099
+Loss: 12.458325386047363
+total_episode_reward: 8.0
+mean_episode_reward: 0.4000000059604645
+num_steps: 20
+Episode 93, Step 0Episode 93, Step 1Episode 93, Step 2Episode 93, Step 3Episode 93, Step 4Episode 93, Step 5Episode 93, Step 6Episode 93, Step 7Episode 93, Step 8Episode 93, Step 9Episode 93, Step 10Episode 93, Step 11Episode 93, Step 12Episode 93, Step 13Episode 93, Step 14Episode 93, Step 15Episode 93, Step 16Episode 93, Step 17Episode 93, Step 18Episode 93, Step 19
 
 Episode 93 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 93 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: -6.705522537231445e-08
-distEntropy loss: -0.4412407875061035
-Loss: 0.49558746814727783
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 94, Step 0Episode 94, Step 1Episode 94, Step 2Episode 94, Step 3Episode 94, Step 4Episode 94, Step 5Episode 94, Step 6Episode 94, Step 7Episode 94, Step 8Episode 94, Step 9
+Value loss: 27.0184326171875
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.6794167160987854
+Loss: 13.502422332763672
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 94, Step 0Episode 94, Step 1Episode 94, Step 2Episode 94, Step 3Episode 94, Step 4Episode 94, Step 5Episode 94, Step 6Episode 94, Step 7Episode 94, Step 8Episode 94, Step 9Episode 94, Step 10Episode 94, Step 11Episode 94, Step 12Episode 94, Step 13Episode 94, Step 14Episode 94, Step 15Episode 94, Step 16Episode 94, Step 17Episode 94, Step 18Episode 94, Step 19
 
 Episode 94 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 4 has NaN/Inf, skipping update.
 Episode 94 finished, Train info:
-Value loss: 1.0
-Action loss: -8.940696516468449e-10
-distEntropy loss: -0.6662715673446655
-Loss: 0.4933372735977173
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 95, Step 0Episode 95, Step 1Episode 95, Step 2Episode 95, Step 3Episode 95, Step 4Episode 95, Step 5Episode 95, Step 6Episode 95, Step 7Episode 95, Step 8Episode 95, Step 9
+Value loss: 39.587890625
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.6876489520072937
+Loss: 19.78706932067871
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 95, Step 0Episode 95, Step 1Episode 95, Step 2Episode 95, Step 3Episode 95, Step 4Episode 95, Step 5Episode 95, Step 6Episode 95, Step 7Episode 95, Step 8Episode 95, Step 9Episode 95, Step 10Episode 95, Step 11Episode 95, Step 12Episode 95, Step 13Episode 95, Step 14Episode 95, Step 15Episode 95, Step 16Episode 95, Step 17Episode 95, Step 18Episode 95, Step 19
 
 Episode 95 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Warning: Gradient norm overflow: 1.6254083477004068e+21, skipping update.
 Episode 95 finished, Train info:
-Value loss: 1.0000001192092896
-Action loss: 3.5762786065873797e-09
-distEntropy loss: -0.6929823756217957
-Loss: 0.49307024478912354
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 96, Step 0Episode 96, Step 1Episode 96, Step 2Episode 96, Step 3Episode 96, Step 4Episode 96, Step 5Episode 96, Step 6Episode 96, Step 7Episode 96, Step 8Episode 96, Step 9
+Value loss: 12.943760871887207
+Action loss: 5.7220457705398076e-08
+distEntropy loss: -0.6867042183876038
+Loss: 6.46501350402832
+total_episode_reward: 7.0
+mean_episode_reward: 0.3499999940395355
+num_steps: 20
+Episode 96, Step 0Episode 96, Step 1Episode 96, Step 2Episode 96, Step 3Episode 96, Step 4Episode 96, Step 5Episode 96, Step 6Episode 96, Step 7Episode 96, Step 8Episode 96, Step 9Episode 96, Step 10Episode 96, Step 11Episode 96, Step 12Episode 96, Step 13Episode 96, Step 14Episode 96, Step 15Episode 96, Step 16Episode 96, Step 17Episode 96, Step 18Episode 96, Step 19
 
 Episode 96 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 96 finished, Train info:
-Value loss: 0.9999998211860657
-Action loss: 1.19209286886246e-09
-distEntropy loss: -0.6931211352348328
-Loss: 0.4930686950683594
-total_episode_reward: -1.4901161193847656e-07
-mean_episode_reward: -1.4901161193847656e-08
-num_steps: 10
-Episode 97, Step 0Episode 97, Step 1Episode 97, Step 2Episode 97, Step 3Episode 97, Step 4Episode 97, Step 5Episode 97, Step 6Episode 97, Step 7Episode 97, Step 8Episode 97, Step 9
+Value loss: 29.138214111328125
+Action loss: -3.814697180359872e-08
+distEntropy loss: -0.689954400062561
+Loss: 14.562207221984863
+total_episode_reward: 10.0
+mean_episode_reward: 0.5
+num_steps: 20
+Episode 97, Step 0Episode 97, Step 1Episode 97, Step 2Episode 97, Step 3Episode 97, Step 4Episode 97, Step 5Episode 97, Step 6Episode 97, Step 7Episode 97, Step 8Episode 97, Step 9Episode 97, Step 10Episode 97, Step 11Episode 97, Step 12Episode 97, Step 13Episode 97, Step 14Episode 97, Step 15Episode 97, Step 16Episode 97, Step 17Episode 97, Step 18Episode 97, Step 19
 
 Episode 97 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
 Episode 97 finished, Train info:
-Value loss: 1.0
-Action loss: 1.5702099176451156e-08
-distEntropy loss: -0.3293148875236511
-Loss: 0.49670684337615967
-total_episode_reward: 0.0
-mean_episode_reward: 0.0
-num_steps: 10
-Episode 98, Step 0Episode 98, Step 1Episode 98, Step 2Episode 98, Step 3Episode 98, Step 4Episode 98, Step 5Episode 98, Step 6Episode 98, Step 7Episode 98, Step 8Episode 98, Step 9
+Value loss: 61.61137771606445
+Action loss: -1.335144048653092e-07
+distEntropy loss: -0.6919136047363281
+Loss: 30.798768997192383
+total_episode_reward: 15.0
+mean_episode_reward: 0.75
+num_steps: 20
+Episode 98, Step 0Episode 98, Step 1Episode 98, Step 2Episode 98, Step 3Episode 98, Step 4Episode 98, Step 5Episode 98, Step 6Episode 98, Step 7Episode 98, Step 8Episode 98, Step 9Episode 98, Step 10Episode 98, Step 11Episode 98, Step 12Episode 98, Step 13Episode 98, Step 14Episode 98, Step 15Episode 98, Step 16Episode 98, Step 17Episode 98, Step 18Episode 98, Step 19
 
 Episode 98 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 98 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: 1.8998980166884394e-08
-distEntropy loss: -0.3317312002182007
-Loss: 0.49668264389038086
-total_episode_reward: -4.172325134277344e-07
-mean_episode_reward: -4.17232506322307e-08
-num_steps: 10
-Episode 99, Step 0Episode 99, Step 1Episode 99, Step 2Episode 99, Step 3Episode 99, Step 4Episode 99, Step 5Episode 99, Step 6Episode 99, Step 7Episode 99, Step 8Episode 99, Step 9
+Value loss: 65.63253021240234
+Action loss: 3.814697180359872e-08
+distEntropy loss: -0.6931464076042175
+Loss: 32.80933380126953
+total_episode_reward: 14.0
+mean_episode_reward: 0.699999988079071
+num_steps: 20
+Episode 99, Step 0Episode 99, Step 1Episode 99, Step 2Episode 99, Step 3Episode 99, Step 4Episode 99, Step 5Episode 99, Step 6Episode 99, Step 7Episode 99, Step 8Episode 99, Step 9Episode 99, Step 10Episode 99, Step 11Episode 99, Step 12Episode 99, Step 13Episode 99, Step 14Episode 99, Step 15Episode 99, Step 16Episode 99, Step 17Episode 99, Step 18Episode 99, Step 19
 
 Episode 99 begins to update:
 traj finalize...
 Optimizer state reset (momentum and iteration counter cleared).
-Gradient 10 has NaN/Inf, skipping update.
 Episode 99 finished, Train info:
-Value loss: 0.9999998807907104
-Action loss: -3.784894886393886e-08
-distEntropy loss: -0.24556127190589905
-Loss: 0.4975442886352539
-total_episode_reward: -1.7881393432617188e-07
-mean_episode_reward: -1.7881394143159923e-08
-num_steps: 10
-Training completed in 2.04263973236084 seconds.
+Value loss: 24.400959014892578
+Action loss: -5.7220457705398076e-08
+distEntropy loss: -0.6560512781143188
+Loss: 12.19391918182373
+total_episode_reward: 9.0
+mean_episode_reward: 0.44999998807907104
+num_steps: 20
+Training completed in 4.7708353996276855 seconds.
 ed layer gradients computed.
 Actor and Critic backward pass completed.
 Shared layer gradients computed.

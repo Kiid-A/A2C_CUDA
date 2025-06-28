@@ -81,10 +81,10 @@ class A2C:
         actLogProbs = np.log(probs[np.arange(len(actions)), actions] + 1e-8)
         distEntropy = -np.sum(probs * np.log(probs + 1e-8), axis=1, keepdims=True)
 
-        advantages = returns.reshape(-1, 1) - values
-        advantages = (advantages - np.mean(advantages)) / (np.std(advantages) + 1e-8)
+        td_error = returns.reshape(-1, 1) - values
+        advantages = (td_error - np.mean(td_error)) / (np.std(td_error) + 1e-8)
 
-        value_loss = np.mean(advantages ** 2)
+        value_loss = np.mean(td_error ** 2)
         action_loss = -np.mean(advantages * actLogProbs)
         distEntropy_loss = -np.mean(distEntropy)
 
@@ -95,7 +95,7 @@ class A2C:
         one_hot = np.zeros_like(probs)
         one_hot[np.arange(len(actions)), actions] = 1
         grad_actor = - (advantages * (one_hot - probs)) / len(advantages) * self.actor_loss_coef
-        grad_value = -2 * (advantages) / len(advantages) * self.value_loss_coef
+        grad_value = -2 * (td_error) / len(td_error) * self.value_loss_coef
 
         self.optimizer.zero_grad()
 

@@ -7,14 +7,14 @@ from algs.a2c import A2C
 def simple_game():
     print("Simple game starting...")
     N_parallel = 1
-    N_episode = 100
-    episode_steps = 10
+    N_episode = 1000
+    episode_steps = 5
     obs_dim = 2
     n_actions = 2
     hidden_dim = 128
     ac = MlpACManual(obs_dim, n_actions, hidden_dim)
     traj = Traj(episode_steps)
-    trainer = A2C(ac, value_loss_coef=0.5, actor_loss_coef=1., entropy_coef=0.01, learning_rate=2e-5)
+    trainer = A2C(ac, value_loss_coef=0.5, actor_loss_coef=1., entropy_coef=0.01, learning_rate=3e-4)
     obs = np.random.randint(0, 10, (N_parallel, obs_dim)).astype(np.float32)
     start_time = time.time()
     for e in range(N_episode):
