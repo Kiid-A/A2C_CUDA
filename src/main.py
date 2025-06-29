@@ -21,7 +21,7 @@ def simple_game():
     episode_steps = 20
     obs_dim = 2
     n_actions = 2
-    hidden_dim = 16
+    hidden_dim = 1280
     trainer_args = dict(value_loss_coef=1, actor_loss_coef=1, entropy_coef=1e-4, learning_rate=8e-4)
     ac = MlpACManual(obs_dim, n_actions, hidden_dim, cpu=False); trainer = A2C(ac, **trainer_args)
     # ac = MlpACTorch(obs_dim, n_actions, hidden_dim); trainer = A2CTorch(ac, **trainer_args_th)
@@ -30,6 +30,7 @@ def simple_game():
     obs = np.random.randint(0, 2, (N_parallel, obs_dim)).astype(np.float32)
     start_time = time.time()
     for e in range(N_episode):
+        if e == 1: start_time = time.time()
         # Rollout阶段计时
         rollout_start = time.time()
         for step in range(episode_steps):
@@ -40,7 +41,7 @@ def simple_game():
             traj.remember(obs[0], action, reward, actLogProbs, value, done)
             obs = np.random.randint(0, 2, (N_parallel, obs_dim)).astype(np.float32)
         rollout_time = time.time() - rollout_start
-        total_rollout_time += rollout_time
+        if e != 0: total_rollout_time += rollout_time
         
         print("\r\n")
         print(f"Episode {e} begins to update:")
@@ -48,7 +49,7 @@ def simple_game():
         update_start = time.time()
         train_info = trainer.update(traj)
         update_time = time.time() - update_start
-        total_update_time += update_time
+        if e != 0: total_update_time += update_time
         
         print(f"Episode {e} finished, Train info:")
         for key, value in train_info.items():
