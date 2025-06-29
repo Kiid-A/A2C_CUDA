@@ -17,11 +17,11 @@ def simple_game():
 
     print("Simple game starting...")
     N_parallel = 1
-    N_episode = 10
+    N_episode = 3000
     episode_steps = 20
     obs_dim = 2
     n_actions = 2
-    hidden_dim = 1280
+    hidden_dim = 16
     trainer_args = dict(value_loss_coef=1, actor_loss_coef=1, entropy_coef=1e-4, learning_rate=8e-4)
     ac = MlpACManual(obs_dim, n_actions, hidden_dim, cpu=False); trainer = A2C(ac, **trainer_args)
     # ac = MlpACTorch(obs_dim, n_actions, hidden_dim); trainer = A2CTorch(ac, **trainer_args_th)
