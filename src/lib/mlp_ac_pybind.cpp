@@ -142,4 +142,5 @@ py::tuple mlp_backward(
 PYBIND11_MODULE(mlp_ac_cuda, m) {
     m.def("mlp_forward", &mlp_forward, "MLP forward by CUDA");
     m.def("mlp_backward", &mlp_backward, "MLP backward by CUDA");
+    m.def("mlp_free_intermediate", &cuda_free_intermediate, "Free CUDA intermediate buffers");
 }
