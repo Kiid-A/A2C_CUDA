@@ -83,8 +83,8 @@ class A2C:
         self.value_loss_coef = value_loss_coef
         self.actor_loss_coef = actor_loss_coef
         self.entropy_coef = entropy_coef
-        self.optimizer = AdamOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
-        # self.optimizer = SGDOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
+        # self.optimizer = AdamOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
+        self.optimizer = SGDOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
 
     def update(self, traj):
         print("traj finalize...")

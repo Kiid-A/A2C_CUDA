@@ -13,14 +13,14 @@ def simple_game():
 
     print("Simple game starting...")
     N_parallel = 1
-    N_episode = 100
+    N_episode = 1000
     episode_steps = 20
     obs_dim = 2
     n_actions = 2
-    hidden_dim = 12800
+    hidden_dim = 128
     trainer_args = dict(value_loss_coef=1, actor_loss_coef=1, entropy_coef=1e-4, learning_rate=2e-3)
-    # ac = MlpACManual(obs_dim, n_actions, hidden_dim, cpu=True); trainer = A2C(ac, **trainer_args)
-    ac = MlpACTorch(obs_dim, n_actions, hidden_dim); trainer = A2CTorch(ac, **trainer_args)
+    ac = MlpACManual(obs_dim, n_actions, hidden_dim, cpu=False); trainer = A2C(ac, **trainer_args)
+    # ac = MlpACTorch(obs_dim, n_actions, hidden_dim); trainer = A2CTorch(ac, **trainer_args)
 
     traj = Traj(episode_steps)
     obs = np.random.randint(0, 2, (N_parallel, obs_dim)).astype(np.float32)
@@ -51,7 +51,7 @@ def simple_game():
             for key in history.keys():
                 plt.plot(history[key])
                 plt.title(key)
-                plt.savefig(f"./{key}.png")
+                plt.savefig(f"src/result/{key}.png")
                 plt.clf()
         duration = time.time() - start_time
         print(f"SPE = {duration/(e + 1)}")

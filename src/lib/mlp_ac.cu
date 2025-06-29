@@ -5,7 +5,7 @@
 #include <cuda_runtime.h>
 #include <math.h>
 #include "mlp_ac.h"
-#include <stdio.h>
+#include <cublas_v2.h>
 
 #define CEIL_DIV(a, b) (((a) + (b) - 1) / (b))
 
@@ -94,7 +94,7 @@ __global__ void fc_relu_forward_kernel(const float *__restrict__ input,
   int row = blockIdx.y * blockDim.y + threadIdx.y;
   int col = blockIdx.x * blockDim.x + threadIdx.x;
 
-  if (row >= output_dim || col >= input_dim) return;
+  if (row >= batch_size || col >= output_dim) return;
 
   float sum = 0.0f;
 
