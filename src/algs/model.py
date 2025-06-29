@@ -9,9 +9,9 @@ class MlpACManual:
         self.cpu = cpu
 
         def xavier(shape):
-            fan_in, fan_out = shape[0], shape[1]
-            limit = min(np.sqrt(3.0 / (fan_in + fan_out)), 0.2)
-            return np.random.uniform(-limit, limit, size=shape).astype(np.float32)
+            fan_in, fan_out = shape
+            scale = np.sqrt(2.0 / (fan_in + fan_out))
+            return np.random.randn(*shape).astype(np.float32) * scale
 
         self.actor1_w = xavier((obs_dim, hidden_dim))
         self.actor1_b = np.zeros(hidden_dim, dtype=np.float32)
@@ -26,6 +26,8 @@ class MlpACManual:
         self.critic2_b = np.zeros(hidden_dim, dtype=np.float32)
         self.critic_head_w = xavier((hidden_dim, 1))
         self.critic_head_b = np.zeros(1, dtype=np.float32)
+
+        self.d_capsules = None 
 
         self.params = [
             self.actor1_w, self.actor1_b,
@@ -51,8 +53,7 @@ class MlpACManual:
 
     def forward(self, obs):
         if self.cpu: return self.forward_numpy(obs)
-
-        actor_out, critic_out = mlp_ac_cuda.mlp_forward(
+        result = mlp_ac_cuda.mlp_forward(
             obs.astype(np.float32),
             self.actor1_w, self.actor1_b,
             self.actor2_w, self.actor2_b,
@@ -63,7 +64,29 @@ class MlpACManual:
             self.hidden_dim,
             self.n_actions
         )
+        actor_out, critic_out, cap1, cap2, cap3, cap4 = result
+        self.d_capsules = (cap1, cap2, cap3, cap4)
         return actor_out, critic_out
+
+    def backward(self, obs, grad_actor_output, grad_critic_output):
+        cap1, cap2, cap3, cap4 = self.d_capsules
+        grads = mlp_ac_cuda.mlp_backward(
+            obs.astype(np.float32),
+            self.actor1_w, self.actor1_b,
+            self.actor2_w, self.actor2_b,
+            self.actor_head_w, self.actor_head_b,
+            self.critic1_w, self.critic1_b,
+            self.critic2_w, self.critic2_b,
+            self.critic_head_w, self.critic_head_b,
+            cap1, cap2, cap3, cap4,
+            grad_actor_output.astype(np.float32),
+            grad_critic_output.astype(np.float32),
+            obs.shape[0],        # batch_size
+            self.obs_dim,        # input_dim
+            self.hidden_dim,     # hidden_dim
+            self.n_actions,      # actor_output_dim
+        )
+        return grads
     
     def forward_numpy(self, obs):
         if not isinstance(obs, np.ndarray):
@@ -81,24 +104,6 @@ class MlpACManual:
         
         return actor_out, critic_out
 
-    def backward(self, obs, grad_actor_output, grad_critic_output):
-        grads = mlp_ac_cuda.mlp_backward(
-            obs.astype(np.float32),
-            self.actor1_w, self.actor1_b,
-            self.actor2_w, self.actor2_b,
-            self.actor_head_w, self.actor_head_b,
-            self.critic1_w, self.critic1_b,
-            self.critic2_w, self.critic2_b,
-            self.critic_head_w, self.critic_head_b,
-            grad_actor_output.astype(np.float32),
-            grad_critic_output.astype(np.float32),
-            obs.shape[0],        # batch_size
-            self.obs_dim,        # input_dim
-            self.hidden_dim,     # hidden_dim
-            self.n_actions,      # actor_output_dim
-        )
-        return grads
-
     def act(self, obs):
         if not isinstance(obs, np.ndarray):
             obs = np.array(obs, dtype=np.float32)
@@ -113,7 +118,11 @@ class MlpACManual:
         value = critic_out.squeeze()
         actLogProbs = np.log(probs[np.arange(len(action)), action] + 1e-8)
         return action, value, actLogProbs
-
+    
+    def free_intermediate(self):
+        if self.d_capsules is not None:
+            mlp_ac_cuda.mlp_free_intermediate(*self.d_capsules)
+            self.d_capsules = None
 
 import torch.nn as nn
 import torch

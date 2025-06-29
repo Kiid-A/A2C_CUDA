@@ -83,8 +83,8 @@ class A2C:
         self.value_loss_coef = value_loss_coef
         self.actor_loss_coef = actor_loss_coef
         self.entropy_coef = entropy_coef
-        # self.optimizer = AdamOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
-        self.optimizer = SGDOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
+        self.optimizer = AdamOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
+        # self.optimizer = SGDOptimizer(self.actor_and_critic.parameters(), lr=learning_rate)
 
     def update(self, traj):
         print("traj finalize...")
@@ -113,24 +113,21 @@ class A2C:
         grad_actor = grad_actor / len(target_actions) * self.actor_loss_coef
 
         advantages = returns.reshape(-1, 1) - values
-        advantages = (advantages - np.mean(advantages)) / (np.std(advantages) + 2e-8)
-
-        print(advantages)
+        # value loss 用原始 advantage
         value_loss = np.mean(np.power(advantages, 2)) * self.value_loss_coef
-        # action_loss = -np.mean(advantages * actLogProbs) * self.actor_loss_coef
-        distEntropy_loss = -np.mean(distEntropy) * self.entropy_coef
 
-        loss = (value_loss + action_loss + distEntropy_loss)
+        # actor loss 用标准化 advantage（可选）
+        adv_std = (advantages - np.mean(advantages)) / (np.std(advantages) + 1e-8)
+        log_probs = np.log(probs[np.arange(len(actions)), actions] + 1e-8)
+        actor_loss = -np.mean(log_probs * adv_std.squeeze()) * self.actor_loss_coef
 
+        # grad_actor 用 policy gradient 形式
         one_hot = np.zeros_like(probs)
         one_hot[np.arange(len(actions)), actions] = 1
-        
-        policy_grad = - (advantages * (one_hot - probs)) / len(advantages) * self.actor_loss_coef
-        entropy_grad = - (np.log(probs + 1e-8) + 1) / len(advantages) * self.entropy_coef
-        grad_actor += entropy_grad
-        
-        grad_value = -2 * (advantages) / (len(advantages) + 1e-8) * self.value_loss_coef
-        # grad_value = - grad_value
+        grad_actor = - (adv_std * (one_hot - probs)) / len(actions) * self.actor_loss_coef
+
+        # value grad
+        grad_value = 2 * (-advantages) / len(advantages) * self.value_loss_coef
 
         self.optimizer.zero_grad()
 
@@ -146,9 +143,9 @@ class A2C:
             "grad_value": np.mean(grad_value),
 
             "Value loss": float(value_loss),
-            "Action loss": float(action_loss),
-            "distEntropy loss": float(distEntropy_loss),
-            "Loss": float(loss),
+            "Action loss": float(actor_loss),
+            # "distEntropy loss": float(distEntropy.squeeze()),
+            "Loss": float(value_loss + actor_loss + distEntropy.mean()),
             "total_episode_reward": np.sum(traj.get_rewards()),
             "mean_episode_reward": np.mean(traj.get_rewards()),
             "num_steps": len(observations)
