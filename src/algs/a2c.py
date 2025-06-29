@@ -125,6 +125,8 @@ class A2C:
         one_hot = np.zeros_like(probs)
         one_hot[np.arange(len(actions)), actions] = 1
         grad_actor = - (adv_std * (one_hot - probs)) / len(actions) * self.actor_loss_coef
+        policy_grad = grad_actor
+        entropy_grad = - (np.log(probs + 1e-8) + 1) / len(advantages) * self.entropy_coef
 
         # value grad
         grad_value = 2 * (-advantages) / len(advantages) * self.value_loss_coef
@@ -137,10 +139,11 @@ class A2C:
         self._apply_grads(grads)
 
         return {
-            # "policy_grad": np.mean(policy_grad),
-            # "entropy_grad": np.mean(entropy_grad),
+            "policy_grad": np.mean(policy_grad),
+            "entropy_grad": np.mean(entropy_grad),
             "grad_actor": np.mean(grad_actor),
             "grad_value": np.mean(grad_value),
+            "Dist Entropy": np.mean(distEntropy),
 
             "Value loss": float(value_loss),
             "Action loss": float(actor_loss),
@@ -157,12 +160,12 @@ class A2C:
             if not np.all(np.isfinite(g)):
                 print(f"Gradient {i} has NaN/Inf, skipping update.")
                 return
-        # # 全局范数裁剪
-        # total_norm = np.sqrt(sum(np.sum(g.astype(np.float64) ** 2) for g in grads))
-        # if not np.isfinite(total_norm) or total_norm > 1e8:
-        #     print(f"Warning: Gradient norm overflow: {total_norm}, skipping update.")
-        #     return
-        # clip_coef = max_norm / (total_norm + 1e-8)
-        # if clip_coef < 1.0:
-        #     grads = [g * clip_coef for g in grads]
+        # 全局范数裁剪
+        total_norm = np.sqrt(sum(np.sum(g.astype(np.float64) ** 2) for g in grads))
+        if not np.isfinite(total_norm) or total_norm > 1e8:
+            print(f"Warning: Gradient norm overflow: {total_norm}, skipping update.")
+            return
+        clip_coef = max_norm / (total_norm + 1e-8)
+        if clip_coef < 1.0:
+            grads = [g * clip_coef for g in grads]
         self.optimizer.step(grads)

@@ -121,7 +121,7 @@ class MlpACManual:
     
     def free_intermediate(self):
         if self.d_capsules is not None:
-            mlp_ac_cuda.mlp_free_intermediate(*self.d_capsules)
+            # mlp_ac_cuda.mlp_free_intermediate(*self.d_capsules)
             self.d_capsules = None
 
 import torch.nn as nn

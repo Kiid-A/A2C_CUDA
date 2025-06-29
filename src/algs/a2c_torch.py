@@ -41,6 +41,8 @@ class A2CTorch:
         self.optimizer.step()
         
         return {
+            "Dist Entropy": entropy.mean().item(),
+
             "Value loss": value_loss.item(),
             "Action loss": action_loss.item(),
             "distEntropy loss": entropy_loss.item(),
