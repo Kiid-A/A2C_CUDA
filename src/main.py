@@ -19,8 +19,8 @@ def simple_game():
     n_actions = 2
     hidden_dim = 16
     trainer_args = dict(value_loss_coef=1, actor_loss_coef=1, entropy_coef=1e-4, learning_rate=2e-3)
-    ac = MlpACManual(obs_dim, n_actions, hidden_dim, cpu=False); trainer = A2C(ac, **trainer_args)
-    # ac = MlpACTorch(obs_dim, n_actions, hidden_dim); trainer = A2CTorch(ac, **trainer_args)
+    # ac = MlpACManual(obs_dim, n_actions, hidden_dim, cpu=False); trainer = A2C(ac, **trainer_args)
+    ac = MlpACTorch(obs_dim, n_actions, hidden_dim); trainer = A2CTorch(ac, **trainer_args)
 
     traj = Traj(episode_steps)
     obs = np.random.randint(0, 2, (N_parallel, obs_dim)).astype(np.float32)
@@ -56,7 +56,7 @@ def simple_game():
         duration = time.time() - start_time
         print(f"SPE = {duration/(e + 1)}")
 
-    ac.free_intermediate()
+    # ac.free_intermediate()
     end_time = time.time()
     duration = end_time - start_time
     print(f"Training completed in {duration} seconds.")

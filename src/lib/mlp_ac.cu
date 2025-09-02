@@ -137,7 +137,6 @@ __global__ void relu_forward_kernel(
 
 /**
  * ReLU前向传播封装函数
- * 优化：简单高效，每个线程处理一个元素
  */
 void relu_forward(
     const float *d_input, 
